@@ -72,7 +72,21 @@ public class GridManager : MonoBehaviour
 
 	void InitGrid()
 	{
-		GameObject newObj = null;
+		int index = 0;
+
+		for(int i = columns - 1; i >= 0; i--)
+		{
+			for(int j = 0; j < rows; j++)
+			{
+				Transform currentTile = grid.transform.GetChild(index);
+
+				_tiles[j, i] = currentTile.GetComponent<Tile>();
+				_tiles[j, i].InitializeData(j, i, currentTile.GetComponent<RectTransform>());
+				_gridButtons[j, i] = currentTile.GetComponent<Button>();
+				index++;
+			}
+		}
+		/*GameObject newObj = null;
 
 		for (int i = columns - 1; i >= 0; i--)
 		{
@@ -86,6 +100,6 @@ public class GridManager : MonoBehaviour
 				//newObj.GetComponent<Tile>().x = j;
 				//newObj.GetComponent<Tile>().y = i;
 			}
-		}
+		}*/
 	}
 }
