@@ -8,9 +8,6 @@ public class Tile : MonoBehaviour
 	[SerializeField]
 	int _x, _y;
 
-	[SerializeField]
-	string terrainType;
-
 	RectTransform _position;
 	Unit _unit;
 	Building _building;
