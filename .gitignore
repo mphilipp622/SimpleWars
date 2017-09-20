@@ -79,3 +79,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+.vs/TurnBasedStrategy/v15/sqlite3/storage.ide
