@@ -24,7 +24,7 @@ public class MoveCharacter : Unit
 		{
 			lastY = y;
 			y++;
-			transform.position = GridManager.gridMan.tiles[x, y].position;
+			transform.position = GridManager.gridMan.tiles[x, y].position; // move character position
 		}
 		if (Input.GetKeyDown(KeyCode.S) && y > 0 )
 		{
@@ -45,6 +45,22 @@ public class MoveCharacter : Unit
 			transform.position = GridManager.gridMan.tiles[x, y].position;
 		}
 	}
+
+	bool isSelected = false;
+	private void OnMouseDown()
+	{
+		if (!isSelected)
+		{
+			isSelected = true;
+			Move();
+		}
+		else if(isSelected)
+		{
+			isSelected = false;
+		}
+	}
+
+
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
