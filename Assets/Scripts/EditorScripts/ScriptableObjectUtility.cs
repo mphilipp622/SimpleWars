@@ -48,6 +48,7 @@ public static class ScriptableObjectUtility
 
 		BoxCollider2D newCollider = newObj.gameObject.AddComponent<BoxCollider2D>();
 		newCollider.isTrigger = true;
+		newCollider.size = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize;
 
 		SpriteRenderer newRend = newObj.gameObject.AddComponent<SpriteRenderer>();
 		newRend.sprite = (Sprite)tileSprite;
