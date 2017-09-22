@@ -26,23 +26,11 @@ public class GridManager : MonoBehaviour
 		}
 	}
 
-	/*public Button[,] gridButtons
-	{
-		get
-		{
-			if (_gridButtons == null)
-				_gridButtons = new Button[rows, columns];
-
-			return _gridButtons;
-		}
-	}*/
-
 	private void Awake()
 	{
 		InitSingleton();
 
-		_tiles = new Tile[rows, columns];
-		//_gridButtons = new Button[rows, columns]; // initialize our 2D array
+		_tiles = new Tile[columns, rows];
 
 		if (grid == null)
 			grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>(); // automatically assign grid if we forgot to do it in inspector
@@ -72,8 +60,6 @@ public class GridManager : MonoBehaviour
 
 	void InitGrid()
 	{
-		//int index = 0;
-
 		foreach(Tile tile in grid.GetComponentsInChildren<Tile>())
 		{
 			RectTransform thisRect = tile.GetComponent<RectTransform>();
@@ -81,34 +67,6 @@ public class GridManager : MonoBehaviour
 			int newY = (int) Mathf.Abs((thisRect.anchoredPosition.y / grid.cellSize.y));
 			_tiles[newX, newY] = tile;
 			_tiles[newX, newY].InitializeData(newX, newY, thisRect);
-			
 		}
-		/*for(int i = columns - 1; i >= 0; i--)
-		{
-			for(int j = 0; j < rows; j++)
-			{
-				Transform currentTile = grid.transform.GetChild(index);
-
-				_tiles[j, i] = currentTile.GetComponent<Tile>();
-				_tiles[j, i].InitializeData(j, i, currentTile.GetComponent<RectTransform>());
-				//_gridButtons[j, i] = currentTile.GetComponent<Button>();
-				index++;
-			}
-		}*/
-		/*GameObject newObj = null;
-
-		for (int i = columns - 1; i >= 0; i--)
-		{
-			for (int j = 0; j < rows; j++)
-			{
-				// create a new game object in our scene. Will spawn a copy of our prefab and make it a child of the grid
-				newObj = (GameObject)Instantiate(gridButton, grid.transform);
-				_tiles[j, i] = new Tile(j, i, newObj.GetComponent<RectTransform>());
-				_gridButtons[j, i] = newObj.GetComponent<Button>(); // assign x,y coordinates to each button.
-				_gridButtons[j, i].GetComponentInChildren<Text>().text = j.ToString() + ", " + i.ToString(); // change button text.
-				//newObj.GetComponent<Tile>().x = j;
-				//newObj.GetComponent<Tile>().y = i;
-			}
-		}*/
 	}
 }

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public static class ScriptableObjectUtility
 {
 	/// <summary>
-	//	This makes it easy to create, name and place unique new ScriptableObject asset files.
+	/// This will allow us to create tile prefabs in the editor, using a menu item.
 	/// </summary>
 
 	static GameObject newObj;
@@ -26,29 +26,31 @@ public static class ScriptableObjectUtility
 		newObj = new GameObject();
 		newObj.transform.parent = GameObject.FindGameObjectWithTag("Grid").transform;
 
+
+		// Start adding components to the prefab
 		RectTransform newRect = newObj.AddComponent<RectTransform>();
 		newRect.anchorMin = new Vector2(0, 1);
 		newRect.anchorMax = new Vector2(0, 1);
 		newRect.sizeDelta = new Vector2(120, 120);
 		newRect.localPosition = Vector3.zero;
 
-		newObj.AddComponent<Image>();
-		newObj.GetComponent<Image>().sprite = (Sprite)tileSprite;
+		Image newImage = newObj.AddComponent<Image>();
+		newImage.sprite = (Sprite)tileSprite;
 
 		newObj.gameObject.AddComponent<Tile>();
 
-		newObj.gameObject.AddComponent<ParentTile>();
-		newObj.gameObject.GetComponent<ParentTile>().rows = 9;
-		newObj.gameObject.GetComponent<ParentTile>().columns = 16;
+		ParentTile newParentTile = newObj.gameObject.AddComponent<ParentTile>();
+		newParentTile.rows = 9;
+		newParentTile.columns = 16;
 
-		newObj.gameObject.AddComponent<LayoutElement>();
-		newObj.gameObject.GetComponent<LayoutElement>().ignoreLayout = true;
+		LayoutElement newLayoutElement = newObj.gameObject.AddComponent<LayoutElement>();
+		newLayoutElement.ignoreLayout = true;
 
-		newObj.gameObject.AddComponent<BoxCollider2D>();
-		newObj.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+		BoxCollider2D newCollider = newObj.gameObject.AddComponent<BoxCollider2D>();
+		newCollider.isTrigger = true;
 
-		newObj.gameObject.AddComponent<SpriteRenderer>();
-		newObj.gameObject.GetComponent<SpriteRenderer>().sprite = (Sprite)tileSprite;
+		SpriteRenderer newRend = newObj.gameObject.AddComponent<SpriteRenderer>();
+		newRend.sprite = (Sprite)tileSprite;
 
 		newObj.tag = terrainTag;
 
@@ -59,40 +61,7 @@ public static class ScriptableObjectUtility
 
 		EditorUtility.FocusProjectWindow();
 		Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(prefabPath);
-		//Selection.activeObject = newObj;
-		
 
 	}
-	/*public static void PublishAsset(string newName, string thisBuildingType)
-	{
-		name = newName.Replace(" ", "");
-		name = name.Replace("-", "");
-
-		string prefabPath = "Assets/Prefabs/Buildings/" + thisBuildingType + "/" + name + ".prefab";
-
-		//newObj = new GameObject();
-		//newObj.AddComponent<SpriteRenderer>();
-
-		/*if (thisBuildingType == "Research")
-			newObj.AddComponent<InventoryResearch>();
-		else
-			newObj.AddComponent<Inventory>();
-
-		newObj.AddComponent(Type.GetType(name));
-		newObj.GetComponent<BuildingData>().name = name;
-		newObj.tag = "Building";
-		
-		//GameObject.DestroyImmediate(gameObject.GetComponent<CreateClass>());
-		PrefabUtility.CreatePrefab(prefabPath, newObj);
-		//AssetDatabase.CreateAsset(scriptAsset, scriptPathAndName);
-		GameObject.DestroyImmediate(newObj);
-
-		//AssetDatabase.SaveAssets();
-		//AssetDatabase.Refresh();
-		EditorUtility.FocusProjectWindow();
-		//Selection.activeObject = finalAsset;
-
-		Debug.Log("Finished Compiling " + name);
-	}*/
 }
 #endif

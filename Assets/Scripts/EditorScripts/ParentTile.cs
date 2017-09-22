@@ -19,7 +19,7 @@ public class ParentTile : MonoBehaviour {
 		thisRect = GetComponent<RectTransform>();
 		transform.parent = grid.transform;
 		transform.localScale = new Vector3(1, 1, 1);
-		thisRect.anchoredPosition = Vector3.zero;
+		//thisRect.anchoredPosition = Vector3.zero;
 		//transform.SetParent(GameObject.FindGameObjectWithTag("Grid").transform);
 		//this.enabled = false;
 	}
