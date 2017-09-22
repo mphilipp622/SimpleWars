@@ -151,8 +151,9 @@ public class Tile : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-		if(unit == null)
-			UnitManager.unitMan.selectedUnit.UpdatePosition();
+		Debug.Log(_x + ", " + _y);
+		//if(unit == null)
+			//UnitManager.unitMan.selectedUnit.UpdatePosition();
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)

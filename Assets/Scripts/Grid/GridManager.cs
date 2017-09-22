@@ -26,7 +26,7 @@ public class GridManager : MonoBehaviour
 		}
 	}
 
-	public Button[,] gridButtons
+	/*public Button[,] gridButtons
 	{
 		get
 		{
@@ -35,14 +35,14 @@ public class GridManager : MonoBehaviour
 
 			return _gridButtons;
 		}
-	}
+	}*/
 
 	private void Awake()
 	{
 		InitSingleton();
 
 		_tiles = new Tile[rows, columns];
-		_gridButtons = new Button[rows, columns]; // initialize our 2D array
+		//_gridButtons = new Button[rows, columns]; // initialize our 2D array
 
 		if (grid == null)
 			grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>(); // automatically assign grid if we forgot to do it in inspector
@@ -72,9 +72,18 @@ public class GridManager : MonoBehaviour
 
 	void InitGrid()
 	{
-		int index = 0;
+		//int index = 0;
 
-		for(int i = columns - 1; i >= 0; i--)
+		foreach(Tile tile in grid.GetComponentsInChildren<Tile>())
+		{
+			RectTransform thisRect = tile.GetComponent<RectTransform>();
+			int newX = (int) Mathf.Abs((thisRect.anchoredPosition.x / grid.cellSize.x));
+			int newY = (int) Mathf.Abs((thisRect.anchoredPosition.y / grid.cellSize.y));
+			_tiles[newX, newY] = tile;
+			_tiles[newX, newY].InitializeData(newX, newY, thisRect);
+			
+		}
+		/*for(int i = columns - 1; i >= 0; i--)
 		{
 			for(int j = 0; j < rows; j++)
 			{
@@ -82,10 +91,10 @@ public class GridManager : MonoBehaviour
 
 				_tiles[j, i] = currentTile.GetComponent<Tile>();
 				_tiles[j, i].InitializeData(j, i, currentTile.GetComponent<RectTransform>());
-				_gridButtons[j, i] = currentTile.GetComponent<Button>();
+				//_gridButtons[j, i] = currentTile.GetComponent<Button>();
 				index++;
 			}
-		}
+		}*/
 		/*GameObject newObj = null;
 
 		for (int i = columns - 1; i >= 0; i--)
