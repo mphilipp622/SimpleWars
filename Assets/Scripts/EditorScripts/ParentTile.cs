@@ -43,7 +43,7 @@ public class ParentTile : MonoBehaviour {
 		newX = Mathf.Clamp(newX, grid.cellSize.x / 2, (grid.cellSize.x * columns) - grid.cellSize.x / 2);
 		newY = Mathf.Clamp(newY, -((grid.cellSize.x * rows) - grid.cellSize.y / 2), -(grid.cellSize.y / 2));
 		
-		thisRect.anchoredPosition = new Vector3(newX, newY, 0);
+		thisRect.anchoredPosition = new Vector3(newX, newY, thisRect.localPosition.z);
 	}
 
 }

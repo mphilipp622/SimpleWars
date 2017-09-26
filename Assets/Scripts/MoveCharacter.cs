@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class MoveCharacter : Unit
 {
-	int x = 0, y = 0, lastX = 0, lastY = 0;
+	int x = 0, y = 0, lastX = 0, lastY = 0, movement = 2;
+
+	bool isSelected = false;
 
 	void Start ()
 	{
-		transform.position = GridManager.gridMan.tiles[0, 0].position;
+		transform.position = GridManager.gridMan.tiles[5, 6].position;
+		x = 5;
+		y = 6;
+		
 	}
 	
 	void Update ()
 	{
-		Move();
-		//if(Input.GetButtonDown("Jump"))
-		//	transform.position = new Vector3(GridManager.gridMan.gridPosition[4, 5].position.x, GridManager.gridMan.gridPosition[4, 5].position.y, 0);
+		
 	}
 
 	void Move()
@@ -46,13 +49,50 @@ public class MoveCharacter : Unit
 		}
 	}
 
-	bool isSelected = false;
+	void FindTraversableTiles()
+	{
+		for(int i = -1; i < 2; i++)
+		{
+			for(int j = -1; j < 2; j++)
+			{
+				if(i == 0 && j == 0)
+					continue;
+
+				if (x + i > GridManager.gridMan.tiles.GetLength(0) - 1 || x + i < 0 || y + j > GridManager.gridMan.tiles.GetLength(1) - 1 || y + j < 0)
+					continue;
+
+				Tile currentTile = GridManager.gridMan.tiles[x + i, y + j];
+
+				float totalCost = 0;
+
+				while(totalCost <= movement)
+				{
+					//totalcost = (totalCost + distance between currentGrid and previousGrid) / cellSize + currentTile terrain Modifier
+					totalCost += (Vector2.Distance(currentTile.gridPosition, GridManager.gridMan.tiles[currentTile.x - i, currentTile.y - j].gridPosition) / GridManager.gridMan.grid.cellSize.x) + currentTile.movementModifier;
+
+					if (totalCost <= movement && currentTile.unit == null)
+						currentTile.SetTraversable();
+					else if(totalCost > movement)
+						break;
+
+					// bounds checking
+					if (currentTile.x + i > GridManager.gridMan.tiles.GetLength(0) - 1 || currentTile.x + i < 0 || currentTile.y + j > GridManager.gridMan.tiles.GetLength(1) - 1 || currentTile.y + j < 0)
+						break;
+
+					currentTile = GridManager.gridMan.tiles[currentTile.x + i, currentTile.y + j]; // assign next tile
+				}
+			}
+
+		}
+	}
+
 	private void OnMouseDown()
 	{
 		if (!isSelected)
 		{
 			isSelected = true;
-			Move();
+			FindTraversableTiles();
+			//Move();
 		}
 		else if(isSelected)
 		{
@@ -60,7 +100,7 @@ public class MoveCharacter : Unit
 		}
 	}
 
-
+	
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{

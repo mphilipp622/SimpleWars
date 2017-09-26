@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class Tile : MonoBehaviour
 
 	[SerializeField]
 	float _movementModifier, _defenseModifier, _attackModifier;
+
+	bool _isTraversable; // used for unit movement
+
+	Image tileImage; // UI Image component for tile. Will be used for fading alpha
 
 	// Getters for our member variables
 	public int x
@@ -56,6 +61,22 @@ public class Tile : MonoBehaviour
 		}
 	}
 
+	public bool isTraversable
+	{
+		get
+		{
+			return _isTraversable;
+		}
+	}
+
+	public Vector3 gridPosition
+	{
+		get
+		{
+			return _position.anchoredPosition;
+		}
+	}
+
 	public Vector3 position
 	{
 		// This property will convert RectTransform world coordinates into a Vector3 that units can use for movement
@@ -90,9 +111,15 @@ public class Tile : MonoBehaviour
 		}
 	}
 
+	private void Awake()
+	{
+		tileImage = GetComponent<Image>();
+	}
+
 	private void Start()
 	{
 	
+
 	}
 
 	private void Update()
@@ -119,28 +146,28 @@ public class Tile : MonoBehaviour
 		if (gameObject.tag == "Road")
 		{
 			// roads should heavily increase movement, lower defense, and provide no attack change
-			_movementModifier = 2f;
+			_movementModifier = 0f;
 			_defenseModifier = 0.5f;
 			_attackModifier = 1;
 		}
 		else if (gameObject.tag == "Mountain")
 		{
 			// mountains should be hard to move through, provide high defense, and moderate attack boost
-			_movementModifier = 0.5f;
+			_movementModifier = 2f;
 			_defenseModifier = 1.8f;
 			_attackModifier = 1.4f;
 		}
 		else if(gameObject.tag == "Grass")
 		{
 			// grass should be slightly harder to move through, provide small defense boost, and not change attack
-			_movementModifier = 0.8f;
+			_movementModifier = 1f;
 			_defenseModifier = 1.4f;
 			_attackModifier = 1f;
 		}
 		else if(gameObject.tag == "River")
 		{
 			// river should heavily hinder movement, provide no defense change, and reduce attack
-			_movementModifier = 0.2f;
+			_movementModifier = 3f;
 			_defenseModifier = 1f;
 			_attackModifier = 0.6f;
 		}
@@ -149,12 +176,43 @@ public class Tile : MonoBehaviour
 
 	}
 
-	private void OnMouseDown()
+	public void SetTraversable()
 	{
-		Debug.Log(_x + ", " + _y);
+		_isTraversable = true;
+		StartCoroutine(FlashTile());
+	}
+
+	
+	IEnumerator FlashTile()
+	{
+		/// <summary>
+		/// Flash tile alpha value to indicate unit can move to it.
+		/// </summary>
+		/// 
+		while (isTraversable)
+		{
+			while(isTraversable && tileImage.color.a > 0.5f)
+			{
+				tileImage.color -= new Color(0, 0, 0, Time.deltaTime / 0.7f);
+				yield return null;
+			}
+			while(isTraversable && tileImage.color.a < 1f)
+			{
+				tileImage.color += new Color(0, 0, 0, Time.deltaTime / 0.7f);
+				yield return null;
+			}
+		}
+
+		tileImage.color += new Color(0, 0, 0, 1f); // set tile transparency back to full
+	}
+
+
+	/*private void OnMouseDown()
+	{
+		//Debug.Log(_x + ", " + _y);
 		//if(unit == null)
 			//UnitManager.unitMan.selectedUnit.UpdatePosition();
-	}
+	}*/
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{

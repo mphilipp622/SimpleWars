@@ -6,11 +6,14 @@ using UnityEditor;
 /// <summary>
 /// Popup Window for Isaac Tools Editor Extension
 /// </summary>
+
+
 public class TilePopupWindow : EditorWindow
 {
 	string tileName;
 	string terrainTag;
 	Object tileSprite;
+	string terrainObj;
 
 	public static void Init()
 	{
@@ -28,6 +31,7 @@ public class TilePopupWindow : EditorWindow
 		GUILayout.Space(10);
 
 		terrainTag = EditorGUILayout.TagField("Terrain Tag", terrainTag);
+
 		GUILayout.Space(10);
 		tileSprite = EditorGUILayout.ObjectField("Sprite", tileSprite, typeof(Sprite), true);
 

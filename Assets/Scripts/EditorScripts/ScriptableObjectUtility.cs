@@ -32,7 +32,7 @@ public static class ScriptableObjectUtility
 		newRect.anchorMin = new Vector2(0, 1);
 		newRect.anchorMax = new Vector2(0, 1);
 		newRect.sizeDelta = new Vector2(120, 120);
-		newRect.localPosition = Vector3.zero;
+		newRect.localPosition = new Vector3(0, 0, 90);
 
 		Image newImage = newObj.AddComponent<Image>();
 		newImage.sprite = (Sprite)tileSprite;
