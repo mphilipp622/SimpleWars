@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Grid
+  - Mountain
+  - Road
+  - Grass
+  - River
   layers:
   - Default
   - TransparentFX
