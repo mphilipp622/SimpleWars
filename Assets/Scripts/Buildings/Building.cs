@@ -4,27 +4,29 @@ using UnityEngine;
 
 public class Building : MonoBehaviour {
 
-    private int hp;
-    private int def;
-    private int goldPerTurn;
+    protected bool isCaptured;
+    protected string capturedBy;
+    protected int goldPerTurn;
 
     // Constructor
     public Building()
     {
-        this.hp = 100;
-        this.def = 100;
+        this.isCaptured = false;
+        this.capturedBy = null;
         this.goldPerTurn = 10;
     }
 
-    public int GetHP()
+    public void Capture(string capturer)
     {
-        return this.hp;
+        this.isCaptured = true;
+        this.capturedBy = capturer;
     }
 
-    public int GetDef()
+    public string getOwner()
     {
-        return this.hp;
+        return this.capturedBy;
     }
+
 
     public int GetGoldPerTurn()
     {
@@ -33,18 +35,3 @@ public class Building : MonoBehaviour {
 
 }
 
-public class Fort : Building{
-
-    private int bonusRange;
-
-    // Constructor
-    public Fort()
-    {   
-        this.bonusRange = 1;
-    }
-
-    public int GetBonusRange()
-    {
-        return this.bonusRange;
-    }
-}
