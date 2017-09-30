@@ -5,19 +5,21 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
 
-	public int x, y, movement = 2, range = 1;
+	public int x, y, range = 1;
+
+	public float movement = 2f;
 
 	public int attack = 2, defense = 1, hp = 10;
 
 	bool isSelected = false;
 
-	public bool hasAttacked = false;
+	public bool hasAttacked = false, hasMoved = false;
 
-	public Vector2 gridPosition
+	public Vector3 gridPosition
 	{
 		get
 		{
-			return new Vector2(x, y);
+			return new Vector3(x, y, transform.position.z);
 		}
 	}
 
@@ -37,7 +39,9 @@ public class Unit : MonoBehaviour
 		/// Primitive pathfinding implementation.
 		/// Code will look left, right, up, down, diagonal for tiles it can move to.
 		/// </summary>
-		
+
+		if (hasMoved) return;
+
 		for (int i = -1; i < 2; i++)
 		{
 			for (int j = -1; j < 2; j++)
@@ -117,6 +121,36 @@ public class Unit : MonoBehaviour
 			isSelected = false;
 			UnitManager.unitManager.selectedUnit = null;
 		}
+	}
+
+	public void StartMove(Tile targetTile)
+	{
+		StartCoroutine(Move(targetTile));
+	}
+
+	IEnumerator Move(Tile targetTile)
+	{
+		Tile currentTile = GridManager.gridMan.tiles[x, y];
+
+		float currentMovement = movement;
+		currentMovement -= (Vector3.Distance(currentTile.gridPosition, targetTile.gridPosition) / GridManager.gridMan.grid.cellSize.x) + targetTile.movementModifier;
+
+		while (transform.position != targetTile.position)
+		{
+
+			//Debug.Log("Tile Pos: " + tilePosition);
+			//Debug.Log(transform.name + " Pos: " + transform.position);
+			Vector3 newVect = targetTile.position - transform.position;
+			transform.position += newVect * .2f;
+			yield return null;
+		}
+
+		if (currentMovement <= 0)
+			hasMoved = true;
+		else
+			FindTraversableTiles();
+
+		yield return null;
 	}
 
 	public void IncreaseStats(int attackMod, int defenseMod)

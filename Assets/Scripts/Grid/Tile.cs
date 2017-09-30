@@ -182,21 +182,27 @@ public class Tile : MonoBehaviour
 		StartCoroutine(FlashTile());
 	}
 
-	
+	private void OnMouseDown()
+	{
+		if (UnitManager.unitManager.selectedUnit != null)
+			UnitManager.unitManager.selectedUnit.StartMove(this);
+	}
+
+
 	IEnumerator FlashTile()
 	{
 		/// <summary>
 		/// Flash tile alpha value to indicate unit can move to it.
 		/// </summary>
 		
-		while (isTraversable && UnitManager.unitManager.selectedUnit != null)
+		while (isTraversable && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
 		{
-			while(isTraversable && tileImage.color.a > 0.5f && UnitManager.unitManager.selectedUnit != null)
+			while(isTraversable && tileImage.color.a > 0.5f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
 			{
 				tileImage.color -= new Color(0, 0, 0, Time.deltaTime / 0.7f);
 				yield return null;
 			}
-			while(isTraversable && tileImage.color.a < 1f && UnitManager.unitManager.selectedUnit != null)
+			while(isTraversable && tileImage.color.a < 1f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
 			{
 				tileImage.color += new Color(0, 0, 0, Time.deltaTime / 0.7f);
 				yield return null;
