@@ -583,12 +583,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 5
   y: 7
-  movement: 2
   range: 1
+  movement: 2
   attack: 2
   defense: 1
   hp: 10
   hasAttacked: 0
+  hasMoved: 0
 --- !u!1 &88214658
 GameObject:
   m_ObjectHideFlags: 0
@@ -10050,66 +10051,6 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1489655468}
-    - target: {fileID: 224189443418633420, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224189443418633420, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224189443418633420, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 1919.9995
-      objectReference: {fileID: 0}
-    - target: {fileID: 224189443418633420, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224189443418633420, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224189443418633420, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224189443418633420, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224189443418633420, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 223261771114356028, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224713371320962500, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224713371320962500, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224713371320962500, guid: 98adf3c451ef38941986048cbaf1e376,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98adf3c451ef38941986048cbaf1e376, type: 2}
   m_IsPrefabParent: 0
@@ -16531,12 +16472,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 5
   y: 6
-  movement: 2
   range: 1
+  movement: 2
   attack: 2
   defense: 1
   hp: 10
   hasAttacked: 0
+  hasMoved: 0
 --- !u!1001 &1960245628
 Prefab:
   m_ObjectHideFlags: 0

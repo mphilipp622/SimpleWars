@@ -17,6 +17,10 @@ public class ParentTile : MonoBehaviour {
 	{
 		grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>();
 		thisRect = GetComponent<RectTransform>();
+		thisRect.sizeDelta = grid.cellSize;
+		rows = Mathf.RoundToInt(Screen.currentResolution.height / grid.cellSize.y);
+		columns = Mathf.RoundToInt(Screen.currentResolution.width / grid.cellSize.x);
+		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta;
 		transform.parent = grid.transform;
 		transform.localScale = new Vector3(1, 1, 1);
 		//thisRect.anchoredPosition = Vector3.zero;
@@ -46,4 +50,11 @@ public class ParentTile : MonoBehaviour {
 		thisRect.anchoredPosition = new Vector3(newX, newY, thisRect.localPosition.z);
 	}
 
+	public void UpdateDimensions()
+	{
+		thisRect.sizeDelta = grid.cellSize;
+		rows = Mathf.RoundToInt(Screen.currentResolution.height / grid.cellSize.y);
+		columns = Mathf.RoundToInt(Screen.currentResolution.width / grid.cellSize.x);
+		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta;
+	}
 }
