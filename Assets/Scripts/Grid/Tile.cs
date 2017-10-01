@@ -143,6 +143,7 @@ public class Tile : MonoBehaviour
 		/// <summary>
 		/// Check the terrain tag for this gameObject and set movement, defense, and attack modifiers accordingly.
 		/// </summary>
+		
 		if (gameObject.tag == "Road")
 		{
 			// roads should heavily increase movement, lower defense, and provide no attack change
@@ -187,7 +188,6 @@ public class Tile : MonoBehaviour
 		if (UnitManager.unitManager.selectedUnit != null)
 			UnitManager.unitManager.selectedUnit.StartMove(this);
 	}
-
 
 	IEnumerator FlashTile()
 	{

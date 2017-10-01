@@ -8,6 +8,11 @@ using UnityEditor;
 [CustomEditor(typeof(ResizeGrid))]
 public class GridResizeButton : Editor
 {
+	/// <summary>
+	/// This script will create a button on the grid game object in the editor inspector.
+	/// It will allow us to resize the grid in the editor without screwing up all the tile positioning.
+	/// </summary>
+	
 	public override void OnInspectorGUI()
 	{
 		DrawDefaultInspector();
@@ -17,18 +22,8 @@ public class GridResizeButton : Editor
 		ResizeGrid myScript = (ResizeGrid)target;
 		if (GUILayout.Button("Change Cell Size"))
 		{
+			// if the button gets pressed in the inspector, call ResizeGrid.Resize() function.
 			myScript.Resize();
 		}
-	}
-
-	void Start ()
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
 	}
 }
