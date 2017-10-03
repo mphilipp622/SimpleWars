@@ -22,7 +22,7 @@ public class Building : MonoBehaviour {
         this.capturedBy = capturer;
     }
 
-    public string getOwner()
+    public string GetOwner()
     {
         return this.capturedBy;
     }
