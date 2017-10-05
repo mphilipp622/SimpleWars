@@ -6,7 +6,12 @@ using System;
 
 [ExecuteInEditMode]
 public class ParentTile : MonoBehaviour {
-
+	/// <summary>
+	/// This script will execute in the editor, not in play mode.
+	/// It is used for snapping tiles to the grid in the scene view. This allows Isaac to put tiles wherever he wants and have them
+	/// adhere to the correct cell sizing and grid boundaries.
+	/// </summary>
+	
 	GridLayoutGroup grid;
 	RectTransform thisRect;
 	float newX, newY;
@@ -15,13 +20,7 @@ public class ParentTile : MonoBehaviour {
 
 	private void Awake()
 	{
-		grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>();
-		thisRect = GetComponent<RectTransform>();
-		transform.parent = grid.transform;
-		transform.localScale = new Vector3(1, 1, 1);
-		//thisRect.anchoredPosition = Vector3.zero;
-		//transform.SetParent(GameObject.FindGameObjectWithTag("Grid").transform);
-		//this.enabled = false;
+		InitData();
 	}
 	void Start ()
 	{
@@ -38,7 +37,6 @@ public class ParentTile : MonoBehaviour {
 
 		newX = Mathf.Round(thisRect.anchoredPosition.x - ((thisRect.anchoredPosition.x % grid.cellSize.x) - grid.cellSize.x / 2));
 		newY = Mathf.Round(thisRect.anchoredPosition.y - ((thisRect.anchoredPosition.y % grid.cellSize.y) + grid.cellSize.y / 2));
-		//Debug.Log(newY);
 		
 		newX = Mathf.Clamp(newX, grid.cellSize.x / 2, (grid.cellSize.x * columns) - grid.cellSize.x / 2);
 		newY = Mathf.Clamp(newY, -((grid.cellSize.x * rows) - grid.cellSize.y / 2), -(grid.cellSize.y / 2));
@@ -46,4 +44,27 @@ public class ParentTile : MonoBehaviour {
 		thisRect.anchoredPosition = new Vector3(newX, newY, thisRect.localPosition.z);
 	}
 
+	void InitData()
+	{
+		grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>();
+		thisRect = GetComponent<RectTransform>();
+		thisRect.sizeDelta = grid.cellSize; // force width and height to current grid cell size.
+
+		// force rows and columns to adapt to the current cell size and the 16:9 aspect ratio.
+		// This calculation will allow us to calculate the needed rows and columns based on cell size.
+		rows = Mathf.RoundToInt(Screen.currentResolution.height / grid.cellSize.y);
+		columns = Mathf.RoundToInt(Screen.currentResolution.width / grid.cellSize.x);
+
+		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta; // force the collider on the tile to match the current grid cell size
+		transform.parent = grid.transform; // assign object to be child of grid.
+		transform.localScale = new Vector3(1, 1, 1);
+	}
+
+	public void UpdateDimensions()
+	{
+		thisRect.sizeDelta = grid.cellSize;
+		rows = Mathf.RoundToInt(Screen.currentResolution.height / grid.cellSize.y);
+		columns = Mathf.RoundToInt(Screen.currentResolution.width / grid.cellSize.x);
+		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta;
+	}
 }

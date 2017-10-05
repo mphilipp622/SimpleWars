@@ -38,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224189443418633420}
   - component: {fileID: 114780576557021332}
+  - component: {fileID: 114622517609411022}
   m_Layer: 5
   m_Name: Grid
   m_TagString: Grid
@@ -82,6 +83,19 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114622517609411022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1751898316153392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7272fa9bae475f1489dd5f6015656aa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newTileSizeX: 0
+  newTileSizeY: 0
 --- !u!114 &114780576557021332
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -14,7 +14,7 @@ public class Tile : MonoBehaviour
 	Building _building;
 
 	[SerializeField]
-	float _movementModifier, _defenseModifier, _attackModifier;
+	int _movementModifier, _defenseModifier, _attackModifier;
 
 	bool _isTraversable; // used for unit movement
 
@@ -143,33 +143,34 @@ public class Tile : MonoBehaviour
 		/// <summary>
 		/// Check the terrain tag for this gameObject and set movement, defense, and attack modifiers accordingly.
 		/// </summary>
+		
 		if (gameObject.tag == "Road")
 		{
 			// roads should heavily increase movement, lower defense, and provide no attack change
-			_movementModifier = 0f;
-			_defenseModifier = 0.5f;
-			_attackModifier = 1;
+			_movementModifier = 0;
+			_defenseModifier = 0;
+			_attackModifier = 0;
 		}
 		else if (gameObject.tag == "Mountain")
 		{
 			// mountains should be hard to move through, provide high defense, and moderate attack boost
-			_movementModifier = 2f;
-			_defenseModifier = 1.8f;
-			_attackModifier = 1.4f;
+			_movementModifier = 2;
+			_defenseModifier = 3;
+			_attackModifier = 2;
 		}
 		else if(gameObject.tag == "Grass")
 		{
 			// grass should be slightly harder to move through, provide small defense boost, and not change attack
-			_movementModifier = 1f;
-			_defenseModifier = 1.4f;
-			_attackModifier = 1f;
+			_movementModifier = 1;
+			_defenseModifier = 1;
+			_attackModifier = 1;
 		}
 		else if(gameObject.tag == "River")
 		{
 			// river should heavily hinder movement, provide no defense change, and reduce attack
-			_movementModifier = 3f;
-			_defenseModifier = 1f;
-			_attackModifier = 0.6f;
+			_movementModifier = 3;
+			_defenseModifier = 0;
+			_attackModifier = 0;
 		}
 
 		// Include buildings. Forts/buildings
@@ -182,21 +183,26 @@ public class Tile : MonoBehaviour
 		StartCoroutine(FlashTile());
 	}
 
-	
+	private void OnMouseDown()
+	{
+		if (UnitManager.unitManager.selectedUnit != null)
+			UnitManager.unitManager.selectedUnit.StartMove(this);
+	}
+
 	IEnumerator FlashTile()
 	{
 		/// <summary>
 		/// Flash tile alpha value to indicate unit can move to it.
 		/// </summary>
-		/// 
-		while (isTraversable)
+		
+		while (isTraversable && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
 		{
-			while(isTraversable && tileImage.color.a > 0.5f)
+			while(isTraversable && tileImage.color.a > 0.5f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
 			{
 				tileImage.color -= new Color(0, 0, 0, Time.deltaTime / 0.7f);
 				yield return null;
 			}
-			while(isTraversable && tileImage.color.a < 1f)
+			while(isTraversable && tileImage.color.a < 1f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
 			{
 				tileImage.color += new Color(0, 0, 0, Time.deltaTime / 0.7f);
 				yield return null;
@@ -206,21 +212,15 @@ public class Tile : MonoBehaviour
 		tileImage.color += new Color(0, 0, 0, 1f); // set tile transparency back to full
 	}
 
-
-	/*private void OnMouseDown()
-	{
-		//Debug.Log(_x + ", " + _y);
-		//if(unit == null)
-			//UnitManager.unitMan.selectedUnit.UpdatePosition();
-	}*/
-
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		_unit = collision.GetComponent<Unit>(); // get the component from unit that just stepped onto the tile
+		_unit.IncreaseStats(_attackModifier, _defenseModifier);
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
+		_unit.DecreaseStats(_attackModifier, _defenseModifier);
 		_unit = null; // when unit leaves, set unit to null
 	}
 }
