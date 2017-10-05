@@ -26,23 +26,11 @@ public class GridManager : MonoBehaviour
 		}
 	}
 
-	public Button[,] gridButtons
-	{
-		get
-		{
-			if (_gridButtons == null)
-				_gridButtons = new Button[rows, columns];
-
-			return _gridButtons;
-		}
-	}
-
 	private void Awake()
 	{
 		InitSingleton();
 
-		_tiles = new Tile[rows, columns];
-		_gridButtons = new Button[rows, columns]; // initialize our 2D array
+		_tiles = new Tile[columns, rows];
 
 		if (grid == null)
 			grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>(); // automatically assign grid if we forgot to do it in inspector
@@ -72,20 +60,13 @@ public class GridManager : MonoBehaviour
 
 	void InitGrid()
 	{
-		GameObject newObj = null;
-
-		for (int i = columns - 1; i >= 0; i--)
+		foreach(Tile tile in grid.GetComponentsInChildren<Tile>())
 		{
-			for (int j = 0; j < rows; j++)
-			{
-				// create a new game object in our scene. Will spawn a copy of our prefab and make it a child of the grid
-				newObj = (GameObject)Instantiate(gridButton, grid.transform);
-				_tiles[j, i] = new Tile(j, i, newObj.GetComponent<RectTransform>());
-				_gridButtons[j, i] = newObj.GetComponent<Button>(); // assign x,y coordinates to each button.
-				_gridButtons[j, i].GetComponentInChildren<Text>().text = j.ToString() + ", " + i.ToString(); // change button text.
-				//newObj.GetComponent<Tile>().x = j;
-				//newObj.GetComponent<Tile>().y = i;
-			}
+			RectTransform thisRect = tile.GetComponent<RectTransform>();
+			int newX = (int) Mathf.Abs((thisRect.anchoredPosition.x / grid.cellSize.x));
+			int newY = (int) Mathf.Abs((thisRect.anchoredPosition.y / grid.cellSize.y));
+			_tiles[newX, newY] = tile;
+			_tiles[newX, newY].InitializeData(newX, newY, thisRect);
 		}
 	}
 }
