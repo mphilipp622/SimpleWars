@@ -13,7 +13,7 @@ public class Unit : MonoBehaviour
 
 	bool isSelected = false;
 
-	public bool hasAttacked = false, hasMoved = false;
+	public bool hasAttacked = false, hasMoved = false, doneMoving = false;
 
 	public Vector3 gridPosition
 	{
@@ -40,7 +40,7 @@ public class Unit : MonoBehaviour
 		/// Code will look left, right, up, down, diagonal for tiles it can move to.
 		/// </summary>
 
-		if (hasMoved) return;
+		if (doneMoving) return;
 
 		for (int i = -1; i < 2; i++)
 		{
@@ -73,7 +73,7 @@ public class Unit : MonoBehaviour
 
 					if (totalCost <= movement && currentTile.unit == null)
 						// If our cost has not exceeded movement and no unit is on the current tile, then we can move to this tile.
-						currentTile.SetTraversable(); 
+						currentTile.SetTraversable();
 					else if (totalCost > movement)
 						// If our totalCost has exceeded our movement, then we can't access the currentTile. Break loop and start next search
 						break;
@@ -130,6 +130,8 @@ public class Unit : MonoBehaviour
 
 	IEnumerator Move(Tile targetTile)
 	{
+		hasMoved = false;
+
 		Tile currentTile = GridManager.gridMan.tiles[x, y];
 
 		float currentMovement = movement;
@@ -137,18 +139,23 @@ public class Unit : MonoBehaviour
 
 		while (transform.position != targetTile.position)
 		{
-
-			//Debug.Log("Tile Pos: " + tilePosition);
-			//Debug.Log(transform.name + " Pos: " + transform.position);
+			// move unit to target tile.
 			Vector3 newVect = targetTile.position - transform.position;
 			transform.position += newVect * .2f;
 			yield return null;
 		}
 
+		hasMoved = true;
+		yield return null;
+
 		if (currentMovement <= 0)
-			hasMoved = true;
+			doneMoving = true;
 		else
+		{
+			hasMoved = false;
+			yield return null;
 			FindTraversableTiles();
+		}
 
 		yield return null;
 	}

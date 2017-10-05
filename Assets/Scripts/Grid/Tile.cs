@@ -179,8 +179,23 @@ public class Tile : MonoBehaviour
 
 	public void SetTraversable()
 	{
+		/// <summary>
+		/// public function that a unit will call when trying to find tile distances. If the tile is in range, the unit will call this function to fade alpha transparency
+		/// </summary>
+		
 		_isTraversable = true;
+		//StopFlash();
 		StartCoroutine(FlashTile());
+	}
+
+	void StopFlash()
+	{
+		///<summary>
+		/// Stops previous flash tile coroutine and sets tile alpha back to full. This will happen when a player moves and still has movement left over
+		/// </summary>
+		
+		StopCoroutine(FlashTile());
+		tileImage.color += new Color(0, 0, 0, 1f);
 	}
 
 	private void OnMouseDown()
@@ -194,7 +209,7 @@ public class Tile : MonoBehaviour
 		/// <summary>
 		/// Flash tile alpha value to indicate unit can move to it.
 		/// </summary>
-		
+
 		while (isTraversable && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
 		{
 			while(isTraversable && tileImage.color.a > 0.5f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
@@ -216,6 +231,7 @@ public class Tile : MonoBehaviour
 	{
 		_unit = collision.GetComponent<Unit>(); // get the component from unit that just stepped onto the tile
 		_unit.IncreaseStats(_attackModifier, _defenseModifier);
+		//_isTraversable = false; // if a unit occupies a tile, it cannot be traversable.
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
