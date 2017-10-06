@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //End Turn Button -> Lock out inactive player -> refresh active player unit movements -> increment active played gold -> increment turn
-
+//
 /*
     This will manage the in-game turn system between players, needs the GameManager for other features.
 
@@ -19,6 +19,21 @@ using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
+    
+    /*
+        Player array, circular, size 2, current player is a variable, turn ends currentplayer.lock prevents player to do stuff
+        Updates the player class to let know its active
+        int current player = 0;
+        current index in cir array 
+
+
+        Example:
+            currentPlayer.Lock();
+            currentIndex++;
+            currentIndex %= 2 
+            curentPlayer = activePlayers. [current.index]
+            currentPlayer.setActive ();
+    */
     void start()
     {
         
@@ -28,4 +43,6 @@ public class TurnManager : MonoBehaviour
     {
 
     }
+
+
 }
