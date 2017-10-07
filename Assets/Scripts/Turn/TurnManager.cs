@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
     /*
         TurnManager :: endTurn();
             1. currentPlayer.Lock();
             2. set currentPlayer to next Player (Players[index++ % = 2])
             3. currentPlayers.startTurn()   
     */
-
-
 
 public class TurnManager : MonoBehaviour
 {
@@ -27,7 +24,6 @@ public class TurnManager : MonoBehaviour
     
     EndTurn()
     {
-
         currentPlayer.Lock();
         players[index++ %= 2];
         currentPlayer.startTurn();
