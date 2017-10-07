@@ -27,6 +27,7 @@ public class Unit : MonoBehaviour
 	{
 		return this.xPos;
 	}
+	
 	public int getyPos()
 	{
 		return this.yPos;
@@ -37,22 +38,27 @@ public class Unit : MonoBehaviour
 	{
 		return this.hp;
 	}
+
 	public int getattack()
 	{
 		return this.attack;
 	}
+
 	public int getdefense()
 	{
 		return this.defense;
 	}
+
 	public int getrange()
 	{
 		return this.range;
 	}
+
 	public int getmovement()
 	{
 		return this.movement;
 	}
+
 	public int getproductionCost()
 	{ 
 		return this.productionCost;
@@ -63,6 +69,7 @@ public class Unit : MonoBehaviour
 	{ 
 		return this.isSelected;
 	}
+
 	public bool gethasAttacked()
 	{
 		return this.hasAttacked;
@@ -73,26 +80,30 @@ public class Unit : MonoBehaviour
 	{
 		return this.captureState;
 	}
+
 //	public void takeDamage(int damage) // pass in hp and attack
 	public void takeDamage(int attackerDamage, int attackerHp)
 	{
 		// this.hp -= damage; 
 		this.hp = (this.hp) - ((attackerDamage)*(attackerHp/10))/(this.defense);
 		//result = floor((((health./10).*attacker_attack)./defender_defense).*attacker_attack)+1;
-		if (hp<=0)
+		if (hp <= 0)
 		{
 			die();
 		}
 	}
+
 	private void die()
 	{
 		Destroy(gameObject); // will need modification due to removal from the player dictionary 
 	}
+
 	public void increaseStats(int attackMod, int defenseMod)
 	{
 		attack += attackMod;
 		defense += defenseMod;
 	}
+
 	public void resetStats(int attackMod, int defenseMod)
 	{
 		attack -= attackMod;
