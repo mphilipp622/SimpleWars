@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour {
-
+public class Unit : MonoBehaviour 
+{
 	// Unit Attributes
 	[SerializeField] 
 	protected int hp, attack, defense,range,movement,productionCost;
 	// Movement 
 	protected bool isSelected; 
 	protected bool hasAttacked;
+	protected bool hasMoved;
+
 	// Special Attributes 
 	protected bool captureState; // remove
 	// Map Attributes 
 	private int xPos;
 	private int yPos;
 	Vector3 worldPosition;// grid posisition
+	Building checkBuilding;
 
 	// Update Comment
 	
@@ -94,5 +97,22 @@ public class Unit : MonoBehaviour {
 	{
 		attack -= attackMod;
 		defense -= defenseMod;	
+	}
+
+	public void reset()
+	{
+		checkBuilding.captureCheck();
+		hasMoved = false;
+		hasAttacked = false;
+	}
+	
+	public void startMove(Unit thisUnit)
+	{
+		//Code coming soon!
+	}
+
+	public bool getHasMoved()
+	{
+		return hasMoved;
 	}
 }
