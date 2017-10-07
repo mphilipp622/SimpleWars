@@ -13,9 +13,10 @@ using UnityEngine.UI;
 public class TurnManager : MonoBehaviour
 {
     int turnCounter = 0; //Initializes turn counter
-    Player [] player = new Player [2]; //Creates array for the two store two Player class objects
+  /*  Player [] player = new Player [2]; //Creates array for the two store two Player class objects
     Player currentPlayer;  //Variable to represent the current player
     currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
+	*/
     int index = 0;
     
     public static TurnManager turnManager;

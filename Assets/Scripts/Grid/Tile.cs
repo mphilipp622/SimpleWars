@@ -216,11 +216,15 @@ public class Tile : MonoBehaviour
 	{
 		_unit = collision.GetComponent<Unit>(); // get the component from unit that just stepped onto the tile
 		_unit.IncreaseStats(_attackModifier, _defenseModifier);
+		if (_building != null)
+			_building.SetCurrentUnit(_unit);
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		_unit.DecreaseStats(_attackModifier, _defenseModifier);
 		_unit = null; // when unit leaves, set unit to null
+		if (_building != null)
+			_building.SetCurrentUnit(_unit);
 	}
 }
