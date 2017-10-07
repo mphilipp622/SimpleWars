@@ -3,37 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//End Turn Button -> Lock out inactive player -> refresh active player unit movements -> increment active played gold -> increment turn
-//
-/*
-    This will manage the in-game turn system between players, needs the GameManager for other features.
 
-    -Game elements affected
-        -Manage the start and end of the turns.
-        -Inactive player is locked out for Active Player turn.
-        -Unit Action and Movements are refreshed.
-        -Gold Count is incremented depending on resources.
-        -Capture System increments and determines if anything is captured.
-*/
+    /*
+        TurnManager :: endTurn();
+            1. currentPlayer.Lock();
+            2. set currentPlayer to next Player (Players[index++ % = 2])
+            3. currentPlayers.startTurn()   
+    */
+
 
 
 public class TurnManager : MonoBehaviour
 {
+    int turnCounter = 0; //Initializes turn counter
+    Player [] player = new Player [2]; //Creates array for the two store two Player class objects
+    Player currentPlayer;  //Variable to represent the current player
+    currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
     
     /*
-        Player array, circular, size 2, current player is a variable, turn ends currentplayer.lock prevents player to do stuff
-        Updates the player class to let know its active
-        int current player = 0;
-        current index in cir array 
-
-
-        Example:
-            currentPlayer.Lock();
-            currentIndex++;
-            currentIndex %= 2 
-            curentPlayer = activePlayers. [current.index]
-            currentPlayer.setActive ();
+        EndTurn() allows the current player to end their turn, locking them in from further input during
+        the next Player's turn, assigns the currentPlayer to the next Player in player[], and increments the turn counter by 1.
     */
+    
+    EndTurn()
+    {
+
+        currentPlayer.Lock();
+        players[index++ %= 2];
+        currentPlayer.startTurn();
+        turnCounter++;
+    }
+
     void start()
     {
         
@@ -43,6 +43,4 @@ public class TurnManager : MonoBehaviour
     {
 
     }
-
-
 }
