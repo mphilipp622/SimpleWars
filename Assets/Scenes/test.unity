@@ -5019,7 +5019,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1843014622731188, guid: eed3bb9004ae0fb46b6a0a12b26f6b6d, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114016496604636386, guid: eed3bb9004ae0fb46b6a0a12b26f6b6d, type: 2}
@@ -5041,6 +5041,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81bc9765ec2ed284a8def34e3efcf92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  attack: 0
+  defense: 0
+  range: 0
+  movement: 0
+  productionCost: 0
 --- !u!1001 &685614636
 Prefab:
   m_ObjectHideFlags: 0
@@ -13036,6 +13042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff0b6a9b7d0d15e49bba031472e59b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 1822165091184420, guid: 71ea0179491c64b01a192f90ee7ce01c, type: 2}
 --- !u!1001 &1467250980
 Prefab:
   m_ObjectHideFlags: 0

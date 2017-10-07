@@ -8,7 +8,7 @@ public class Chopper : Unit
 	{
 		this.hp = 10;
 		this.attack = 3;
-		this.def = 3;
+		this.defense = 3;
 		this.movement = 5;
 		this.range = 1;
 		this.productionCost = 5;

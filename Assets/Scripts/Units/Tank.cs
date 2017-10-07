@@ -8,7 +8,7 @@ public class Tank : Unit
 	{
 		this.hp = 10;
 		this.attack = 4;
-		this.def = 4;
+		this.defense = 4;
 		this.movement = 4;
 		this.range = 1;
 		this.productionCost = 5;

@@ -6,7 +6,7 @@ public class Unit : MonoBehaviour {
 
 	// Unit Attributes
 	[SerializeField] 
-	protected int hp, attack, def,range,movement,productionCost;
+	protected int hp, attack, defense,range,movement,productionCost;
 	// Movement 
 	protected bool isSelected; 
 	protected bool hasAttacked;
@@ -38,9 +38,9 @@ public class Unit : MonoBehaviour {
 	{
 		return this.attack;
 	}
-	public int getdef()
+	public int getdefense()
 	{
-		return this.def;
+		return this.defense;
 	}
 	public int getrange()
 	{
@@ -74,7 +74,7 @@ public class Unit : MonoBehaviour {
 	public void takeDamage(int attackerDamage, int attackerHp)
 	{
 		// this.hp -= damage; 
-		this.hp = (this.hp) - ((attackerDamage)*(attackerHp/10))/(this.def);
+		this.hp = (this.hp) - ((attackerDamage)*(attackerHp/10))/(this.defense);
 		//result = floor((((health./10).*attacker_attack)./defender_defense).*attacker_attack)+1;
 		if (hp<=0)
 		{
