@@ -5,6 +5,9 @@ using UnityEngine;
 public class UnitManager : MonoBehaviour
 {
 	public static UnitManager unitManager;
+	// Will be using arrays instead of dictionary:
+	//Dictionary<GameObject,Unit> Units;
+	public GameObject prefab;
 
 	Unit _selectedUnit;
 
@@ -23,6 +26,11 @@ public class UnitManager : MonoBehaviour
 	private void Awake()
 	{
 		InitSingleton();
+		// Will be using arrays instead of dictionary:
+    	//Units = new Dictionary<GameObject,Unit>();
+        //GameObject newObj=(GameObject)Instantiate(prefab,Vector3.zero,Quaternion.identity);// spawns in the middle of the screen 
+    	//Units.Add(newObj,newObj.GetComponent<Unit>());
+        //Units[newObj].gethp();
 	}
 
 	void Start()
