@@ -4,33 +4,68 @@ using UnityEngine;
 
 public class Building : MonoBehaviour {
 
-    protected bool isCaptured;
-    protected string capturedBy;
+    //global vars
+    protected Player capturedBy;
     protected int goldPerTurn;
+    protected Color color;
+    protected int captureFlag;
+    protected Unit currentUnit;
+    protected Unit previousUnit;
 
     // Constructor
     public Building()
     {
-        this.isCaptured = false;
         this.capturedBy = null;
         this.goldPerTurn = 10;
+        this.captureFlag = 0;
+        this.color = Color.gray;
+        this.currentUnit = null;
+        this.previousUnit = null;
     }
 
-    public void Capture(string capturer)
+    //This function will be called on by the Building's CaptureCheck() function if the 
+    //current unit has stayed on the building for 3 turns.
+    public void Capture()
     {
-        this.isCaptured = true;
-        this.capturedBy = capturer;
+        if (this.capturedBy != null)
+            this.capturedBy.ConcedeBuilding();
+        this.capturedBy = currentUnit;//update this 
+        this.capturedBy.CaptureBuilding(this);
+        this.captureFlag = 0;
+        this.color = capturedBy.color;
+
     }
 
-    public string GetOwner()
+    public Player GetOwner()
     {
         return this.capturedBy;
     }
 
-
+    //returns the goldPerTurn stat of the building.
     public int GetGoldPerTurn()
     {
         return this.goldPerTurn;
+    }
+
+    public void SetCurrentUnit(Unit newUnit)
+    {
+        this.currentUnit = newUnit;
+    }
+
+    //This function will be called by Unit.Reset() function at the start of every
+    //unit's turn.
+    public void CaptureCheck()
+    {
+        if (this.currentUnit == this.previousUnit)
+            captureFlag += 1;
+        else
+        {
+            captureFlag = 0;
+            this.previousUnit = this.currentUnit;
+        }
+
+        if (captureFlag >= 3)
+            this.Capture();
     }
 
 }
