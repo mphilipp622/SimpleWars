@@ -33,7 +33,7 @@ public class Unit : MonoBehaviour
 		return this.yPos;
 	}
 
-	// Unit Attributes 
+	// Unit Attributes for receiving variable values
 	public int gethp()
 	{
 		return this.hp;
@@ -110,19 +110,19 @@ public class Unit : MonoBehaviour
 		defense -= defenseMod;	
 	}
 
-	public void reset()
+	public void reset() //Checks if a building is captured by the unit and assigns false to hasMove and hasAttack.
 	{
 		checkBuilding.captureCheck();
 		hasMoved = false;
 		hasAttacked = false;
 	}
 	
-	public void startMove(Unit thisUnit)
+	public void startMove(Unit thisUnit) // ???
 	{
 		//Code coming soon!
 	}
 
-	public bool getHasMoved()
+	public bool getHasMoved() //Returns boolean value of 'hasMoved' when called.
 	{
 		return hasMoved;
 	}
