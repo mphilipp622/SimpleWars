@@ -114,6 +114,8 @@ public class Tile : MonoBehaviour
 	private void Awake()
 	{
 		tileImage = GetComponent<Image>();
+		if (tag == "Building")
+			_building = GetComponent<Building>();
 	}
 
 	private void Start()
@@ -188,19 +190,21 @@ public class Tile : MonoBehaviour
 		StartCoroutine(FlashTile());
 	}
 
-	void StopFlash()
+	public void StopFlash()
 	{
-		///<summary>
+		/// <summary>
 		/// Stops previous flash tile coroutine and sets tile alpha back to full. This will happen when a player moves and still has movement left over
 		/// </summary>
 		
 		StopCoroutine(FlashTile());
+		_isTraversable = false;
 		tileImage.color += new Color(0, 0, 0, 1f);
 	}
 
 	private void OnMouseDown()
 	{
-		if (UnitManager.unitManager.selectedUnit != null)
+		if (UnitManager.unitManager.selectedUnit != null && _isTraversable)
+			// if we have a unit selected and we click on this tile, move the selected unit to this tile.
 			UnitManager.unitManager.selectedUnit.StartMove(this);
 	}
 
@@ -209,7 +213,7 @@ public class Tile : MonoBehaviour
 		/// <summary>
 		/// Flash tile alpha value to indicate unit can move to it.
 		/// </summary>
-
+		
 		while (isTraversable && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
 		{
 			while(isTraversable && tileImage.color.a > 0.5f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
@@ -223,6 +227,8 @@ public class Tile : MonoBehaviour
 				yield return null;
 			}
 		}
+
+		
 
 		tileImage.color += new Color(0, 0, 0, 1f); // set tile transparency back to full
 	}

@@ -9,6 +9,10 @@ public class Unit : MonoBehaviour
 
 	public float movement = 2f;
 
+	float currentMovement = 2f;
+
+	List<Tile> traversableTiles;
+
 	public int attack = 2, defense = 1, hp = 10;
 
 	bool isSelected = false;
@@ -26,11 +30,14 @@ public class Unit : MonoBehaviour
 	void Start ()
 	{
 		transform.position = GridManager.gridMan.tiles[x, y].position;
+		currentMovement = movement;
+		traversableTiles = new List<Tile>();
 	}
 	
 	void Update ()
 	{
-		
+		if (Input.GetKeyDown(KeyCode.Mouse1))
+			isSelected = false; // if user right-clicks, deselect this unit.
 	}
 
 	protected void FindTraversableTiles()
@@ -63,8 +70,19 @@ public class Unit : MonoBehaviour
 				Tile currentTile = GridManager.gridMan.tiles[x + i, y + j]; // Set our current tile. We don't start with our unit's pos.
 
 				float totalCost = 0; // initialize our totalCost variable. This will keep a running tally of the movement cost in a direction.
+				float tempMovement = currentMovement; // initialize tempMovement to our max movement
 
-				while (totalCost <= movement)
+				tempMovement -= (Vector2.Distance(currentTile.gridPosition, GridManager.gridMan.tiles[currentTile.x - i, currentTile.y - j].gridPosition) / GridManager.gridMan.grid.cellSize.x) + currentTile.movementModifier;
+
+				if (tempMovement >= 0 && currentTile.unit == null)
+				{
+					traversableTiles.Add(currentTile);
+					currentTile.SetTraversable();
+				}
+				else if (tempMovement < 0)
+					break;
+
+				/*while (totalCost <= movement)
 				{
 					// This loop will run as long as total cost does not exceed our unit's movement.
 
@@ -83,7 +101,7 @@ public class Unit : MonoBehaviour
 						break;
 
 					currentTile = GridManager.gridMan.tiles[currentTile.x + i, currentTile.y + j]; // assign next tile
-				}
+				}*/
 			}
 		}
 	}
@@ -125,6 +143,8 @@ public class Unit : MonoBehaviour
 
 	public void StartMove(Tile targetTile)
 	{
+		if (doneMoving) return;
+
 		StartCoroutine(Move(targetTile));
 	}
 
@@ -133,30 +153,44 @@ public class Unit : MonoBehaviour
 		hasMoved = false;
 
 		Tile currentTile = GridManager.gridMan.tiles[x, y];
-
-		float currentMovement = movement;
+		
+		//float currentMovement = movement;
 		currentMovement -= (Vector3.Distance(currentTile.gridPosition, targetTile.gridPosition) / GridManager.gridMan.grid.cellSize.x) + targetTile.movementModifier;
 
-		while (transform.position != targetTile.position)
+		Vector3 newVect = targetTile.position - transform.position;
+		//transform.position += newVect * .2f;
+		transform.position += newVect;
+		yield return null;
+
+		/*while (transform.position != targetTile.position)
 		{
 			// move unit to target tile.
 			Vector3 newVect = targetTile.position - transform.position;
-			transform.position += newVect * .2f;
+			//transform.position += newVect * .2f;
+			transform.position = newVect;
 			yield return null;
-		}
+		}*/
 
-		hasMoved = true;
+		this.x = targetTile.x;
+		this.y = targetTile.y;
+		//hasMoved = true;
 		yield return null;
 
 		if (currentMovement <= 0)
 			doneMoving = true;
-		else
+		else if (currentMovement > 0)
 		{
-			hasMoved = false;
+			//	hasMoved = false;
+			if (traversableTiles.Count > 0)
+			{
+				foreach (Tile tile in traversableTiles)
+					tile.StopFlash();
+
+				traversableTiles.Clear();
+			}
 			yield return null;
 			FindTraversableTiles();
 		}
-
 		yield return null;
 	}
 

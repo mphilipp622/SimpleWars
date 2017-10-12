@@ -9,6 +9,7 @@ TagManager:
   - Road
   - Grass
   - River
+  - Building
   layers:
   - Default
   - TransparentFX
