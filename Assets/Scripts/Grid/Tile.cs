@@ -206,7 +206,7 @@ public class Tile : MonoBehaviour
 		if (UnitManager.unitManager.selectedUnit != null && _isTraversable)
 			// if we have a unit selected and we click on this tile, move the selected unit to this tile.
 			UnitManager.unitManager.selectedUnit.StartMove(this);
-		/*else if (UnitManager.unitManager.selectedUnit == null && this.building != null && GridManager.gridMan.selectedBuilding == null, && this.building.owner == PlayerManager.playerManager.selectedPlayer)
+		/*else if (UnitManager.unitManager.selectedUnit == null && this.building != null && GridManager.gridMan.selectedBuilding == null, && this.building.owner == PlayerManager.playerManager.selectedPlayer && this._unit == null)
 			// assign this building as the selected building.
 			GridManager.gridMan.selectedBuilding = this;*/
 
