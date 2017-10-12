@@ -12,6 +12,7 @@ public class Unit : MonoBehaviour
 	float currentMovement = 2f;
 
 	List<Tile> traversableTiles;
+	List<Tile> enemyTiles;
 
 	public int attack = 2, defense = 1, hp = 10;
 
@@ -32,12 +33,30 @@ public class Unit : MonoBehaviour
 		transform.position = GridManager.gridMan.tiles[x, y].position;
 		currentMovement = movement;
 		traversableTiles = new List<Tile>();
+		enemyTiles = new List<Tile>();
 	}
 	
 	void Update ()
 	{
 		if (Input.GetKeyDown(KeyCode.Mouse1))
+		{
 			isSelected = false; // if user right-clicks, deselect this unit.
+			UnitManager.unitManager.selectedUnit = null;
+		}
+	}
+
+	void HighlightEnemies()
+	{
+		if (hasAttacked) return;
+
+		/*foreach(Unit enemyUnit in PlayerManager.playerManager.GetInactivePlayer().units)
+		{
+			if(range >= Vector2.Distance(new Vector2(x, y), new Vector2(enemyUnit.x, enemyUnit.y)))
+			{
+				GridManager.gridMan.tiles[enemyUnit.x, enemyUnit.y].SetEnemy();
+				enemyTiles.Add(enemyUnit);
+			}
+		}*/
 	}
 
 	protected void FindTraversableTiles()
@@ -75,13 +94,23 @@ public class Unit : MonoBehaviour
 
 				Tile currentTile = GridManager.gridMan.tiles[x + i, y + j]; // Set our current tile. We don't start with our unit's pos.
 
+				/*if (currentTile.unit != null)
+				{
+					// unit on tile, add it to enemy tile
+					enemyTiles.Add(currentTile);
+					currentTile.SetEnemy();
+					continue;
+				}*/
+
 				float totalCost = 0; // initialize our totalCost variable. This will keep a running tally of the movement cost in a direction.
 				float tempMovement = currentMovement; // initialize tempMovement to our max movement
-				Debug.Log("Temp Movement: " + tempMovement);
+				//Debug.Log("Temp Movement: " + tempMovement);
 
-				tempMovement -= (Vector2.Distance(currentTile.gridPosition, GridManager.gridMan.tiles[currentTile.x - i, currentTile.y - j].gridPosition) / GridManager.gridMan.grid.cellSize.x) + currentTile.movementModifier;
+				//Debug.Log("Distance to Tile " + currentTile.x + ", " + currentTile.y + ": " + (Vector2.Distance(new Vector2(x, y), new Vector2(currentTile.x, currentTile.y)) + currentTile.movementModifier));
+				tempMovement -= Vector2.Distance(new Vector2(x, y), new Vector2(currentTile.x, currentTile.y)) + currentTile.movementModifier;
+				//tempMovement -= (Vector2.Distance(currentTile.gridPosition, GridManager.gridMan.tiles[currentTile.x - i, currentTile.y - j].gridPosition) / GridManager.gridMan.grid.cellSize.x) + currentTile.movementModifier;
 
-				Debug.Log("Post Temp Movement: " + tempMovement);
+				//Debug.Log("Post Temp Movement: " + tempMovement);
 
 				if (tempMovement >= 0 && currentTile.unit == null)
 				{
@@ -89,7 +118,7 @@ public class Unit : MonoBehaviour
 					currentTile.SetTraversable();
 				}
 				else if (tempMovement < 0)
-					break;
+					continue;
 
 				/*while (totalCost <= movement)
 				{
@@ -169,8 +198,20 @@ public class Unit : MonoBehaviour
 		Vector3 newVect = targetTile.position - transform.position;
 		//transform.position += newVect * .2f;
 		transform.position += newVect;
-		yield return null;
+		if (traversableTiles.Count > 0)
+		{
+			foreach (Tile tile in traversableTiles)
+				tile.StopFlash();
 
+			traversableTiles.Clear();
+		}
+		if(enemyTiles.Count > 0)
+		{
+			foreach (Tile tile in enemyTiles)
+				tile.StopFlash();
+
+			enemyTiles.Clear();
+		}
 		/*while (transform.position != targetTile.position)
 		{
 			// move unit to target tile.
@@ -190,17 +231,14 @@ public class Unit : MonoBehaviour
 		else if (currentMovement > 0)
 		{
 			//	hasMoved = false;
-			if (traversableTiles.Count > 0)
-			{
-				foreach (Tile tile in traversableTiles)
-					tile.StopFlash();
-
-				traversableTiles.Clear();
-			}
-			yield return null;
 			FindTraversableTiles();
 		}
+
 		yield return null;
+
+		if (traversableTiles.Count == 0)
+			// if we cannot find any more traversable tiles, then we can't move anymore.
+			doneMoving = true;
 	}
 
 	/*public void BuildUnit(string newName)

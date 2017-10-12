@@ -20,6 +20,8 @@ public class Tile : MonoBehaviour
 
 	Image tileImage; // UI Image component for tile. Will be used for fading alpha
 
+	Color originalColor;
+
 	// Getters for our member variables
 	public int x
 	{
@@ -116,6 +118,7 @@ public class Tile : MonoBehaviour
 		tileImage = GetComponent<Image>();
 		if (tag == "Building")
 			_building = GetComponent<Building>();
+		originalColor = tileImage.color;
 	}
 
 	private void Start()
@@ -190,6 +193,11 @@ public class Tile : MonoBehaviour
 		StartCoroutine(FlashTile());
 	}
 
+	public void SetEnemy()
+	{
+		StartCoroutine(FlashEnemyTile());
+	}
+
 	public void StopFlash()
 	{
 		/// <summary>
@@ -197,8 +205,10 @@ public class Tile : MonoBehaviour
 		/// </summary>
 		
 		StopCoroutine(FlashTile());
+		StopCoroutine(FlashEnemyTile());
 		_isTraversable = false;
-		tileImage.color += new Color(0, 0, 0, 1f);
+		tileImage.color = originalColor;
+		//tileImage.color += new Color(0, 0, 0, 1f);
 	}
 
 	private void OnMouseDown()
@@ -212,6 +222,28 @@ public class Tile : MonoBehaviour
 
 		// GridManager.gridMan.selectedBuilding.gridPosition;
 		// myGameObject = (GameObject) Instantiate (prefab, buildingPosition, Quaternion.identity);
+	}
+
+	IEnumerator FlashEnemyTile()
+	{
+		Unit selectedUnit = UnitManager.unitManager.selectedUnit;
+		tileImage.color = Color.red;
+
+		while(selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.hasAttacked)
+		{
+			while (tileImage.color.r > 0.5f && selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.hasAttacked)
+			{
+				tileImage.color -= new Color(Time.deltaTime / 0.7f, 0, 0, 0f);
+				yield return null;
+			}
+			while (tileImage.color.r < 1f && selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.hasAttacked)
+			{
+				tileImage.color += new Color(Time.deltaTime / 0.7f, 0, 0, 0f);
+				yield return null;
+			}
+		}
+
+		tileImage.color = originalColor;
 	}
 
 	IEnumerator FlashTile()
@@ -234,9 +266,9 @@ public class Tile : MonoBehaviour
 			}
 		}
 
-		
 
-		tileImage.color += new Color(0, 0, 0, 1f); // set tile transparency back to full
+		tileImage.color = originalColor;
+		//tileImage.color += new Color(0, 0, 0, 1f); // set tile transparency back to full
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
