@@ -19,6 +19,7 @@ public class Unit : MonoBehaviour
 	private int yPos;
 	Vector3 worldPosition;// grid posisition
 	Building checkBuilding;
+	Player unitOwner;
 
 	// Update Comment
 	
@@ -93,18 +94,18 @@ public class Unit : MonoBehaviour
 		}
 	}
 
-	private void die()
+	private void die() //MIght need to change up as of 10/12 due to player dictionary changes.
 	{
-		Destroy(gameObject); // will need modification due to removal from the player dictionary 
+		Destroy(gameObject);
 	}
 
-	public void increaseStats(int attackMod, int defenseMod)
+	public void increaseStats(int attackMod, int defenseMod) //Provides a boost to this unit's atk and def stats via mods.
 	{
 		attack += attackMod;
 		defense += defenseMod;
 	}
 
-	public void resetStats(int attackMod, int defenseMod)
+	public void resetStats(int attackMod, int defenseMod) //Removes the boost from the this unit's stats after its use.
 	{
 		attack -= attackMod;
 		defense -= defenseMod;	
@@ -117,7 +118,7 @@ public class Unit : MonoBehaviour
 		hasAttacked = false;
 	}
 	
-	public void startMove(Unit thisUnit) // ???
+	public void startMove(Unit thisUnit) //Empty for now, needed for compiling purposes.
 	{
 		//Code coming soon!
 	}
@@ -125,5 +126,10 @@ public class Unit : MonoBehaviour
 	public bool getHasMoved() //Returns boolean value of 'hasMoved' when called.
 	{
 		return hasMoved;
+	}
+
+	public Player getUnitOwner(Unit thisUnit) //Returns this unit's player owner.
+	{
+		return unitOwner
 	}
 }
