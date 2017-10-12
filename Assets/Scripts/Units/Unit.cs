@@ -194,6 +194,19 @@ public class Unit : MonoBehaviour
 		yield return null;
 	}
 
+	/*public void BuildUnit(string newName)
+	{
+		Debug.Log(newName);
+		if (newName == "infantry")
+		{
+			if (PlayerManager.currentPlayer.money > infantryCost)
+				BuildInfantry();
+			else
+				return;
+		}
+		else if (newName == "tank") Debug.Log("Hi Tank");
+	}*/
+
 	public void IncreaseStats(int attackMod, int defenseMod)
 	{
 		///<summary>
