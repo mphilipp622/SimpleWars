@@ -60,19 +60,28 @@ public class Unit : MonoBehaviour
 				if (i == 0 && j == 0)
 					continue; // this continues loop if our [x + i, y + j] is equal to our current position. We don't want to check our pos.
 
+
 				// The below if statement performs bounds checking to make sure our next tile is within the bounds of our 2D tile array.
 				// tiles.GetLength(0) grabs the 0th dimension of the tiles array and returns it's length.
 				// For instance, if tiles is size [3][4]. tiles.GetLength(0) will return 3. GetLength(1) will return 4
 
 				if (x + i > GridManager.gridMan.tiles.GetLength(0) - 1 || x + i < 0 || y + j > GridManager.gridMan.tiles.GetLength(1) - 1 || y + j < 0)
+				{
+				//	Debug.Log("Out of Bounds: " + (x + i) + ", " + (y + j));
 					continue;
+				}
+
+				//Debug.Log((x + i) + ", " + (y + j));
 
 				Tile currentTile = GridManager.gridMan.tiles[x + i, y + j]; // Set our current tile. We don't start with our unit's pos.
 
 				float totalCost = 0; // initialize our totalCost variable. This will keep a running tally of the movement cost in a direction.
 				float tempMovement = currentMovement; // initialize tempMovement to our max movement
+				Debug.Log("Temp Movement: " + tempMovement);
 
 				tempMovement -= (Vector2.Distance(currentTile.gridPosition, GridManager.gridMan.tiles[currentTile.x - i, currentTile.y - j].gridPosition) / GridManager.gridMan.grid.cellSize.x) + currentTile.movementModifier;
+
+				Debug.Log("Post Temp Movement: " + tempMovement);
 
 				if (tempMovement >= 0 && currentTile.unit == null)
 				{
