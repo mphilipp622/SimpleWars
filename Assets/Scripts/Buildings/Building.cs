@@ -28,9 +28,9 @@ public class Building : MonoBehaviour {
     public void Capture()
     {
         if (this.capturedBy != null)
-            this.capturedBy.ConcedeBuilding();
-        this.capturedBy = currentUnit;//update this 
-        this.capturedBy.CaptureBuilding(this);
+			this.capturedBy.concedeBuilding();		// Checks list and removes building from player list
+        this.capturedBy = currentUnit;				//update this 
+        this.capturedBy.captureBuilding(this);		// Checks list and updates it with capture owner
         this.captureFlag = 0;
         this.color = capturedBy.color;
 
