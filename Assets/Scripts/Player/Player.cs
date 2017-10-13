@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     private int currentMoney;
 	public Color color;
 	private bool isActive;
+	private bool captureBuilding;
+	private bool concedeBuilding;
 	public bool isLocked;
 	void Awake()
     {
@@ -33,11 +35,11 @@ public class Player : MonoBehaviour
 	{
 		return this.color;
 	}
-	public bool captureBuilding()
+	public bool iscaptureBuilding()
 	{
 		return this.captureBuilding;
 	}
-	public bool concedeBuilding()
+	public bool isconcedeBuilding()
 	{
 		return this.concedeBuilding;
 	}
