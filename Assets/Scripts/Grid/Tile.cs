@@ -177,6 +177,13 @@ public class Tile : MonoBehaviour
 			_defenseModifier = 0;
 			_attackModifier = 0;
 		}
+		else if(gameObject.tag == "Building")
+		{
+			// does not currently differentiate between building types.
+			_defenseModifier = 2;
+			_attackModifier = 0;
+			_movementModifier = 0;
+		}
 
 		// Include buildings. Forts/buildings
 
@@ -273,6 +280,8 @@ public class Tile : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		_unit.x = this.x;
+		_unit.y = this.y;
 		_unit = collision.GetComponent<Unit>(); // get the component from unit that just stepped onto the tile
 		_unit.IncreaseStats(_attackModifier, _defenseModifier);
 		//_isTraversable = false; // if a unit occupies a tile, it cannot be traversable.

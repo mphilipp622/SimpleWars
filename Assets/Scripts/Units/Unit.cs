@@ -9,14 +9,14 @@ public class Unit : MonoBehaviour
 
 	public float movement = 2f;
 
-	float currentMovement = 2f;
+	protected float currentMovement = 2f;
 
-	List<Tile> traversableTiles;
-	List<Tile> enemyTiles;
+	protected List<Tile> traversableTiles;
+	protected List<Tile> enemyTiles;
 
 	public int attack = 2, defense = 1, hp = 10;
 
-	bool isSelected = false;
+	protected bool isSelected = false;
 
 	public bool hasAttacked = false, hasMoved = false, doneMoving = false;
 
@@ -45,7 +45,7 @@ public class Unit : MonoBehaviour
 		}
 	}
 
-	void HighlightEnemies()
+	protected void HighlightEnemies()
 	{
 		if (hasAttacked) return;
 
@@ -143,8 +143,8 @@ public class Unit : MonoBehaviour
 			}
 		}
 	}
-	
-	private void OnMouseDown()
+
+	protected void OnMouseDown()
 	{
 		///<summary>
 		/// This function is called whenever a unit is clicked on with the mouse. We need this function to have several if statements
@@ -186,7 +186,7 @@ public class Unit : MonoBehaviour
 		StartCoroutine(Move(targetTile));
 	}
 
-	IEnumerator Move(Tile targetTile)
+	protected IEnumerator Move(Tile targetTile)
 	{
 		hasMoved = false;
 
@@ -276,7 +276,7 @@ public class Unit : MonoBehaviour
 		defense -= defenseMod;
 	}
 
-	void HasAttacked()
+	protected void HasAttacked()
 	{
 		///<summary>
 		/// This function will do three things:
@@ -292,7 +292,7 @@ public class Unit : MonoBehaviour
 		UnitManager.unitManager.selectedUnit = null;
 	}
 
-	void AttackRoutine(Unit attackingUnit)
+	protected void AttackRoutine(Unit attackingUnit)
 	{
 		// check if attacker is in range of this unit
 		if (!attackingUnit.CheckAttackRange(this))
@@ -312,7 +312,7 @@ public class Unit : MonoBehaviour
 		attackingUnit.HasAttacked();
 	}
 
-	bool CheckAttackRange(Unit defendingUnit)
+	protected bool CheckAttackRange(Unit defendingUnit)
 	{
 		/// <summary>
 		/// Check if enemy unit is in range to attack. Returns true if distance is within range. False otherwise.
@@ -325,7 +325,7 @@ public class Unit : MonoBehaviour
 			return true;
 	}
 
-	void Attack(Unit defendingUnit)
+	protected void Attack(Unit defendingUnit)
 	{
 		/// <summary>
 		/// call TakeDamage on defendingUnit. Pass the attacking unit's attack value as a parameter
@@ -336,7 +336,7 @@ public class Unit : MonoBehaviour
 		defendingUnit.TakeDamage(this.attack, this.hp);
 	}
 
-	void TakeDamage(int attackDamage, int attackerHP)
+	protected void TakeDamage(int attackDamage, int attackerHP)
 	{
 		///<summary>
 		/// Perform damage calculations against the unit that calls this function.

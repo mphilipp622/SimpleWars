@@ -9,17 +9,19 @@ using UnityEditor;
 /// This allows us to customize the Unity editor to create custom tools that we want.
 /// </summary>
 
-public class TilePopupWindow : EditorWindow
+public class UnitPopupWindow: EditorWindow
 {
-	string tileName;
-	string terrainTag;
-	Object tileSprite;
+	string unitName;
+	string unitType;
+	Object unitSprite;
+	string[] unitTypes = { "infantry", "tank", "helicopter" };
+	int index = 0;
 
 	public static void Init()
 	{
 		// this function will be called by the isaac menu tool. It will initialize and show this popup window.
 
-		TilePopupWindow window = ScriptableObject.CreateInstance<TilePopupWindow>(); // create a new instance of this class
+		UnitPopupWindow window = ScriptableObject.CreateInstance<UnitPopupWindow>(); // create a new instance of this class
 		window.position = new Rect(Screen.width / 2, Screen.height / 2, 256, 256); // set the position of the window when it opens
 		window.ShowPopup(); // called EditorWindow.ShowPopup() to open the window in the editor.
 	}
@@ -31,21 +33,23 @@ public class TilePopupWindow : EditorWindow
 		this.Repaint(); // refresh the popup window
 
 		// Create a text field for the name of the prefab we want to make. Assign tileName to the string that's in the name text field.
-		tileName = EditorGUILayout.TextField("Tile Name", tileName); 
+		unitName = EditorGUILayout.TextField("Tile Name", unitName);
 		GUILayout.Space(10); // create some space on the window. Allows us to space out our ui elements
 
-		// create a tag field that allows the user to specify the type of terrain this tile should be. Assign terrainTag string to the chosen tag.
-		terrainTag = EditorGUILayout.TagField("Terrain/Building type", terrainTag);
+		index = EditorGUILayout.Popup("Unit Type", index, unitTypes);
+		unitType = unitTypes[index];
 
 		GUILayout.Space(10);
 
 		// create a sprite field. Allows user to select a sprite to use for the tile. Assign tileSprite to this object
-		tileSprite = EditorGUILayout.ObjectField("Sprite", tileSprite, typeof(Sprite), true);
+		unitSprite = EditorGUILayout.ObjectField("Sprite", unitSprite, typeof(Sprite), true);
+
+		GUILayout.Space(10);
 
 		if (GUILayout.Button("Accept"))
 		{
 			// Create Accept button. When user presses this button, we want to call our ScriptableObjectUtility to create a prefab.
-			ScriptableObjectUtility.CreateTile(tileName, terrainTag, tileSprite);
+			ScriptableObjectUtility.CreateUnit(unitName, unitType, unitSprite);
 			this.Close(); // close window
 		}
 		else if (GUILayout.Button("Cancel"))
