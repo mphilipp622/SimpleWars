@@ -76,11 +76,6 @@ public class Unit : MonoBehaviour
 	}
 
 	//Special Attributes 
-	public bool getcaptureState()
-	{
-		return this.captureState;
-	}
-
 	private void die() //Needs editing due to player list rather than dictionary
 	{
 		Destroy(gameObject);
@@ -123,13 +118,11 @@ public class Unit : MonoBehaviour
 
 	public Vector2 gridPosition() //Returns the x and y coordinates.
 	{	
-		get
-		{
-				return newVector2(x,y);
-		}
+		
+			return newVector2(x,y);
 	}
 
-	void HasAttacked(bool isSelected, bool hasAttacked)
+	void HasAttacked(bool isSelected, bool hasAttacked) //Sets of the conditions for after a unit attacks
 	{
 		isSelected = false;
 		hasAttacked = true;
@@ -137,7 +130,7 @@ public class Unit : MonoBehaviour
 		thisUnitMananger.selectedUnit = null;
 	}
 
-	void AttackRoutine(Unit attackingUnit)
+	void AttackRoutine(Unit attackingUnit) //Performs various attack actions based on the current conditions
 	{
 		if(!attackingUnit.CheckAttackRange(this))
 			return;
@@ -162,13 +155,12 @@ public class Unit : MonoBehaviour
 			return false;
 	}
 
-	void Attack(Unit defendingUnit)
+	void Attack(Unit defendingUnit) //Attack function to inflict damage on the defending unit
 	{
 		defendingUnit.TakeDamage(this.attack, this.hp);
 	}
 
-	//	public void takeDamage(int damage) // pass in hp and attack
-	public void takeDamage(int attackerDamage, int attackerHp)
+	public void takeDamage(int attackerDamage, int attackerHp) //Damage calculation is done in this function and checks if the defending unit is destroyed.
 	{
 		int totalDamageDone = ((attackerDamage)*(attackerHP/10))/(this.defense); //Algorithm for calculating total damage.
 
