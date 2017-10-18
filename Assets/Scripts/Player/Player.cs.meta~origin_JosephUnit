@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 2fc4d61b77ad64a39afcd9098bb4a74c
-timeCreated: 1507401981
-=======
-guid: 48dd2e42bdd26134895f50ad3724fd3b
-timeCreated: 1507401460
->>>>>>> origin/JosephUnit
+guid: 4a78504c2abd15940959ead8788e2272
+timeCreated: 1507401709
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
