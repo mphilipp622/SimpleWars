@@ -9,9 +9,10 @@ public class Unit : MonoBehaviour
 	protected int hp, attack, defense, range, movement, productionCost;
 	
 	//Check variables for actions done on each units
-	protected bool isSelected; 
-	protected bool hasAttacked;
-	protected bool hasMoved;
+	protected bool isSelected = false; 
+	protected bool hasAttacked = false;
+	protected bool hasMoved = false;
+	protected bool doneMoving = false;
 
 	//Map coordinates variables
 	private int xPos;
@@ -22,7 +23,29 @@ public class Unit : MonoBehaviour
 	Building checkBuilding;
 	Player unitOwner;
 	UnitManager unitMananger;
-	
+
+	//Movement variables
+	protected List<Tile> traversableTiles;
+	protected List<Tile> enemyTiles;
+	protected float currentMovement;
+
+	private void Start()
+	{
+		transform.position = GridManager.gridMan.tiles[x, y].position;
+		currentMovement = movement;
+		traversableTiles = new List<Tile>();
+		enemyTiles = new List<Tile>();
+	}
+
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Mouse1))
+		{
+			isSelected = false; // if user right-clicks, deselect this unit.
+			UnitManager.unitManager.selectedUnit = null;
+		}
+	}
+
 	//Map Attributes and Coordinates
 	public int getxPos()
 	{
@@ -100,10 +123,166 @@ public class Unit : MonoBehaviour
 		hasMoved = false;
 		hasAttacked = false;
 	}
-	
-	public void startMove(Unit thisUnit) //Empty for now, needed for compiling purposes.
+
+	protected void HighlightEnemies()
 	{
-		//Code coming soon!
+		if (hasAttacked) return;
+
+		/*foreach(Unit enemyUnit in PlayerManager.playerManager.GetInactivePlayer().units)
+		{
+			if(range >= Vector2.Distance(new Vector2(x, y), new Vector2(enemyUnit.x, enemyUnit.y)))
+			{
+				GridManager.gridMan.tiles[enemyUnit.x, enemyUnit.y].SetEnemy();
+				enemyTiles.Add(enemyUnit);
+			}
+		}*/
+	}
+
+	protected void FindTraversableTiles()
+	{
+		///<summary>
+		/// Primitive pathfinding implementation.
+		/// Code will look left, right, up, down, diagonal for tiles it can move to.
+		/// </summary>
+
+		if (doneMoving) return;
+
+		for (int i = -1; i < 2; i++)
+		{
+			for (int j = -1; j < 2; j++)
+			{
+				// we use nested for loops bounded from -1 to 1, which allows us to look at all adjacent tiles to our current position.
+				// To do this, we call x + i, x + j. For instance, [4 + -1, 4 + -1] will check the tile [3, 3]. The loop is nested because
+				// the next iteration will do [4 + -1, 4 + 0], which checks tile [3, 4].
+
+				if (i == 0 && j == 0)
+					continue; // this continues loop if our [x + i, y + j] is equal to our current position. We don't want to check our pos.
+
+
+				// The below if statement performs bounds checking to make sure our next tile is within the bounds of our 2D tile array.
+				// tiles.GetLength(0) grabs the 0th dimension of the tiles array and returns it's length.
+				// For instance, if tiles is size [3][4]. tiles.GetLength(0) will return 3. GetLength(1) will return 4
+
+				if (xPos + i > GridManager.gridMan.tiles.GetLength(0) - 1 || xPos + i < 0 || yPos + j > GridManager.gridMan.tiles.GetLength(1) - 1 || yPos + j < 0)
+				{
+					//	Debug.Log("Out of Bounds: " + (x + i) + ", " + (y + j));
+					continue;
+				}
+
+				//Debug.Log((x + i) + ", " + (y + j));
+
+				Tile currentTile = GridManager.gridMan.tiles[xPos + i, yPos + j]; // Set our current tile. We don't start with our unit's pos.
+
+				/*if (currentTile.unit != null)
+				{
+					// unit on tile, add it to enemy tile
+					enemyTiles.Add(currentTile);
+					currentTile.SetEnemy();
+					continue;
+				}*/
+
+				float totalCost = 0; // initialize our totalCost variable. This will keep a running tally of the movement cost in a direction.
+				float tempMovement = currentMovement; // initialize tempMovement to our max movement
+													  //Debug.Log("Temp Movement: " + tempMovement);
+
+				//Debug.Log("Distance to Tile " + currentTile.x + ", " + currentTile.y + ": " + (Vector2.Distance(new Vector2(x, y), new Vector2(currentTile.x, currentTile.y)) + currentTile.movementModifier));
+				tempMovement -= Vector2.Distance(new Vector2(xPos, yPos), new Vector2(currentTile.x, currentTile.y)) + currentTile.movementModifier;
+				//tempMovement -= (Vector2.Distance(currentTile.gridPosition, GridManager.gridMan.tiles[currentTile.x - i, currentTile.y - j].gridPosition) / GridManager.gridMan.grid.cellSize.x) + currentTile.movementModifier;
+
+				//Debug.Log("Post Temp Movement: " + tempMovement);
+
+				if (tempMovement >= 0 && currentTile.unit == null)
+				{
+					traversableTiles.Add(currentTile);
+					currentTile.SetTraversable();
+				}
+				else if (tempMovement < 0)
+					continue;
+
+				/*while (totalCost <= movement)
+				{
+					// This loop will run as long as total cost does not exceed our unit's movement.
+
+					// the below equation adds the distance from our currentTile to our previous tile and adds the movementModifier of the current tile. The weird division black magic is necessary due to the way the GridLayoutManager is implemented. In most circumstances, you would just run Vector2.Distance between one position and another position.
+					totalCost += (Vector2.Distance(currentTile.gridPosition, GridManager.gridMan.tiles[currentTile.x - i, currentTile.y - j].gridPosition) / GridManager.gridMan.grid.cellSize.x) + currentTile.movementModifier;
+
+					if (totalCost <= movement && currentTile.unit == null)
+						// If our cost has not exceeded movement and no unit is on the current tile, then we can move to this tile.
+						currentTile.SetTraversable();
+					else if (totalCost > movement)
+						// If our totalCost has exceeded our movement, then we can't access the currentTile. Break loop and start next search
+						break;
+
+					// bounds checking again
+					if (currentTile.x + i > GridManager.gridMan.tiles.GetLength(0) - 1 || currentTile.x + i < 0 || currentTile.y + j > GridManager.gridMan.tiles.GetLength(1) - 1 || currentTile.y + j < 0)
+						break;
+
+					currentTile = GridManager.gridMan.tiles[currentTile.x + i, currentTile.y + j]; // assign next tile
+				}*/
+			}
+		}
+	}
+
+	public void StartMove(Tile targetTile)
+	{
+		if (doneMoving) return;
+
+		StartCoroutine(Move(targetTile));
+	}
+
+	protected IEnumerator Move(Tile targetTile)
+	{
+		hasMoved = false;
+
+		Tile currentTile = GridManager.gridMan.tiles[x, y];
+
+		//float currentMovement = movement;
+		currentMovement -= (Vector3.Distance(currentTile.gridPosition, targetTile.gridPosition) / GridManager.gridMan.grid.cellSize.x) + targetTile.movementModifier;
+
+		Vector3 newVect = targetTile.position - transform.position;
+		//transform.position += newVect * .2f;
+		transform.position += newVect;
+		if (traversableTiles.Count > 0)
+		{
+			foreach (Tile tile in traversableTiles)
+				tile.StopFlash();
+
+			traversableTiles.Clear();
+		}
+		if (enemyTiles.Count > 0)
+		{
+			foreach (Tile tile in enemyTiles)
+				tile.StopFlash();
+
+			enemyTiles.Clear();
+		}
+		/*while (transform.position != targetTile.position)
+		{
+			// move unit to target tile.
+			Vector3 newVect = targetTile.position - transform.position;
+			//transform.position += newVect * .2f;
+			transform.position = newVect;
+			yield return null;
+		}*/
+
+		this.xPos = targetTile.x;
+		this.yPos = targetTile.y;
+		//hasMoved = true;
+		yield return null;
+
+		if (currentMovement <= 0)
+			doneMoving = true;
+		else if (currentMovement > 0)
+		{
+			//	hasMoved = false;
+			FindTraversableTiles();
+		}
+
+		yield return null;
+
+		if (traversableTiles.Count == 0)
+			// if we cannot find any more traversable tiles, then we can't move anymore.
+			doneMoving = true;
 	}
 
 	public bool getHasMoved() //Returns boolean value of 'hasMoved' when called.
@@ -116,13 +295,12 @@ public class Unit : MonoBehaviour
 		return unitOwner;
 	}
 
-	public Vector2 gridPosition() //Returns the x and y coordinates.
+	public Vector3 gridPosition() //Returns the x and y coordinates.
 	{	
-		
-			return new Vector2(xPos, yPos);
+		return new Vector3(xPos, yPos, transform.position.z);
 	}
 
-	void HasAttacked(bool isSelected, bool hasAttacked) //Sets of the conditions for after a unit attacks
+	void HasAttacked() //Sets of the conditions for after a unit attacks
 	{
 		isSelected = false;
 		hasAttacked = true;
@@ -160,7 +338,7 @@ public class Unit : MonoBehaviour
 		defendingUnit.TakeDamage(this.attack, this.hp);
 	}
 
-	public void takeDamage(int attackerDamage, int attackerHp) //Damage calculation is done in this function and checks if the defending unit is destroyed.
+	public void TakeDamage(int attackerDamage, int attackerHp) //Damage calculation is done in this function and checks if the defending unit is destroyed.
 	{
 		int totalDamageDone = ((attackerDamage)*(attackerHP/10))/(this.defense); //Algorithm for calculating total damage.
 
@@ -196,59 +374,6 @@ public class Unit : MonoBehaviour
 			// if this unit is selected and we click on it again, cancel selection
 			isSelected = false;
 			UnitManager.unitManager.selectedUnit = null;
-		}
-	}
-
-	protected void FindTraversableTiles()
-	{
-		///<summary>
-		/// Primitive pathfinding implementation.
-		/// Code will look left, right, up, down, diagonal for tiles it can move to.
-		/// </summary>
-	
-		for (int i = -1; i < 2; i++)
-		{
-			for (int j = -1; j < 2; j++)
-			{
-			// we use nested for loops bounded from -1 to 1, which allows us to look at all adjacent tiles to our current position.
-			// To do this, we call x + i, x + j. For instance, [4 + -1, 4 + -1] will check the tile [3, 3]. The loop is nested because
-			// the next iteration will do [4 + -1, 4 + 0], which checks tile [3, 4].
-
-				if (i == 0 && j == 0)
-					continue; // this continues loop if our [x + i, y + j] is equal to our current position. We don't want to check our pos.
-
-			// The below if statement performs bounds checking to make sure our next tile is within the bounds of our 2D tile array.
-			// tiles.GetLength(0) grabs the 0th dimension of the tiles array and returns it's length.
-			// For instance, if tiles is size [3][4]. tiles.GetLength(0) will return 3. GetLength(1) will return 4
-
-				if (x + i > GridManager.gridMan.tiles.GetLength(0) - 1 || x + i < 0 || y + j > GridManager.gridMan.tiles.GetLength(1) - 1 || y + j < 0)
-					continue;
-
-				Tile currentTile = GridManager.gridMan.tiles[x + i, y + j]; // Set our current tile. We don't start with our unit's pos.
-
-				float totalCost = 0; // initialize our totalCost variable. This will keep a running tally of the movement cost in a direction.
-
-				while (totalCost <= movement)
-				{
-				// This loop will run as long as total cost does not exceed our unit's movement.
-
-				// the below equation adds the distance from our currentTile to our previous tile and adds the movementModifier of the current tile. The weird division black magic is necessary due to the way the GridLayoutManager is implemented. In most circumstances, you would just run Vector2.Distance between one position and another position.
-					totalCost += (Vector2.Distance(currentTile.gridPosition, GridManager.gridMan.tiles[currentTile.x - i, currentTile.y - j].gridPosition) / GridManager.gridMan.grid.cellSize.x) + currentTile.movementModifier;
-
-					if (totalCost <= movement && currentTile.unit == null)
-					// If our cost has not exceeded movement and no unit is on the current tile, then we can move to this tile.
-					currentTile.SetTraversable(); 
-					else if (totalCost > movement)
-					// If our totalCost has exceeded our movement, then we can't access the currentTile. Break loop and start next search
-						break;
-
-				// bounds checking again
-					if (currentTile.x + i > GridManager.gridMan.tiles.GetLength(0) - 1 || currentTile.x + i < 0 || currentTile.y + j > GridManager.gridMan.tiles.GetLength(1) - 1 || currentTile.y + j < 0)
-						break;
-
-					currentTile = GridManager.gridMan.tiles[currentTile.x + i, currentTile.y + j]; // assign next tile
-				}
-			}
 		}
 	}
 }
