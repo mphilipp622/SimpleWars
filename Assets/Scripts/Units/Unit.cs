@@ -14,6 +14,8 @@ public class Unit : MonoBehaviour
 
 	// Special Attributes 
 	protected bool captureState; // remove
+	protected bool captureCheck; // remove
+
 	// Map Attributes 
 	private int xPos;
 	private int yPos;
@@ -80,6 +82,11 @@ public class Unit : MonoBehaviour
 	{
 		return this.captureState;
 	}
+	public bool getcaptureCheck()
+	{
+		return this.captureCheck;
+	}
+
 
 	//	public void takeDamage(int damage) // pass in hp and attack
 	public void takeDamage(int attackerDamage, int attackerHp)
@@ -112,7 +119,7 @@ public class Unit : MonoBehaviour
 
 	public void reset() //Checks if a building is captured by the unit and assigns false to hasMove and hasAttack.
 	{
-		checkBuilding.captureCheck();
+		checkBuilding.getcaptureCheck();
 		hasMoved = false;
 		hasAttacked = false;
 	}
