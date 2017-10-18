@@ -21,7 +21,7 @@ public class Unit : MonoBehaviour
 	Vector3 worldPosition;
 	Building checkBuilding;
 	Player unitOwner;
-	UnitManager thisUnitMananger;
+	UnitManager unitMananger;
 	
 	//Map Attributes and Coordinates
 	public int getxPos()
@@ -127,7 +127,7 @@ public class Unit : MonoBehaviour
 		isSelected = false;
 		hasAttacked = true;
 		
-		thisUnitMananger.selectedUnit = null;
+		unitMananger.selectedUnit = null;
 	}
 
 	void AttackRoutine(Unit attackingUnit) //Performs various attack actions based on the current conditions
@@ -179,23 +179,23 @@ public class Unit : MonoBehaviour
 
 	private void OnMouseDown() //Function is called when the mouse is clicked, and will run checks to execute the proper action.
 	{
-		private static bool hasSelected;
-
-		//More actions will be implemented as further testing goes on.
-		if(!this.Unit && hasAttacked == false && thisUnitManager.selectedUnit == null)
+		if (!isSelected && !hasAttacked && UnitManager.unitManager.selectedUnit == null)
 		{
+			// if no unit is selected at all, select this unit for movement/attacking.
 			isSelected = true;
-			thisUnitManager.selectedUnit = this;
+			UnitManager.unitManager.selectedUnit = this;
 			FindTraversableTiles();
 		}
-		else if(!this.Unit && thisUnitManager.selectedUnit == !this && thisUnitManager.selectedUnit == !null)
+		else if(!isSelected && UnitManager.unitManager.selectedUnit != this && UnitManager.unitManager.selectedUnit != null /* && UnitManager.selectedUnit.player != this.player*/)
 		{
-			AttackRoutine(attackingUnit);
+			// This means a different unit is selected and they are attempting to attack this unit
+			AttackRoutine(UnitManager.unitManager.selectedUnit);
 		}
-		else
+		else if (isSelected)
 		{
+			// if this unit is selected and we click on it again, cancel selection
 			isSelected = false;
-			thisUnitMananger.selectedUnit = null;
+			UnitManager.unitManager.selectedUnit = null;
 		}
 	}
 
