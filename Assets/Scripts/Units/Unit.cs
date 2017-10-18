@@ -119,7 +119,7 @@ public class Unit : MonoBehaviour
 	public Vector2 gridPosition() //Returns the x and y coordinates.
 	{	
 		
-			return newVector2(x,y);
+			return new Vector2(xPos, yPos);
 	}
 
 	void HasAttacked(bool isSelected, bool hasAttacked) //Sets of the conditions for after a unit attacks
