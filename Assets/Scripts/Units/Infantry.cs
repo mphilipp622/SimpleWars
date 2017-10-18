@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Infantry : Unit {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-=======
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +13,5 @@ public class Infantry : Unit
 		this.range = 2;
 		this.productionCost = 2;
 		//this.captureBuilding = false;
->>>>>>> origin/JosephUnit
 	}
 }

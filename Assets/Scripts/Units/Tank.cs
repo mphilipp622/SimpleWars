@@ -1,25 +1,7 @@
-<<<<<<< HEAD
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Tank : Unit {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-}
-=======
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//update comment
+
 public class Tank : Unit
 {
 	public Tank()
@@ -32,4 +14,4 @@ public class Tank : Unit
 		this.productionCost = 5;
 	}
 }
->>>>>>> origin/JosephUnit
+

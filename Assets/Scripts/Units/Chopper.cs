@@ -1,11 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-<<<<<<< HEAD
 
-=======
-//update comment
->>>>>>> origin/JosephUnit
 public class Chopper : Unit
 {
 	public Chopper() 

@@ -13,32 +13,23 @@ using UnityEngine.UI;
 public class TurnManager : MonoBehaviour
 {
     int turnCounter = 0; //Initializes turn counter
-<<<<<<< HEAD
-	Player [] player; //Creates array for the two store two Player class objects
+    Player [] player; //Creates array for the two store two Player class objects
     Player currentPlayer;  //Variable to represent the current player
-
-=======
-  /*  Player [] player = new Player [2]; //Creates array for the two store two Player class objects
-    Player currentPlayer;  //Variable to represent the current player
-    currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
-	*/
->>>>>>> origin/JosephUnit
+   // currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
     int index = 0;
     
     public static TurnManager turnManager;
-
-    /*
+	private void Awake()
+	{
+		player = new Player[2];
+		currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
+	}
+	/*
         EndTurn() allows the current player to end their turn, locking them in from further input during
         the next Player's turn, assigns the currentPlayer to the next Player in player[], and increments the turn counter by 1.
     */
 
-	void Awake(){
-	
-		player = new Player [2];
-		currentPlayer = player[0];     //Assigns the current Player to the first Player in player[]
-	}
-    
-    public void EndTurn()
+	public void EndTurn()
     {
         currentPlayer.Lock(); //Locks the current Player object
         index++;
