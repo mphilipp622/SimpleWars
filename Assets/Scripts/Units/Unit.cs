@@ -121,7 +121,7 @@ public class Unit : MonoBehaviour
 
 	public void reset() //Checks if a building is captured by the unit and assigns false to hasMove and hasAttack.
 	{
-		//checkBuilding.captureCheck();
+		checkBuilding.CaptureCheck();
 		hasMoved = false;
 		hasAttacked = false;
 	}
@@ -377,5 +377,15 @@ public class Unit : MonoBehaviour
 			isSelected = false;
 			UnitManager.unitManager.selectedUnit = null;
 		}
+	}
+
+	public void SetX(int x_coord)
+	{
+		xPos = x_coord;
+	}
+
+	public void SetY(int y_coord)
+	{
+		yPos = y_coord;
 	}
 }
