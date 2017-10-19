@@ -11,9 +11,11 @@ public class Player : MonoBehaviour
     private int currentMoney;
 	public Color color;
 	private bool isActive;
-	private bool captureBuilding;
-	private bool concedeBuilding;
+	//private bool captureBuilding;
+	//private bool ConcedeBuilding;
 	public bool isLocked;
+    protected Building removeBuilding = null;
+
 	void Awake()
     {
         units = new List<Unit>();
@@ -35,13 +37,13 @@ public class Player : MonoBehaviour
 	{
 		return this.color;
 	}
-	public bool iscaptureBuilding()
+	public void captureBuilding(Building addedBuilding)
 	{
-		return this.captureBuilding;
+		buildings.Add(addedBuilding);
 	}
-	public bool isconcedeBuilding()
+    public void concedeBuilding(Building removedBuilding)
 	{
-		return this.concedeBuilding;
+        buildings.Remove(removedBuilding); 
 	}
 	public void startTurn()
 	{

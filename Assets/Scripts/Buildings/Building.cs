@@ -28,12 +28,11 @@ public class Building : MonoBehaviour {
     public void Capture()
     {
         if (this.capturedBy != null)
-            this.capturedBy.ConcedeBuilding();
-        this.capturedBy = currentUnit;//update this 
-        this.capturedBy.CaptureBuilding(this);
+            this.capturedBy.concedeBuilding(this);
+        this.capturedBy = currentUnit.getUnitOwner();//update this 
+        this.capturedBy.captureBuilding(this);
         this.captureFlag = 0;
         this.color = capturedBy.color;
-
     }
 
     public Player GetOwner()
