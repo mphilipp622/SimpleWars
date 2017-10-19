@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour 
 {
@@ -29,9 +30,17 @@ public class Unit : MonoBehaviour
 	protected List<Tile> enemyTiles;
 	protected float currentMovement;
 
+	private void Awake()
+	{
+		int finalX = (int)Mathf.Abs((GetComponent<RectTransform>().anchoredPosition.x / GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize.x));
+		int finalY = (int)Mathf.Abs((GetComponent<RectTransform>().anchoredPosition.y / GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize.y));
+		this.xPos = finalX;
+		this.yPos = finalY;
+	}
+
 	private void Start()
 	{
-		transform.position = GridManager.gridMan.tiles[xPos, yPos].position; //x,y changed to xPos, yPos
+		//transform.position = GridManager.gridMan.tiles[xPos, yPos].position; //x,y changed to xPos, yPos
 		currentMovement = movement;
 		traversableTiles = new List<Tile>();
 		enemyTiles = new List<Tile>();
