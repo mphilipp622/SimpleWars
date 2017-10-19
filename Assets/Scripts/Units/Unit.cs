@@ -101,7 +101,9 @@ public class Unit : MonoBehaviour
 	//Special Attributes 
 	private void die() //Needs editing due to player list rather than dictionary
 	{
-		Destroy(gameObject);
+		// Need to remove object from list first.
+        // Created a removeUnit(unit removedUnit) function
+        Destroy(gameObject);
 		//get player owner from list.
 	}
 
@@ -290,7 +292,7 @@ public class Unit : MonoBehaviour
 		return hasMoved;
 	}
 
-	public Player getUnitOwner(Unit thisUnit) //Returns this unit's player owner.
+	public Player getUnitOwner() //Returns this unit's player owner.
 	{
 		return unitOwner;
 	}
@@ -338,7 +340,7 @@ public class Unit : MonoBehaviour
 		defendingUnit.TakeDamage(this.attack, this.hp);
 	}
 
-	public void TakeDamage(int attackerDamage, int attackerHp) //Damage calculation is done in this function and checks if the defending unit is destroyed.
+	public void TakeDamage(int attackerDamage, int attackerHP) //Damage calculation is done in this function and checks if the defending unit is destroyed.
 	{
 		int totalDamageDone = ((attackerDamage)*(attackerHP/10))/(this.defense); //Algorithm for calculating total damage.
 

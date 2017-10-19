@@ -9,12 +9,10 @@ public class Player : MonoBehaviour
 
     private int moneyPerTurn;
     private int currentMoney;
-	public Color color;
 	private bool isActive;
-	//private bool captureBuilding;
-	//private bool ConcedeBuilding;
 	public bool isLocked;
     protected Building removeBuilding = null;
+    public Color color;
 
 	void Awake()
     {
@@ -35,17 +33,26 @@ public class Player : MonoBehaviour
 	}
 	public Color getColor()
 	{
-		return this.color;
+        return this.color;
 	}
-	public void captureBuilding(Building addedBuilding)
+    public void removeUnit(Unit removedUnit)            // Removes unit from list 
+    {
+        units.Remove(removedUnit);
+    }
+    public void addUnit(Unit addedUnit)                 // Adds unit to list 
+    {
+        units.Add(addedUnit);
+    }
+	public void captureBuilding(Building addedBuilding) // Adds building to list 
 	{
 		buildings.Add(addedBuilding);
 	}
-    public void concedeBuilding(Building removedBuilding)
+    public void concedeBuilding(Building removedBuilding) // Removes building from list
 	{
         buildings.Remove(removedBuilding); 
 	}
-	public void startTurn()
+	// Update 
+	public void startTurn() 
 	{
 		// Updates the income from buildings 
 		this.moneyPerTurn = 10 * buildings.Count; // Assuming the income per building is 10 
