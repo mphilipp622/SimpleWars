@@ -236,14 +236,14 @@ public class Tile : MonoBehaviour
 		Unit selectedUnit = UnitManager.unitManager.selectedUnit;
 		tileImage.color = Color.red;
 
-		while(selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.hasAttacked)
+		while(selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.gethasAttacked())
 		{
-			while (tileImage.color.r > 0.5f && selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.hasAttacked)
+			while (tileImage.color.r > 0.5f && selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.gethasAttacked())
 			{
 				tileImage.color -= new Color(Time.deltaTime / 0.7f, 0, 0, 0f);
 				yield return null;
 			}
-			while (tileImage.color.r < 1f && selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.hasAttacked)
+			while (tileImage.color.r < 1f && selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.gethasAttacked())
 			{
 				tileImage.color += new Color(Time.deltaTime / 0.7f, 0, 0, 0f);
 				yield return null;
@@ -259,14 +259,14 @@ public class Tile : MonoBehaviour
 		/// Flash tile alpha value to indicate unit can move to it.
 		/// </summary>
 		
-		while (isTraversable && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
+		while (isTraversable && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.getHasMoved())
 		{
-			while(isTraversable && tileImage.color.a > 0.5f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
+			while(isTraversable && tileImage.color.a > 0.5f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.getHasMoved())
 			{
 				tileImage.color -= new Color(0, 0, 0, Time.deltaTime / 0.7f);
 				yield return null;
 			}
-			while(isTraversable && tileImage.color.a < 1f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
+			while(isTraversable && tileImage.color.a < 1f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.getHasMoved())
 			{
 				tileImage.color += new Color(0, 0, 0, Time.deltaTime / 0.7f);
 				yield return null;
@@ -280,16 +280,16 @@ public class Tile : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		_unit.x = this.x;
-		_unit.y = this.y;
+		_unit.SetX(this.x);
+		_unit.SetY(this.y);
 		_unit = collision.GetComponent<Unit>(); // get the component from unit that just stepped onto the tile
-		_unit.IncreaseStats(_attackModifier, _defenseModifier);
+		_unit.increaseStats(_attackModifier, _defenseModifier);
 		//_isTraversable = false; // if a unit occupies a tile, it cannot be traversable.
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		_unit.DecreaseStats(_attackModifier, _defenseModifier);
+		_unit.resetStats(_attackModifier, _defenseModifier);
 		_unit = null; // when unit leaves, set unit to null
 	}
 }
