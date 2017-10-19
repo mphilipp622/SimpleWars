@@ -50,7 +50,7 @@ public static class ScriptableObjectUtility
 		// Tile needs a collider on it to detect unit movements.
 		BoxCollider2D newCollider = newObj.gameObject.AddComponent<BoxCollider2D>();
 		newCollider.isTrigger = true; // set the collider to be a trigger.
-		newCollider.size = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize; // set collider size to the cell size of our tiles
+		newCollider.size = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize / 2; // set collider size to the cell size of our tiles
 
 		// the LayoutElement allows our tiles to ignore mandatory positioning from the GridLayoutGroup component. We need this so
 		// Isaac can place tiles wherever he wants without being forced into an order. ParentTile script allows him to place tiles

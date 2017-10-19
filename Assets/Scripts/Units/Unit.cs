@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -28,9 +29,17 @@ public class Unit : MonoBehaviour
 		}
 	}
 
+	private void Awake()
+	{
+		int finalX = (int)Mathf.Abs((GetComponent<RectTransform>().anchoredPosition.x / GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize.x));
+		int finalY = (int)Mathf.Abs((GetComponent<RectTransform>().anchoredPosition.y / GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize.y));
+		this.x = finalX;
+		this.y = finalY;
+	}
+
 	void Start ()
 	{
-		transform.position = GridManager.gridMan.tiles[x, y].position;
+		//transform.position = GridManager.gridMan.tiles[x, y].position;
 		currentMovement = movement;
 		traversableTiles = new List<Tile>();
 		enemyTiles = new List<Tile>();
@@ -158,6 +167,7 @@ public class Unit : MonoBehaviour
 		/// 3. else if statement 2 will cancel unit selection if we click on the selected unit again.
 		///		- If this unit is selected, THEN set this unit to not selected, set Unit Manager's selectedUnit to null
 		/// </summary>
+		
 		if (!isSelected && !hasAttacked && UnitManager.unitManager.selectedUnit == null)
 		{
 			// if no unit is selected at all, select this unit for movement/attacking.
@@ -260,7 +270,6 @@ public class Unit : MonoBehaviour
 		/// This function will be called on by the Tile that the unit enters
 		/// Tile will pass it's attack and defense mods to this function and the unit will update their stats accordingly.
 		/// </summary>
-		
 		attack += attackMod;
 		defense += defenseMod;
 	}
