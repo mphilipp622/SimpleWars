@@ -16,6 +16,7 @@ public class ParentTile : MonoBehaviour {
 	GridManager gridMan;
 	RectTransform thisRect;
 	float newX, newY;
+	//Unit thisUnit;
 
 	public int rows, columns;
 
@@ -41,8 +42,16 @@ public class ParentTile : MonoBehaviour {
 		
 		newX = Mathf.Clamp(newX, grid.cellSize.x / 2, (grid.cellSize.x * columns) - grid.cellSize.x / 2);
 		newY = Mathf.Clamp(newY, -((grid.cellSize.x * rows) - grid.cellSize.y / 2), -(grid.cellSize.y / 2));
-		
+
 		thisRect.anchoredPosition = new Vector3(newX, newY, thisRect.localPosition.z);
+		
+		/*if(thisUnit != null)
+		{
+			int finalX = (int)Mathf.Abs((thisRect.anchoredPosition.x / grid.cellSize.x));
+			int finalY = (int)Mathf.Abs((thisRect.anchoredPosition.y / grid.cellSize.y));
+			thisUnit.x = finalX;
+			thisUnit.y = finalY;
+		}*/
 	}
 
 	void InitData()
@@ -59,9 +68,12 @@ public class ParentTile : MonoBehaviour {
 		rows = gridMan.rows;
 		columns = gridMan.columns;
 
-		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta; // force the collider on the tile to match the current grid cell size
+		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta / 2; // force the collider on the tile to match the current grid cell size
 		transform.parent = grid.transform; // assign object to be child of grid.
 		transform.localScale = new Vector3(1, 1, 1);
+
+		//if (gameObject.tag == "Unit")
+		//	thisUnit = GetComponent<Unit>();
 	}
 
 	public void UpdateDimensions()
