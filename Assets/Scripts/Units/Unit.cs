@@ -23,7 +23,7 @@ public class Unit : MonoBehaviour
 	Vector3 worldPosition;
 	Building checkBuilding;
 	Player unitOwner;
-	UnitManager unitMananger;
+	
 
 	//Movement variables
 	protected List<Tile> traversableTiles;
@@ -315,8 +315,8 @@ public class Unit : MonoBehaviour
 	{
 		isSelected = false;
 		hasAttacked = true;
-		
-		unitMananger.selectedUnit = null;
+		//Debug.Log("Hi");
+		UnitManager.unitManager.selectedUnit = null;
 	}
 
 	void AttackRoutine(Unit attackingUnit) //Performs various attack actions based on the current conditions
@@ -344,21 +344,22 @@ public class Unit : MonoBehaviour
 			return false;
 	}
 
-	void Attack(Unit defendingUnit) //Attack function to inflict damage on the defending unit
+	void Attack(Unit defendingUnit) //Attack function to inflict damage on the defending unit 
 	{
 		defendingUnit.TakeDamage(this.attack, this.hp);
 	}
 
 	public void TakeDamage(int attackerDamage, int attackerHP) //Damage calculation is done in this function and checks if the defending unit is destroyed.
 	{
-		int totalDamageDone = ((attackerDamage)*(attackerHP/10))/(this.defense); //Algorithm for calculating total damage.
-
+		int totalDamageDone = (int) ((attackerDamage)*(attackerHP/10f)) / (this.defense); //Algorithm for calculating total damage.
+		
 		if(totalDamageDone < 0.5) //If damage is under 0.5, reduced to zero.
 			totalDamageDone = 0;
 		else if(totalDamageDone >= 0.5 && totalDamageDone < 1) //If damage is over 0.5 but under 1, sets damage to 1.
 			totalDamageDone = 1;
 		else //Else proceed as normal with no additional modifiers
 			this.hp = this.hp - totalDamageDone;
+		Debug.Log(gameObject.name + " took " + totalDamageDone + " damage.");
 
 		if (hp <= 0)
 		{
