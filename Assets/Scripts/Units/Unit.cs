@@ -31,7 +31,7 @@ public class Unit : MonoBehaviour
 
 	private void Start()
 	{
-		transform.position = GridManager.gridMan.tiles[x, y].position;
+		transform.position = GridManager.gridMan.tiles[xPos, yPos].position; //x,y changed to xPos, yPos
 		currentMovement = movement;
 		traversableTiles = new List<Tile>();
 		enemyTiles = new List<Tile>();
@@ -121,7 +121,7 @@ public class Unit : MonoBehaviour
 
 	public void reset() //Checks if a building is captured by the unit and assigns false to hasMove and hasAttack.
 	{
-		checkBuilding.captureCheck();
+		//checkBuilding.captureCheck();
 		hasMoved = false;
 		hasAttacked = false;
 	}
@@ -236,7 +236,7 @@ public class Unit : MonoBehaviour
 	{
 		hasMoved = false;
 
-		Tile currentTile = GridManager.gridMan.tiles[x, y];
+		Tile currentTile = GridManager.gridMan.tiles[xPos, yPos]; //Changed x,y to xPos,yPos
 
 		//float currentMovement = movement;
 		currentMovement -= (Vector3.Distance(currentTile.gridPosition, targetTile.gridPosition) / GridManager.gridMan.grid.cellSize.x) + targetTile.movementModifier;
