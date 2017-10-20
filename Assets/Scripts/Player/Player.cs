@@ -51,6 +51,10 @@ public class Player : MonoBehaviour
 	{
         buildings.Remove(removedBuilding); 
 	}
+
+	// public void SetActive()
+	// public void SetInactive()
+
 	// Update 
 	public void startTurn() 
 	{

@@ -24,6 +24,15 @@ public class PlayerManager : MonoBehaviour {
 		activePlayer = newActivePlayer; // set active player to new active player
 	}
 
+	private void Awake()
+	{
+		InitSingleton();
+		activePlayer = new Player();
+		inactivePlayer = new Player();
+		//activePlayer.SetActive();
+		//inactivePlayer.SetInactive();
+	}
+
 	void InitSingleton()
 	{
 		// singleton pattern. Assigns this instance of the class to gridMan if gridMan is null.

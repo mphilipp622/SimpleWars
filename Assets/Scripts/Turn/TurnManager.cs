@@ -22,6 +22,12 @@ public class TurnManager : MonoBehaviour
 	private void Awake()
 	{
 		player = new Player[2];
+		
+	}
+	private void Start()
+	{
+		player[0] = PlayerManager.playerManager.GetActivePlayer();
+		player[1] = PlayerManager.playerManager.GetInactivePlayer();
 		currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
 	}
 	/*
@@ -33,7 +39,8 @@ public class TurnManager : MonoBehaviour
     {
         currentPlayer.Lock(); //Locks the current Player object
         index++;
-        currentPlayer = player[index %= 2]; //Assigns currentPlayer to the next Player object in player[]
+		index %= 2;
+        currentPlayer = player[index]; //Assigns currentPlayer to the next Player object in player[]
         currentPlayer.startTurn(); //Calls on the Player's startTurn function
 
         turnCounter++; //Increments turn counter by 1
