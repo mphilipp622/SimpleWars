@@ -26,8 +26,8 @@ public class TurnManager : MonoBehaviour
 	}
 	private void Start()
 	{
-		player[0] = PlayerManager.playerManager.GetActivePlayer();
-		player[1] = PlayerManager.playerManager.GetInactivePlayer();
+		player[0] = PlayerManager.playerManager.players[0];
+		player[1] = PlayerManager.playerManager.players[1];
 		currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
 	}
 	/*

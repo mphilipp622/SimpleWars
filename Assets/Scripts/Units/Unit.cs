@@ -23,7 +23,7 @@ public class Unit : MonoBehaviour
 	Vector3 worldPosition;
 	Building checkBuilding;
 	Player unitOwner;
-	
+	Color unitColor;
 
 	//Movement variables
 	protected List<Tile> traversableTiles;
@@ -105,6 +105,12 @@ public class Unit : MonoBehaviour
 	public bool gethasAttacked()
 	{
 		return this.hasAttacked;
+	}
+
+	public void SetOwner(Player newOwner)
+	{
+		unitOwner = newOwner;
+		GetComponent<Image>().color = newOwner.getColor();
 	}
 
 	//Special Attributes 

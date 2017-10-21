@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Building : MonoBehaviour {
 
@@ -23,9 +24,27 @@ public class Building : MonoBehaviour {
         this.previousUnit = null;
     }
 
-    //This function will be called on by the Building's CaptureCheck() function if the 
-    //current unit has stayed on the building for 3 turns.
-    public void Capture()
+	private void Start()
+	{
+	}
+
+	public void SetOwner(Player newOwner)
+	{
+		/// <summary>
+		/// This will be called at start of game. It will be called on by a Player script.
+		/// It will assign the owner of this building and update the color of the building.
+		/// 
+		/// 1. set this owner to newOwner
+		/// 2. Change color of the building's Image component to the owner's color (red or blue depending on owner).
+		/// </summary>
+		/// 
+		capturedBy = newOwner;
+		GetComponent<Image>().color = newOwner.color;
+	}
+
+	//This function will be called on by the Building's CaptureCheck() function if the 
+	//current unit has stayed on the building for 3 turns.
+	public void Capture()
     {
         if (this.capturedBy != null)
             this.capturedBy.concedeBuilding(this);

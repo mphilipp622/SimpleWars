@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-	private List<Unit> units;
-	private List<Building> buildings;
+	public List<Unit> units;
+	public List<Building> buildings;
 
     private int moneyPerTurn;
     private int currentMoney;
@@ -16,9 +16,17 @@ public class Player : MonoBehaviour
 
 	void Awake()
     {
-        units = new List<Unit>();
-        buildings = new List<Building>();
+		InitData();
     }
+
+	void InitData()
+	{
+		foreach (Unit unit in units)
+			unit.SetOwner(this);
+		foreach (Building building in buildings)
+			building.SetOwner(this);
+	}
+
 	public bool Lock()
 	{
 		return this.isLocked = true;

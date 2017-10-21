@@ -8,6 +8,17 @@ public class PlayerManager : MonoBehaviour {
 
 	Player activePlayer, inactivePlayer;
 
+	[SerializeField]
+	Player[] _players;
+
+	public Player[] players
+	{
+		get
+		{
+			return _players;
+		}
+	}
+
 	public Player GetActivePlayer()
 	{
 		return activePlayer;
@@ -27,8 +38,8 @@ public class PlayerManager : MonoBehaviour {
 	private void Awake()
 	{
 		InitSingleton();
-		activePlayer = new Player();
-		inactivePlayer = new Player();
+		activePlayer = _players[0];
+		inactivePlayer = _players[1];
 		//activePlayer.SetActive();
 		//inactivePlayer.SetInactive();
 	}
