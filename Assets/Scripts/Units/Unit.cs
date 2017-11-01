@@ -138,7 +138,8 @@ public class Unit : MonoBehaviour
 	{
 		if(checkBuilding != null)
 			checkBuilding.CaptureCheck();
-		hasMoved = false;
+        currentMovement = movement;
+        hasMoved = false;
 		hasAttacked = false;
 	}
 
