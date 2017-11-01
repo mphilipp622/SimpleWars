@@ -39,6 +39,7 @@ public class TurnManager : MonoBehaviour
 
 	public void EndTurn()
     {
+        UnitManager.unitManager.selectedUnit = null;
         currentPlayer.Lock(); //Locks the current Player object
         index++;
 		index %= 2;
