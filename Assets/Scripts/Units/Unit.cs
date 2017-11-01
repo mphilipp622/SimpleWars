@@ -136,9 +136,15 @@ public class Unit : MonoBehaviour
 
 	public void reset() //Checks if a building is captured by the unit and assigns false to hasMove and hasAttack.
 	{
-		checkBuilding.CaptureCheck();
+		if(checkBuilding != null)
+			checkBuilding.CaptureCheck();
 		hasMoved = false;
 		hasAttacked = false;
+	}
+
+	public void setBuilding(Building newBuilding)
+	{
+		checkBuilding = newBuilding;
 	}
 
 	protected void HighlightEnemies()
@@ -375,7 +381,7 @@ public class Unit : MonoBehaviour
 
 	private void OnMouseDown() //Function is called when the mouse is clicked, and will run checks to execute the proper action.
 	{
-		if (!isSelected && !hasAttacked && UnitManager.unitManager.selectedUnit == null)
+		if (!isSelected && !hasAttacked && UnitManager.unitManager.selectedUnit == null && !this.unitOwner.isLocked)
 		{
 			// if no unit is selected at all, select this unit for movement/attacking.
 			isSelected = true;
@@ -394,6 +400,7 @@ public class Unit : MonoBehaviour
 			UnitManager.unitManager.selectedUnit = null;
 		}
 	}
+	
 
 	public void SetX(int x_coord)
 	{

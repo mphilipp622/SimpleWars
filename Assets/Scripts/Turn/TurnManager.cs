@@ -29,9 +29,11 @@ public class TurnManager : MonoBehaviour
 		player[0] = PlayerManager.playerManager.players[0];
 		player[1] = PlayerManager.playerManager.players[1];
 		currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
+        player[1].Lock();
 	}
 	/*
-        EndTurn() allows the current player to end their turn, locking them in from further input during
+        EndTurn() allows the current player to end t
+        heir turn, locking them in from further input during
         the next Player's turn, assigns the currentPlayer to the next Player in player[], and increments the turn counter by 1.
     */
 
