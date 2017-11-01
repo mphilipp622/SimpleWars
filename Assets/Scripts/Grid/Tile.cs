@@ -284,6 +284,9 @@ public class Tile : MonoBehaviour
 		_unit.SetX(this.x);
 		_unit.SetY(this.y);
 		_unit.increaseStats(_attackModifier, _defenseModifier);
+		if (gameObject.tag == "Building")
+			_unit.setBuilding(gameObject.GetComponent<Building>());
+
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
@@ -291,7 +294,9 @@ public class Tile : MonoBehaviour
 		if (_unit != null)
 		{
 			_unit.resetStats(_attackModifier, _defenseModifier);
-			_unit = null; // when unit leaves, set unit to null
+            if (gameObject.tag == "Building")
+                _unit.setBuilding(null);
+            _unit = null; // when unit leaves, set unit to null
 		}
 	}
 }
