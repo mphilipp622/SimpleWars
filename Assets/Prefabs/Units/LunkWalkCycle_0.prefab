@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4489215706281994}
   - component: {fileID: 212912211504158888}
-  - component: {fileID: 114016496604636386}
   - component: {fileID: 50245323693204428}
   - component: {fileID: 61300939073236478}
+  - component: {fileID: 114320455602959188}
   m_Layer: 0
   m_Name: LunkWalkCycle_0
   m_TagString: Untagged
@@ -88,7 +88,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.95}
   m_EdgeRadius: 0
---- !u!114 &114016496604636386
+--- !u!114 &114320455602959188
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,9 +96,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1843014622731188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f63d693945c70fe4694f97bd32b42b3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 81bc9765ec2ed284a8def34e3efcf92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 5
+  y: 7
+  range: 1
+  movement: 2
+  attack: 2
+  defense: 1
+  hp: 10
+  hasAttacked: 0
+  hasMoved: 0
+  doneMoving: 0
 --- !u!212 &212912211504158888
 SpriteRenderer:
   m_ObjectHideFlags: 1

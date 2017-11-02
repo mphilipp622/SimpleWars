@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//update comment
+
 public class Tank : Unit
 {
 	public Tank()
@@ -14,3 +14,4 @@ public class Tank : Unit
 		this.productionCost = 5;
 	}
 }
+

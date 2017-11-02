@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class UnitManager : MonoBehaviour
 {
+	/// <summary>
+	/// This class will be static and global so every other script in the game can access it and its public members and functions.
+	/// This class keeps track of the currently selected unit in the scene. Because so many scripts depend on this information,
+	/// this class needs to be static and global for access.
+	/// </summary>
+	
 	public static UnitManager unitManager;
-	// Will be using arrays instead of dictionary:
-	//Dictionary<GameObject,Unit> Units;
-	public GameObject prefab;
 
 	Unit _selectedUnit;
 
@@ -26,27 +29,22 @@ public class UnitManager : MonoBehaviour
 	private void Awake()
 	{
 		InitSingleton();
-		// Will be using arrays instead of dictionary:
-    	//Units = new Dictionary<GameObject,Unit>();
-        //GameObject newObj=(GameObject)Instantiate(prefab,Vector3.zero,Quaternion.identity);// spawns in the middle of the screen 
-    	//Units.Add(newObj,newObj.GetComponent<Unit>());
-        //Units[newObj].gethp();
 	}
 
-	void Start()
+	void Start ()
 	{
-
+		
 	}
-
-	void Update()
-	{
-
+	
+	void Update ()
+	{ 
+		
 	}
 
 	void InitSingleton()
 	{
-		// singleton pattern. Assigns this instance of the class to gridMan if gridMan is null.
-		// destroys this instance if a gridMan already exists. We only want one of these in our game.
+		// singleton pattern. Assigns this instance of the class to unitManager if unitManager is null.
+		// destroys this instance if a unitManager already exists. We only want one of these in our game.
 		if (unitManager == null)
 			unitManager = this;
 		else if (unitManager != this)

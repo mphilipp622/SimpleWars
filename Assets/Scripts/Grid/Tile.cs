@@ -20,6 +20,8 @@ public class Tile : MonoBehaviour
 
 	Image tileImage; // UI Image component for tile. Will be used for fading alpha
 
+	Color originalColor;
+
 	// Getters for our member variables
 	public int x
 	{
@@ -114,6 +116,9 @@ public class Tile : MonoBehaviour
 	private void Awake()
 	{
 		tileImage = GetComponent<Image>();
+		if (tag == "Building")
+			_building = GetComponent<Building>();
+		originalColor = tileImage.color;
 	}
 
 	private void Start()
@@ -172,6 +177,13 @@ public class Tile : MonoBehaviour
 			_defenseModifier = 0;
 			_attackModifier = 0;
 		}
+		else if(gameObject.tag == "Building")
+		{
+			// does not currently differentiate between building types.
+			_defenseModifier = 2;
+			_attackModifier = 0;
+			_movementModifier = 0;
+		}
 
 		// Include buildings. Forts/buildings
 
@@ -179,14 +191,66 @@ public class Tile : MonoBehaviour
 
 	public void SetTraversable()
 	{
+		/// <summary>
+		/// public function that a unit will call when trying to find tile distances. If the tile is in range, the unit will call this function to fade alpha transparency
+		/// </summary>
+		
 		_isTraversable = true;
+		//StopFlash();
 		StartCoroutine(FlashTile());
+	}
+
+	public void SetEnemy()
+	{
+		StartCoroutine(FlashEnemyTile());
+	}
+
+	public void StopFlash()
+	{
+		/// <summary>
+		/// Stops previous flash tile coroutine and sets tile alpha back to full. This will happen when a player moves and still has movement left over
+		/// </summary>
+		
+		StopCoroutine(FlashTile());
+		StopCoroutine(FlashEnemyTile());
+		_isTraversable = false;
+		tileImage.color = originalColor;
+		//tileImage.color += new Color(0, 0, 0, 1f);
 	}
 
 	private void OnMouseDown()
 	{
-		if (UnitManager.unitManager.selectedUnit != null)
+		if (UnitManager.unitManager.selectedUnit != null && _isTraversable)
+			// if we have a unit selected and we click on this tile, move the selected unit to this tile.
 			UnitManager.unitManager.selectedUnit.StartMove(this);
+		/*else if (UnitManager.unitManager.selectedUnit == null && this.building != null && GridManager.gridMan.selectedBuilding == null, && this.building.owner == PlayerManager.playerManager.selectedPlayer && this._unit == null)
+			// assign this building as the selected building.
+			GridManager.gridMan.selectedBuilding = this;*/
+
+		// GridManager.gridMan.selectedBuilding.gridPosition;
+		// myGameObject = (GameObject) Instantiate (prefab, buildingPosition, Quaternion.identity);
+	}
+
+	IEnumerator FlashEnemyTile()
+	{
+		Unit selectedUnit = UnitManager.unitManager.selectedUnit;
+		tileImage.color = Color.red;
+
+		while(selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.gethasAttacked())
+		{
+			while (tileImage.color.r > 0.5f && selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.gethasAttacked())
+			{
+				tileImage.color -= new Color(Time.deltaTime / 0.7f, 0, 0, 0f);
+				yield return null;
+			}
+			while (tileImage.color.r < 1f && selectedUnit == UnitManager.unitManager.selectedUnit && !selectedUnit.gethasAttacked())
+			{
+				tileImage.color += new Color(Time.deltaTime / 0.7f, 0, 0, 0f);
+				yield return null;
+			}
+		}
+
+		tileImage.color = originalColor;
 	}
 
 	IEnumerator FlashTile()
@@ -195,36 +259,44 @@ public class Tile : MonoBehaviour
 		/// Flash tile alpha value to indicate unit can move to it.
 		/// </summary>
 		
-		while (isTraversable && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
+		while (isTraversable && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.getHasMoved())
 		{
-			while(isTraversable && tileImage.color.a > 0.5f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
+			while(isTraversable && tileImage.color.a > 0.5f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.getHasMoved())
 			{
 				tileImage.color -= new Color(0, 0, 0, Time.deltaTime / 0.7f);
 				yield return null;
 			}
-			while(isTraversable && tileImage.color.a < 1f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.hasMoved)
+			while(isTraversable && tileImage.color.a < 1f && UnitManager.unitManager.selectedUnit != null && !UnitManager.unitManager.selectedUnit.getHasMoved())
 			{
 				tileImage.color += new Color(0, 0, 0, Time.deltaTime / 0.7f);
 				yield return null;
 			}
 		}
 
-		tileImage.color += new Color(0, 0, 0, 1f); // set tile transparency back to full
+
+		tileImage.color = originalColor;
+		//tileImage.color += new Color(0, 0, 0, 1f); // set tile transparency back to full
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		_unit = collision.GetComponent<Unit>(); // get the component from unit that just stepped onto the tile
-		_unit.IncreaseStats(_attackModifier, _defenseModifier);
-		if (_building != null)
-			_building.SetCurrentUnit(_unit);
+		_unit.SetX(this.x);
+		_unit.SetY(this.y);
+		_unit.increaseStats(_attackModifier, _defenseModifier);
+		if (gameObject.tag == "Building")
+			_unit.setBuilding(gameObject.GetComponent<Building>());
+
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		_unit.DecreaseStats(_attackModifier, _defenseModifier);
-		_unit = null; // when unit leaves, set unit to null
-		if (_building != null)
-			_building.SetCurrentUnit(_unit);
+		if (_unit != null)
+		{
+			_unit.resetStats(_attackModifier, _defenseModifier);
+            if (gameObject.tag == "Building")
+                _unit.setBuilding(null);
+            _unit = null; // when unit leaves, set unit to null
+		}
 	}
 }

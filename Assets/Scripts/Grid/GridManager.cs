@@ -11,10 +11,24 @@ public class GridManager : MonoBehaviour
 
 	public int rows, columns;
 
+	Tile _selectedBuilding;
+
 	public static GridManager gridMan; // used for global access to this class
 
 	Tile[,] _tiles;
 	Button[,] _gridButtons;
+
+	public Tile selectedBuilding
+	{
+		get
+		{
+			return _selectedBuilding;
+		}
+		set
+		{
+			_selectedBuilding = value;
+		}
+	}
 
 	public Tile[,] tiles
 	{ 

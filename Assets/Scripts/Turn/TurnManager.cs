@@ -13,23 +13,48 @@ using UnityEngine.UI;
 public class TurnManager : MonoBehaviour
 {
     int turnCounter = 0; //Initializes turn counter
+<<<<<<< HEAD
     Player [] player = new Player [2]; //Creates array for the two store two Player class objects
     Player currentPlayer;  //Variable to represent the current player
     currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
+=======
+    Player [] player; //Creates array for the two store two Player class objects
+    Player currentPlayer;  //Variable to represent the current player
+   // currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
+>>>>>>> DebugBranch
     int index = 0;
     
     public static TurnManager turnManager;
-
-    /*
-        EndTurn() allows the current player to end their turn, locking them in from further input during
+	private void Awake()
+	{
+		player = new Player[2];
+		
+	}
+	private void Start()
+	{
+		player[0] = PlayerManager.playerManager.players[0];
+		player[1] = PlayerManager.playerManager.players[1];
+		currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
+        player[1].Lock();
+	}
+	/*
+        EndTurn() allows the current player to end t
+        heir turn, locking them in from further input during
         the next Player's turn, assigns the currentPlayer to the next Player in player[], and increments the turn counter by 1.
     */
+<<<<<<< HEAD
     
     public void EndTurn()
+=======
+
+	public void EndTurn()
+>>>>>>> DebugBranch
     {
+        UnitManager.unitManager.selectedUnit = null;
         currentPlayer.Lock(); //Locks the current Player object
         index++;
-        currentPlayer = player[index %= 2]; //Assigns currentPlayer to the next Player object in player[]
+		index %= 2;
+        currentPlayer = player[index]; //Assigns currentPlayer to the next Player object in player[]
         currentPlayer.startTurn(); //Calls on the Player's startTurn function
 
         turnCounter++; //Increments turn counter by 1

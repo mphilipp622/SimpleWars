@@ -14,7 +14,6 @@ public class TilePopupWindow : EditorWindow
 	string tileName;
 	string terrainTag;
 	Object tileSprite;
-	string terrainObj;
 
 	public static void Init()
 	{
@@ -36,7 +35,7 @@ public class TilePopupWindow : EditorWindow
 		GUILayout.Space(10); // create some space on the window. Allows us to space out our ui elements
 
 		// create a tag field that allows the user to specify the type of terrain this tile should be. Assign terrainTag string to the chosen tag.
-		terrainTag = EditorGUILayout.TagField("Terrain Tag", terrainTag);
+		terrainTag = EditorGUILayout.TagField("Terrain/Building type", terrainTag);
 
 		GUILayout.Space(10);
 

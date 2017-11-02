@@ -4,19 +4,29 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-	private List<Unit> units;
-	private List<Building> buildings;
+	public List<Unit> units;
+	public List<Building> buildings;
 
     private int moneyPerTurn;
     private int currentMoney;
-	public Color color;
 	private bool isActive;
 	public bool isLocked;
+    protected Building removeBuilding = null;
+    public Color color;
+
 	void Awake()
     {
-        units = new List<Unit>();
-        buildings = new List<Building>();
+		InitData();
     }
+
+	void InitData()
+	{
+		foreach (Unit unit in units)
+			unit.SetOwner(this);
+		foreach (Building building in buildings)
+			building.SetOwner(this);
+	}
+
 	public bool Lock()
 	{
 		return this.isLocked = true;
@@ -31,17 +41,30 @@ public class Player : MonoBehaviour
 	}
 	public Color getColor()
 	{
-		return this.color;
+        return this.color;
 	}
-	public bool captureBuilding()
+    public void removeUnit(Unit removedUnit)            // Removes unit from list 
+    {
+        units.Remove(removedUnit);
+    }
+    public void addUnit(Unit addedUnit)                 // Adds unit to list 
+    {
+        units.Add(addedUnit);
+    }
+	public void captureBuilding(Building addedBuilding) // Adds building to list 
 	{
-		return this.captureBuilding;
+		buildings.Add(addedBuilding);
 	}
-	public bool concedeBuilding()
+    public void concedeBuilding(Building removedBuilding) // Removes building from list
 	{
-		return this.concedeBuilding;
+        buildings.Remove(removedBuilding); 
 	}
-	public void startTurn()
+
+	// public void SetActive()
+	// public void SetInactive()
+
+	// Update 
+	public void startTurn() 
 	{
 		// Updates the income from buildings 
 		this.moneyPerTurn = 10 * buildings.Count; // Assuming the income per building is 10 

@@ -13,8 +13,10 @@ public class ParentTile : MonoBehaviour {
 	/// </summary>
 	
 	GridLayoutGroup grid;
+	GridManager gridMan;
 	RectTransform thisRect;
 	float newX, newY;
+	//Unit thisUnit;
 
 	public int rows, columns;
 
@@ -40,24 +42,38 @@ public class ParentTile : MonoBehaviour {
 		
 		newX = Mathf.Clamp(newX, grid.cellSize.x / 2, (grid.cellSize.x * columns) - grid.cellSize.x / 2);
 		newY = Mathf.Clamp(newY, -((grid.cellSize.x * rows) - grid.cellSize.y / 2), -(grid.cellSize.y / 2));
-		
+
 		thisRect.anchoredPosition = new Vector3(newX, newY, thisRect.localPosition.z);
+		
+		/*if(thisUnit != null)
+		{
+			int finalX = (int)Mathf.Abs((thisRect.anchoredPosition.x / grid.cellSize.x));
+			int finalY = (int)Mathf.Abs((thisRect.anchoredPosition.y / grid.cellSize.y));
+			thisUnit.x = finalX;
+			thisUnit.y = finalY;
+		}*/
 	}
 
 	void InitData()
 	{
+		gridMan = GameObject.FindGameObjectWithTag("GridManager").GetComponent<GridManager>();
 		grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>();
 		thisRect = GetComponent<RectTransform>();
 		thisRect.sizeDelta = grid.cellSize; // force width and height to current grid cell size.
 
 		// force rows and columns to adapt to the current cell size and the 16:9 aspect ratio.
 		// This calculation will allow us to calculate the needed rows and columns based on cell size.
-		rows = Mathf.RoundToInt(Screen.currentResolution.height / grid.cellSize.y);
-		columns = Mathf.RoundToInt(Screen.currentResolution.width / grid.cellSize.x);
+		//rows = Mathf.RoundToInt(Screen.currentResolution.height / grid.cellSize.y);
+		//columns = Mathf.RoundToInt(Screen.currentResolution.width / grid.cellSize.x);
+		rows = gridMan.rows;
+		columns = gridMan.columns;
 
-		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta; // force the collider on the tile to match the current grid cell size
+		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta / 2; // force the collider on the tile to match the current grid cell size
 		transform.parent = grid.transform; // assign object to be child of grid.
 		transform.localScale = new Vector3(1, 1, 1);
+
+		//if (gameObject.tag == "Unit")
+		//	thisUnit = GetComponent<Unit>();
 	}
 
 	public void UpdateDimensions()

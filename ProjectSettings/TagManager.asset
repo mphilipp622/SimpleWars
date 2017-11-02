@@ -9,6 +9,9 @@ TagManager:
   - Road
   - Grass
   - River
+  - Building
+  - GridManager
+  - Unit
   layers:
   - Default
   - TransparentFX
@@ -45,4 +48,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1437114093
     locked: 0

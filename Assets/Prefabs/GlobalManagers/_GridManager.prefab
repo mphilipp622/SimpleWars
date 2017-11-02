@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114245846094278264}
   m_Layer: 0
   m_Name: _GridManager
-  m_TagString: Untagged
+  m_TagString: GridManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,5 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridButton: {fileID: 1967849543228674, guid: 2e6ecca0b2251a845b093cb424fa3763, type: 2}
   grid: {fileID: 0}
-  rows: 9
+  rows: 8
   columns: 16
