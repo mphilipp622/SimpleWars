@@ -12,8 +12,8 @@ public class Unit : MonoBehaviour
 	//Check variables for actions done on each units
 	protected bool isSelected = false; 
 	protected bool hasAttacked = false;
-	protected bool hasMoved = false;
 	protected bool doneMoving = false;
+	protected bool hasMoved = false;
 
 	//Map coordinates variables
 	private int xPos;
@@ -169,7 +169,7 @@ public class Unit : MonoBehaviour
 		/// Code will look left, right, up, down, diagonal for tiles it can move to.
 		/// </summary>
 
-		if (doneMoving) return;
+		if (hasMoved) return;
 
 		for (int i = -1; i < 2; i++)
 		{
@@ -249,7 +249,7 @@ public class Unit : MonoBehaviour
 
 	public void StartMove(Tile targetTile)
 	{
-		if (doneMoving) return;
+		if (hasMoved) return;
 
 		StartCoroutine(Move(targetTile));
 	}
@@ -295,7 +295,7 @@ public class Unit : MonoBehaviour
 		yield return null;
 
 		if (currentMovement <= 0)
-			doneMoving = true;
+			hasMoved = true;
 		else if (currentMovement > 0)
 		{
 			//	hasMoved = false;
@@ -306,7 +306,7 @@ public class Unit : MonoBehaviour
 
 		if (traversableTiles.Count == 0)
 			// if we cannot find any more traversable tiles, then we can't move anymore.
-			doneMoving = true;
+			hasMoved = true;
 	}
 
 	public bool getHasMoved() //Returns boolean value of 'hasMoved' when called.
