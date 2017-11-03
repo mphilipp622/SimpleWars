@@ -68,8 +68,7 @@ public class ParentTile : MonoBehaviour {
 		rows = gridMan.rows;
 		columns = gridMan.columns;
 
-		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta / 2; // force the collider on the tile to match the current grid cell size
-		transform.parent = grid.transform; // assign object to be child of grid.
+		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta /1.05f ; // force the collider on the tile to match the current grid cell size		transform.parent = grid.transform; // assign object to be child of grid.
 		transform.localScale = new Vector3(1, 1, 1);
 
 		//if (gameObject.tag == "Unit")
