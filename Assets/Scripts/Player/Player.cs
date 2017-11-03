@@ -27,9 +27,11 @@ public class Player : MonoBehaviour
 			building.SetOwner(this);
 	}
 
-	public bool Lock()
+	public void Lock()
 	{
-		return this.isLocked = true;
+        foreach (Unit unit in units)
+            unit.reset();
+		this.isLocked = true;
 	}
 	public bool getActive()
 	{
