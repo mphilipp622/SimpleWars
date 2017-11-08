@@ -74,11 +74,11 @@ public class GridManager : MonoBehaviour
 
 	void InitGrid()
 	{
-		foreach(Tile tile in grid.GetComponentsInChildren<Tile>())
+		foreach (Tile tile in grid.GetComponentsInChildren<Tile>())
 		{
 			RectTransform thisRect = tile.GetComponent<RectTransform>();
-			int newX = (int) Mathf.Abs((thisRect.anchoredPosition.x / grid.cellSize.x));
-			int newY = (int) Mathf.Abs((thisRect.anchoredPosition.y / grid.cellSize.y));
+			int newX = (int)Mathf.Abs((thisRect.anchoredPosition.x / grid.cellSize.x));
+			int newY = (int)Mathf.Abs((thisRect.anchoredPosition.y / grid.cellSize.y));
 			_tiles[newX, newY] = tile;
 			_tiles[newX, newY].InitializeData(newX, newY, thisRect);
 		}

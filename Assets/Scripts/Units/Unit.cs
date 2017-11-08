@@ -16,8 +16,8 @@ public class Unit : MonoBehaviour
 	protected bool hasMoved = false;
 
 	//Map coordinates variables
-	private int xPos;
-	private int yPos;
+	[SerializeField]
+	private int xPos, yPos;
 
 	//Misc. class variables
 	Vector3 worldPosition;
@@ -194,7 +194,7 @@ public class Unit : MonoBehaviour
 				}
 
 				//Debug.Log((x + i) + ", " + (y + j));
-
+				//Debug.Log((xPos + i) + ", " + (yPos + j));
 				Tile currentTile = GridManager.gridMan.tiles[xPos + i, yPos + j]; // Set our current tile. We don't start with our unit's pos.
 
 				/*if (currentTile.unit != null)
@@ -210,6 +210,7 @@ public class Unit : MonoBehaviour
 													  //Debug.Log("Temp Movement: " + tempMovement);
 
 				//Debug.Log("Distance to Tile " + currentTile.x + ", " + currentTile.y + ": " + (Vector2.Distance(new Vector2(x, y), new Vector2(currentTile.x, currentTile.y)) + currentTile.movementModifier));
+				
 				tempMovement -= Vector2.Distance(new Vector2(xPos, yPos), new Vector2(currentTile.x, currentTile.y)) + currentTile.movementModifier;
 				//tempMovement -= (Vector2.Distance(currentTile.gridPosition, GridManager.gridMan.tiles[currentTile.x - i, currentTile.y - j].gridPosition) / GridManager.gridMan.grid.cellSize.x) + currentTile.movementModifier;
 

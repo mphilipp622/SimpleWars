@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEditor;
 
 [ExecuteInEditMode]
 public class ParentTile : MonoBehaviour {
@@ -26,14 +27,14 @@ public class ParentTile : MonoBehaviour {
 	}
 	void Start ()
 	{
-
+		DestroyImmediate(GetComponent<SpriteRenderer>());
 	}
-	
+
 	void Update ()
 	{
 		if (Application.isPlaying)
 		{
-			Destroy(GetComponent<SpriteRenderer>());
+			//Destroy(GetComponent<SpriteRenderer>());
 			this.enabled = false;
 		}
 
@@ -69,8 +70,13 @@ public class ParentTile : MonoBehaviour {
 		columns = gridMan.columns;
 
 		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta /1.05f ; // force the collider on the tile to match the current grid cell size		transform.parent = grid.transform; // assign object to be child of grid.
+		if (transform.tag == "Building")
+			transform.SetParent(GameObject.FindGameObjectWithTag("Grid").transform.Find("Buildings").transform);
+		else if (transform.tag == "Unit")
+			transform.SetParent(GameObject.FindGameObjectWithTag("Grid").transform.Find("Units").transform);
+		else
+			transform.SetParent(GameObject.FindGameObjectWithTag("Grid").transform.Find("Tiles").transform);
 		transform.localScale = new Vector3(1, 1, 1);
-
 		//if (gameObject.tag == "Unit")
 		//	thisUnit = GetComponent<Unit>();
 	}
