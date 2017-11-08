@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 61983188485756618}
   - component: {fileID: 114692087989936558}
   - component: {fileID: 114792901773209312}
+  - component: {fileID: 95946658937889264}
   m_Layer: 0
   m_Name: tank
   m_TagString: Unit
@@ -79,6 +80,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 60, y: 60}
   m_EdgeRadius: 0
+--- !u!95 &95946658937889264
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1805333993912026}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114324972132396960
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 212456726775675786}
   - component: {fileID: 114454498688237426}
   - component: {fileID: 114384966289434048}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Forest
   m_TagString: Mountain
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ RectTransform:
   m_GameObject: {fileID: 1562888830645498}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

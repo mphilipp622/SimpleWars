@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 61874766495770814}
   - component: {fileID: 114959755821014970}
   - component: {fileID: 114946664053698802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Infantry
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -136,16 +136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81bc9765ec2ed284a8def34e3efcf92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  y: 0
-  range: 1
-  movement: 2
+  hp: 10
   attack: 2
   defense: 1
-  hp: 10
-  hasAttacked: 0
-  hasMoved: 0
-  doneMoving: 0
+  range: 1
+  movement: 2
+  productionCost: 0
 --- !u!114 &114959755821014970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -214,7 +210,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1636945608789556}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalPosition: {x: 0, y: 0, z: -90.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
