@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114144608227957078}
   - component: {fileID: 114206735747303140}
   m_Layer: 0
-  m_Name: mountain
+  m_Name: Mountain
   m_TagString: Mountain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

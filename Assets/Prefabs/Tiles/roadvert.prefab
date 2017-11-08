@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114715914681427692}
   - component: {fileID: 114675750543758796}
   m_Layer: 0
-  m_Name: roadVert
+  m_Name: roadvert
   m_TagString: Road
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

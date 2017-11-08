@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114111242399989982}
   - component: {fileID: 114278002731288866}
   m_Layer: 0
-  m_Name: roadBend4
+  m_Name: roadbend4
   m_TagString: Road
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
