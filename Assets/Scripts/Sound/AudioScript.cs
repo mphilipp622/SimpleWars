@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AudioScript : MonoBehaviour {
 
+    public AudioClip BGM;
+    public AudioSource Output;
+
 	// Use this for initialization
 	void Start () {
 		
