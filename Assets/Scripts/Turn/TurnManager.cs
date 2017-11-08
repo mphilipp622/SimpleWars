@@ -15,8 +15,6 @@ public class TurnManager : MonoBehaviour
     int turnCounter = 1; //Initializes turn counter
     Player [] player; //Creates array for the two store two Player class objects
     Player currentPlayer;  //Variable to represent the current player
-	[SerializeField]
-	Text turnText;
    // currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
     int index = 0;
     
@@ -32,7 +30,7 @@ public class TurnManager : MonoBehaviour
 		player[1] = PlayerManager.playerManager.players[1];
 		currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
         player[1].Lock();
-		turnText.text = "Turn: " + turnCounter;
+		UIManager.uiManager.UpdateUI(currentPlayer, turnCounter);
 	}
 	/*
         EndTurn() allows the current player to end t
@@ -50,7 +48,7 @@ public class TurnManager : MonoBehaviour
         currentPlayer.startTurn(); //Calls on the Player's startTurn function
 
         turnCounter++; //Increments turn counter by 1
-		turnText.text = "Turn: " + turnCounter;
+		UIManager.uiManager.UpdateUI(currentPlayer, turnCounter);
     }
 
     void initSingleton()

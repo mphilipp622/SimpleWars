@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 	public List<Building> buildings;
 
     private int moneyPerTurn;
+	[SerializeField]
     private int currentMoney;
 	private bool isActive;
 	public bool isLocked;
@@ -27,6 +28,11 @@ public class Player : MonoBehaviour
 			building.SetOwner(this);
 	}
 
+	private void Start()
+	{
+		moneyPerTurn = 10 * buildings.Count;
+	}
+
 	public void Lock()
 	{
         foreach (Unit unit in units)
@@ -40,6 +46,10 @@ public class Player : MonoBehaviour
 	public int getMoney()
 	{
 		return this.currentMoney;
+	}
+	public int GetMoneyPerTurn()
+	{
+		return this.moneyPerTurn;
 	}
 	public Color getColor()
 	{

@@ -18,7 +18,7 @@ public class Building : MonoBehaviour {
     {
         this.capturedBy = null;
         this.goldPerTurn = 10;
-        this.captureFlag = 0;
+        this.captureFlag = 1;
         this.color = Color.gray;
         this.currentUnit = null;
         this.previousUnit = null;
@@ -26,6 +26,12 @@ public class Building : MonoBehaviour {
 
 	private void Start()
 	{
+
+	}
+
+	private void Update()
+	{
+
 	}
 
 	public void SetOwner(Player newOwner)
@@ -37,7 +43,7 @@ public class Building : MonoBehaviour {
 		/// 1. set this owner to newOwner
 		/// 2. Change color of the building's Image component to the owner's color (red or blue depending on owner).
 		/// </summary>
-		/// 
+		///
 		capturedBy = newOwner;
 		GetComponent<Image>().color = newOwner.color;
 	}
@@ -50,8 +56,8 @@ public class Building : MonoBehaviour {
             this.capturedBy.concedeBuilding(this);
         this.capturedBy = currentUnit.getUnitOwner();//update this 
         this.capturedBy.captureBuilding(this);
-        this.captureFlag = 0;
-        this.color = capturedBy.color;
+        this.captureFlag = 1;
+        GetComponent<Image>().color = capturedBy.color;
     }
 
     public Player GetOwner()
@@ -78,7 +84,7 @@ public class Building : MonoBehaviour {
             captureFlag += 1;
         else
         {
-            captureFlag = 0;
+            captureFlag = 1;
             this.previousUnit = this.currentUnit;
         }
 
