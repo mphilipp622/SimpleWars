@@ -390,7 +390,7 @@ public class Unit : MonoBehaviour
 			UnitManager.unitManager.selectedUnit = this;
 			FindTraversableTiles();
 		}
-		else if(!isSelected && UnitManager.unitManager.selectedUnit != this && UnitManager.unitManager.selectedUnit != null /* && UnitManager.selectedUnit.player != this.player*/)
+		else if(!isSelected && UnitManager.unitManager.selectedUnit != this && UnitManager.unitManager.selectedUnit != null && UnitManager.unitManager.selectedUnit.getUnitOwner() != this.unitOwner)
 		{
 			// This means a different unit is selected and they are attempting to attack this unit
 			AttackRoutine(UnitManager.unitManager.selectedUnit);
