@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour {
 
+    public void LoadScene(int level)
+    {
+        Application.LoadLevel(level);
+        //SceneManager.LoadScene;
+    }
+
+
 	// Use this for initialization
 	void Start () {
 		
