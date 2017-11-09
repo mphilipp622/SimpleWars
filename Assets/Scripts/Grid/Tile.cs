@@ -163,6 +163,13 @@ public class Tile : MonoBehaviour
 			_defenseModifier = 3;
 			_attackModifier = 2;
 		}
+		else if(gameObject.tag == "Forest")
+		{
+			// forests are slightly harder to move through, provide decent defense, and have a high attack mod.
+			_movementModifier = 1;
+			_defenseModifier = 2;
+			_attackModifier = 3;
+		}
 		else if(gameObject.tag == "Grass")
 		{
 			// grass should be slightly harder to move through, provide small defense boost, and not change attack
