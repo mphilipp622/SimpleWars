@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 212453959962623942}
   - component: {fileID: 114944846492010972}
   - component: {fileID: 114514429316722586}
+  - component: {fileID: 95185634650299408}
   m_Layer: 0
   m_Name: waterVert
   m_TagString: Mountain
@@ -58,6 +59,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 114.28572, y: 114.28572}
   m_EdgeRadius: 0
+--- !u!95 &95185634650299408
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1896316856633846}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e814d1ba293c382428eb513ee1e4c29f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114088544959594284
 MonoBehaviour:
   m_ObjectHideFlags: 1

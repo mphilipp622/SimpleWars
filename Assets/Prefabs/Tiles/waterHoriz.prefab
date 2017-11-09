@@ -26,8 +26,9 @@ GameObject:
   - component: {fileID: 212027038759565916}
   - component: {fileID: 114188383380886666}
   - component: {fileID: 114647706936006312}
+  - component: {fileID: 95854637039810326}
   m_Layer: 0
-  m_Name: water
+  m_Name: waterHoriz
   m_TagString: Mountain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,6 +59,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 114.28572, y: 114.28572}
   m_EdgeRadius: 0
+--- !u!95 &95854637039810326
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1487967949822780}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 42894896ddd53c2409879c7f2adc3f7f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114124746705991288
 MonoBehaviour:
   m_ObjectHideFlags: 1

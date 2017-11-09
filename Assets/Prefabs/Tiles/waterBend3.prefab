@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 212381472381835348}
   - component: {fileID: 114043074937094156}
   - component: {fileID: 114125773958330036}
+  - component: {fileID: 95693659899392420}
   m_Layer: 0
   m_Name: waterBend3
   m_TagString: Mountain
@@ -58,6 +59,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 114.28572, y: 114.28572}
   m_EdgeRadius: 0
+--- !u!95 &95693659899392420
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1135000050119550}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 73794aacf6b09d44faf4c37a5abab2e0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114029324620607398
 MonoBehaviour:
   m_ObjectHideFlags: 1
