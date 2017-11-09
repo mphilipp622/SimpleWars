@@ -12,12 +12,12 @@ public class Unit : MonoBehaviour
 	//Check variables for actions done on each units
 	protected bool isSelected = false; 
 	protected bool hasAttacked = false;
-	protected bool hasMoved = false;
 	protected bool doneMoving = false;
+	protected bool hasMoved = false;
 
 	//Map coordinates variables
-	private int xPos;
-	private int yPos;
+	[SerializeField]
+	private int xPos, yPos;
 
 	//Misc. class variables
 	Vector3 worldPosition;
@@ -196,7 +196,7 @@ public class Unit : MonoBehaviour
 		/// Code will look left, right, up, down, diagonal for tiles it can move to.
 		/// </summary>
 
-		if (doneMoving) return;
+		if (hasMoved) return;
 
 		for (int i = -1; i < 2; i++)
 		{
@@ -221,7 +221,7 @@ public class Unit : MonoBehaviour
 				}
 
 				//Debug.Log((x + i) + ", " + (y + j));
-
+				//Debug.Log((xPos + i) + ", " + (yPos + j));
 				Tile currentTile = GridManager.gridMan.tiles[xPos + i, yPos + j]; // Set our current tile. We don't start with our unit's pos.
 
 				/*if (currentTile.unit != null)
@@ -237,6 +237,7 @@ public class Unit : MonoBehaviour
 													  //Debug.Log("Temp Movement: " + tempMovement);
 
 				//Debug.Log("Distance to Tile " + currentTile.x + ", " + currentTile.y + ": " + (Vector2.Distance(new Vector2(x, y), new Vector2(currentTile.x, currentTile.y)) + currentTile.movementModifier));
+				
 				tempMovement -= Vector2.Distance(new Vector2(xPos, yPos), new Vector2(currentTile.x, currentTile.y)) + currentTile.movementModifier;
 				//tempMovement -= (Vector2.Distance(currentTile.gridPosition, GridManager.gridMan.tiles[currentTile.x - i, currentTile.y - j].gridPosition) / GridManager.gridMan.grid.cellSize.x) + currentTile.movementModifier;
 
@@ -276,7 +277,7 @@ public class Unit : MonoBehaviour
 
 	public void StartMove(Tile targetTile)
 	{
-		if (doneMoving) return;
+		if (hasMoved) return;
 
 		StartCoroutine(Move(targetTile));
 	}
@@ -322,7 +323,7 @@ public class Unit : MonoBehaviour
 		yield return null;
 
 		if (currentMovement <= 0)
-			doneMoving = true;
+			hasMoved = true;
 		else if (currentMovement > 0)
 		{
 			//	hasMoved = false;
@@ -333,7 +334,7 @@ public class Unit : MonoBehaviour
 
 		if (traversableTiles.Count == 0)
 			// if we cannot find any more traversable tiles, then we can't move anymore.
-			doneMoving = true;
+			hasMoved = true;
 	}
 
 	public bool getHasMoved() //Returns boolean value of 'hasMoved' when called.
@@ -417,7 +418,7 @@ public class Unit : MonoBehaviour
 			UnitManager.unitManager.selectedUnit = this;
 			FindTraversableTiles();
 		}
-		else if(!isSelected && UnitManager.unitManager.selectedUnit != this && UnitManager.unitManager.selectedUnit != null /* && UnitManager.selectedUnit.player != this.player*/)
+		else if(!isSelected && UnitManager.unitManager.selectedUnit != this && UnitManager.unitManager.selectedUnit != null && UnitManager.unitManager.selectedUnit.getUnitOwner() != this.unitOwner)
 		{
 			// This means a different unit is selected and they are attempting to attack this unit
 			AttackRoutine(UnitManager.unitManager.selectedUnit);

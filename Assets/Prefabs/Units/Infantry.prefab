@@ -27,6 +27,8 @@ GameObject:
   - component: {fileID: 61874766495770814}
   - component: {fileID: 114959755821014970}
   - component: {fileID: 114946664053698802}
+  - component: {fileID: 111215778932067448}
+  - component: {fileID: 95684902295935088}
   m_Layer: 0
   m_Name: Infantry
   m_TagString: Unit
@@ -79,6 +81,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 120, y: 120}
   m_EdgeRadius: 0
+--- !u!95 &95684902295935088
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636945608789556}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5cb50ed656a8e4ecc96d3f310bbeece8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!111 &111215778932067448
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636945608789556}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 1f362fbd2733a4f38bef1ebb481bd47e, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114686972663903858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,16 +169,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81bc9765ec2ed284a8def34e3efcf92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  y: 0
-  range: 1
-  movement: 2
+  hp: 10
   attack: 2
   defense: 1
-  hp: 10
-  hasAttacked: 0
-  hasMoved: 0
-  doneMoving: 0
+  range: 1
+  movement: 2
+  productionCost: 0
+  xPos: 0
+  yPos: 0
 --- !u!114 &114959755821014970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -214,8 +245,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1636945608789556}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

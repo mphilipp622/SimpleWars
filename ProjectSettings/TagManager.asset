@@ -12,6 +12,7 @@ TagManager:
   - Building
   - GridManager
   - Unit
+  - Forest
   layers:
   - Default
   - TransparentFX

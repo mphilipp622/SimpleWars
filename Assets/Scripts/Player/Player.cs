@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+// Controls player behavior
 public class Player : MonoBehaviour
 {
 	public List<Unit> units;
 	public List<Building> buildings;
 
     private int moneyPerTurn;
+	[SerializeField]
     private int currentMoney;
 	private bool isActive;
 	public bool isLocked;
@@ -27,9 +28,16 @@ public class Player : MonoBehaviour
 			building.SetOwner(this);
 	}
 
-	public bool Lock()
+	private void Start()
 	{
-		return this.isLocked = true;
+		moneyPerTurn = 10 * buildings.Count;
+	}
+
+	public void Lock()
+	{
+        foreach (Unit unit in units)
+            unit.reset();
+		this.isLocked = true;
 	}
 	public bool getActive()
 	{
@@ -38,6 +46,10 @@ public class Player : MonoBehaviour
 	public int getMoney()
 	{
 		return this.currentMoney;
+	}
+	public int GetMoneyPerTurn()
+	{
+		return this.moneyPerTurn;
 	}
 	public Color getColor()
 	{

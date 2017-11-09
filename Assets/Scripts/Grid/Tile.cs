@@ -163,6 +163,13 @@ public class Tile : MonoBehaviour
 			_defenseModifier = 3;
 			_attackModifier = 2;
 		}
+		else if(gameObject.tag == "Forest")
+		{
+			// forests are slightly harder to move through, provide decent defense, and have a high attack mod.
+			_movementModifier = 1;
+			_defenseModifier = 2;
+			_attackModifier = 3;
+		}
 		else if(gameObject.tag == "Grass")
 		{
 			// grass should be slightly harder to move through, provide small defense boost, and not change attack
@@ -210,11 +217,15 @@ public class Tile : MonoBehaviour
 		/// <summary>
 		/// Stops previous flash tile coroutine and sets tile alpha back to full. This will happen when a player moves and still has movement left over
 		/// </summary>
-		
 		StopCoroutine(FlashTile());
 		StopCoroutine(FlashEnemyTile());
 		_isTraversable = false;
-		tileImage.color = originalColor;
+		if(_building != null && _building.GetOwner() != null)
+		{
+			tileImage.color = _building.GetOwner().color;
+		}
+		else
+			tileImage.color = originalColor;
 		//tileImage.color += new Color(0, 0, 0, 1f);
 	}
 
@@ -273,8 +284,10 @@ public class Tile : MonoBehaviour
 			}
 		}
 
-
-		tileImage.color = originalColor;
+		if (_building != null && _building.GetOwner() != null)
+			tileImage.color = _building.GetOwner().getColor();
+		else
+			tileImage.color = originalColor;
 		//tileImage.color += new Color(0, 0, 0, 1f); // set tile transparency back to full
 	}
 
@@ -285,7 +298,10 @@ public class Tile : MonoBehaviour
 		_unit.SetY(this.y);
 		_unit.increaseStats(_attackModifier, _defenseModifier);
 		if (gameObject.tag == "Building")
+		{
 			_unit.setBuilding(gameObject.GetComponent<Building>());
+			_building.SetCurrentUnit(_unit);
+		}
 
 	}
 
@@ -294,8 +310,11 @@ public class Tile : MonoBehaviour
 		if (_unit != null)
 		{
 			_unit.resetStats(_attackModifier, _defenseModifier);
-            if (gameObject.tag == "Building")
-                _unit.setBuilding(null);
+			if (gameObject.tag == "Building")
+			{
+				_unit.setBuilding(null);
+				_building.SetCurrentUnit(null);
+			}
             _unit = null; // when unit leaves, set unit to null
 		}
 	}
