@@ -30,6 +30,10 @@ public class Unit : MonoBehaviour
 	protected List<Tile> enemyTiles;
 	protected float currentMovement;
 
+    //sound variables
+    public AudioSource sfx;
+    public AudioClip[] clips;
+
 	private void Awake()
 	{
 		int finalX = (int)Mathf.Abs((GetComponent<RectTransform>().anchoredPosition.x / GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize.x));

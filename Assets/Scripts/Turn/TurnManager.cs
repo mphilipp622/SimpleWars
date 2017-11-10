@@ -17,10 +17,13 @@ public class TurnManager : MonoBehaviour
     Player currentPlayer;  //Variable to represent the current player
    // currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
     int index = 0;
+
+    public AudioScript audioScript;
     
     public static TurnManager turnManager;
 	private void Awake()
 	{
+        initSingleton();
 		player = new Player[2];
 		
 	}
@@ -49,6 +52,7 @@ public class TurnManager : MonoBehaviour
 
         turnCounter++; //Increments turn counter by 1
 		UIManager.uiManager.UpdateUI(currentPlayer, turnCounter);
+        audioScript.SwitchMusic(turnCounter);
     }
 
     void initSingleton()
@@ -57,6 +61,11 @@ public class TurnManager : MonoBehaviour
             turnManager = this;
         else if (turnManager != this)
             Destroy(gameObject);
+    }
+    
+    public int getTurn()
+    {
+        return turnCounter;
     }
 
     void start()

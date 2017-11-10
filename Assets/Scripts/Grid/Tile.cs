@@ -302,6 +302,7 @@ public class Tile : MonoBehaviour
 			_unit.setBuilding(gameObject.GetComponent<Building>());
 			_building.SetCurrentUnit(_unit);
 		}
+        _unit.transform.GetComponent<UnitSound>().PlaySound(this.tag);
 
 	}
 
