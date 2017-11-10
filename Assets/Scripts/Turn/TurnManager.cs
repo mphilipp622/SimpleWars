@@ -12,20 +12,10 @@ using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
-<<<<<<< HEAD
-    int turnCounter = 0; //Initializes turn counter
-<<<<<<< HEAD
-    Player [] player = new Player [2]; //Creates array for the two store two Player class objects
-    Player currentPlayer;  //Variable to represent the current player
-    currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
-=======
-=======
     int turnCounter = 1; //Initializes turn counter
->>>>>>> DebugBranch
     Player [] player; //Creates array for the two store two Player class objects
     Player currentPlayer;  //Variable to represent the current player
    // currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
->>>>>>> DebugBranch
     int index = 0;
     
     public static TurnManager turnManager;
@@ -47,13 +37,8 @@ public class TurnManager : MonoBehaviour
         heir turn, locking them in from further input during
         the next Player's turn, assigns the currentPlayer to the next Player in player[], and increments the turn counter by 1.
     */
-<<<<<<< HEAD
-    
-    public void EndTurn()
-=======
 
 	public void EndTurn()
->>>>>>> DebugBranch
     {
         UnitManager.unitManager.selectedUnit = null;
         currentPlayer.Lock(); //Locks the current Player object

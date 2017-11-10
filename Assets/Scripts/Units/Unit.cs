@@ -23,13 +23,6 @@ public class Unit : MonoBehaviour
 	Vector3 worldPosition;
 	Building checkBuilding;
 	Player unitOwner;
-<<<<<<< HEAD
-
-	// Update Comment
-	
-	// Map Attributes 
-	public int getxPos()
-=======
 	Color unitColor;
 
 	//Movement variables
@@ -46,15 +39,12 @@ public class Unit : MonoBehaviour
 	}
 
 	private void Start()
->>>>>>> DebugBranch
 	{
 		//transform.position = GridManager.gridMan.tiles[xPos, yPos].position; //x,y changed to xPos, yPos
 		currentMovement = movement;
 		traversableTiles = new List<Tile>();
 		enemyTiles = new List<Tile>();
 	}
-<<<<<<< HEAD
-=======
 
 	void Update()
 	{
@@ -70,18 +60,13 @@ public class Unit : MonoBehaviour
 	{
 		return this.xPos;
 	}
->>>>>>> DebugBranch
 	
 	public int getyPos()
 	{
 		return this.yPos;
 	}
 
-<<<<<<< HEAD
-	// Unit Attributes for receiving variable values
-=======
 	//Unit Attributes for receiving variable values
->>>>>>> DebugBranch
 	public int gethp()
 	{
 		return this.hp;
@@ -128,18 +113,6 @@ public class Unit : MonoBehaviour
 		GetComponent<Image>().color = newOwner.getColor();
 	}
 
-<<<<<<< HEAD
-//	public void takeDamage(int damage) // pass in hp and attack
-	public void takeDamage(int attackerDamage, int attackerHp)
-	{
-		// this.hp -= damage; 
-		this.hp = (this.hp) - ((attackerDamage)*(attackerHp/10))/(this.defense);
-		//result = floor((((health./10).*attacker_attack)./defender_defense).*attacker_attack)+1;
-		if (hp <= 0)
-		{
-			die();
-		}
-=======
 	//Special Attributes 
 	private void die() //Needs editing due to player list rather than dictionary
 	{
@@ -340,7 +313,6 @@ public class Unit : MonoBehaviour
 	public bool getHasMoved() //Returns boolean value of 'hasMoved' when called.
 	{
 		return hasMoved;
->>>>>>> DebugBranch
 	}
 
 	public Player getUnitOwner() //Returns this unit's player owner.
