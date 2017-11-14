@@ -30,6 +30,9 @@ public class Unit : MonoBehaviour
 	protected List<Tile> enemyTiles;
 	protected float currentMovement;
 
+	[SerializeField]
+	GameObject damageAnimation;
+
 	private void Awake()
 	{
 		int finalX = (int)Mathf.Abs((GetComponent<RectTransform>().anchoredPosition.x / GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize.x));
@@ -333,15 +336,19 @@ public class Unit : MonoBehaviour
 		UnitManager.unitManager.selectedUnit = null;
 	}
 
-	void AttackRoutine(Unit attackingUnit) //Performs various attack actions based on the current conditions
+	IEnumerator AttackRoutine(Unit attackingUnit) //Performs various attack actions based on the current conditions
 	{
-		if(!attackingUnit.CheckAttackRange(this))
-			return;
+		if (!attackingUnit.CheckAttackRange(this))
+			yield break;
+			//return;
 
 		attackingUnit.Attack(this);
 
-		if(!this.CheckAttackRange(attackingUnit))
-			return;
+		yield return new WaitForSeconds(1);
+
+		if (!this.CheckAttackRange(attackingUnit))
+			yield break;
+			//return;
 
 		this.Attack(attackingUnit);
 
@@ -363,8 +370,22 @@ public class Unit : MonoBehaviour
 		defendingUnit.TakeDamage(this.attack, this.hp);
 	}
 
+	IEnumerator PlayDamageAnimation()
+	{
+		damageAnimation.SetActive(true);
+		Debug.Log(transform.name);
+
+		Animator damageAnim = damageAnimation.GetComponent<Animator>();
+		while (damageAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+			yield return null;
+
+		damageAnimation.SetActive(false);
+	}
+
 	public void TakeDamage(int attackerDamage, int attackerHP) //Damage calculation is done in this function and checks if the defending unit is destroyed.
 	{
+		StartCoroutine(PlayDamageAnimation());
+
 		int totalDamageDone = (int) ((attackerDamage)*(attackerHP/10f)) / (this.defense); //Algorithm for calculating total damage.
 		
 		if(totalDamageDone < 0.5) //If damage is under 0.5, reduced to zero.
@@ -393,7 +414,7 @@ public class Unit : MonoBehaviour
 		else if(!isSelected && UnitManager.unitManager.selectedUnit != this && UnitManager.unitManager.selectedUnit != null && UnitManager.unitManager.selectedUnit.getUnitOwner() != this.unitOwner)
 		{
 			// This means a different unit is selected and they are attempting to attack this unit
-			AttackRoutine(UnitManager.unitManager.selectedUnit);
+			StartCoroutine(AttackRoutine(UnitManager.unitManager.selectedUnit));
 		}
 		else if (isSelected)
 		{
