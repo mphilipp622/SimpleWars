@@ -373,7 +373,6 @@ public class Unit : MonoBehaviour
 	IEnumerator PlayDamageAnimation()
 	{
 		damageAnimation.SetActive(true);
-		Debug.Log(transform.name);
 
 		Animator damageAnim = damageAnimation.GetComponent<Animator>();
 		while (damageAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
