@@ -1000,7 +1000,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 880b6c6afa359034fad81900cd340af0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 472cfb98ea7cbff41a0b1dffcd6f116b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.474
   m_Pitch: 1
@@ -1095,8 +1095,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9004909ebf225014bb8f160afab27ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Loop1: {fileID: 8300000, guid: 97a9f30017fb22b4f96dca572840167e, type: 3}
+  Loop1: {fileID: 8300000, guid: d10d822081f7106478bd9dd4868f73ef, type: 3}
   Loop2: {fileID: 8300000, guid: b88d4fc44e4340142aa03f0002868de9, type: 3}
+  Loop3: {fileID: 8300000, guid: 13a74550d97acd74b82dc67eaa4e21c1, type: 3}
+  Loop4: {fileID: 8300000, guid: d10d822081f7106478bd9dd4868f73ef, type: 3}
+  Loop5: {fileID: 8300000, guid: b88d4fc44e4340142aa03f0002868de9, type: 3}
   das: {fileID: 0}
 --- !u!114 &108886239
 MonoBehaviour:
