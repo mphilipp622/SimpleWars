@@ -28,6 +28,16 @@ public class Player : MonoBehaviour
 			building.SetOwner(this);
 	}
 
+	public int GetWinSum()
+	{
+		int total = 0;
+		total += units.Count;
+		total += buildings.Count;
+		total += currentMoney;
+		Debug.Log(name + " Total Score = " + total);
+		return total;
+	}
+
 	private void Start()
 	{
 		moneyPerTurn = 10 * buildings.Count;
@@ -58,8 +68,9 @@ public class Player : MonoBehaviour
     public void removeUnit(Unit removedUnit)            // Removes unit from list 
     {
         units.Remove(removedUnit);
-    }
-    public void addUnit(Unit addedUnit)                 // Adds unit to list 
+
+	}
+	public void addUnit(Unit addedUnit)                 // Adds unit to list 
     {
         units.Add(addedUnit);
     }
@@ -69,7 +80,8 @@ public class Player : MonoBehaviour
 	}
     public void concedeBuilding(Building removedBuilding) // Removes building from list
 	{
-        buildings.Remove(removedBuilding); 
+        buildings.Remove(removedBuilding);
+
 	}
 
 	// public void SetActive()
@@ -86,6 +98,12 @@ public class Player : MonoBehaviour
 			thisunit.reset(); // Resets Boolean variables for the units 
 		}
 		this.isLocked = false; // unlocks the current player
+	}
+
+	private void Update()
+	{
+		if (units.Count == 0 && buildings.Count == 0)
+			TurnManager.turnManager.Lose(this);
 	}
 
 }

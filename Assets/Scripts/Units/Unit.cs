@@ -122,6 +122,7 @@ public class Unit : MonoBehaviour
 		// Need to remove object from list first.
         // Created a removeUnit(unit removedUnit) function
         Destroy(gameObject);
+		this.getUnitOwner().removeUnit(this);
 		//get player owner from list.
 	}
 
