@@ -249,11 +249,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9307fcff5d1426f489c87266895669fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultClip: {fileID: 8300000, guid: fb64ec40320880b42827d62201448cc5, type: 3}
-  grassSound: {fileID: 8300000, guid: fb64ec40320880b42827d62201448cc5, type: 3}
+  defaultClip: {fileID: 8300000, guid: 68c406fc20d6ad0409273e8e7d86f015, type: 3}
+  grassSound: {fileID: 0}
   roadSound: {fileID: 0}
   mountainSound: {fileID: 0}
   riverSound: {fileID: 0}
+  forestSound: {fileID: 0}
+  buildingSound: {fileID: 0}
   output: {fileID: 82009312049336822}
 --- !u!114 &114814768492341824
 MonoBehaviour:

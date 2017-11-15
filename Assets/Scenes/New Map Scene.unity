@@ -10977,7 +10977,7 @@ Prefab:
     - target: {fileID: 224901328634113690, guid: 71ea0179491c64b01a192f90ee7ce01c,
         type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.72500014
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224901328634113690, guid: 71ea0179491c64b01a192f90ee7ce01c,
         type: 2}
@@ -11014,6 +11014,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114224975827311340, guid: 71ea0179491c64b01a192f90ee7ce01c,
+        type: 2}
+      propertyPath: forestSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 56608a6911501ae4189ea9090c94c180, type: 3}
     m_RemovedComponents:
     - {fileID: 212594664420486272, guid: 71ea0179491c64b01a192f90ee7ce01c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 71ea0179491c64b01a192f90ee7ce01c, type: 2}
