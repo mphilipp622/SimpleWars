@@ -22,11 +22,11 @@ public class AudioScript : MonoBehaviour {
     {
         if (turn == 5)
         {
-            das.CrossFade(Loop1, 1, 3, 0);
+            das.CrossFade(Loop1, 1, 10, 0);
         }
         else if (turn == 10)
         {
-            das.CrossFade(Loop2, 1, 3, 0);
+            das.CrossFade(Loop2, 1, 10, 0);
         }
     }
 }

@@ -34,7 +34,7 @@ public class TurnManager : MonoBehaviour
 		currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
         player[1].Lock();
 		UIManager.uiManager.UpdateUI(currentPlayer, turnCounter);
-	}
+    }
 	/*
         EndTurn() allows the current player to end t
         heir turn, locking them in from further input during

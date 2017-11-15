@@ -326,6 +326,16 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82009312049336822, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 82009312049336822, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 212369211903926408, guid: fd0a67323c132eb4dbc434d8acc8b6e2, type: 2}
     - {fileID: 0}
@@ -998,7 +1008,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1116,7 +1126,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -8032,6 +8042,16 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82009312049336822, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 82009312049336822, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 212369211903926408, guid: fd0a67323c132eb4dbc434d8acc8b6e2, type: 2}
     - {fileID: 0}
@@ -8530,6 +8550,16 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 1f7d8306289df374ba34b29f18c9590c,
         type: 3}
+    - target: {fileID: 82009312049336822, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 82009312049336822, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 212369211903926408, guid: fd0a67323c132eb4dbc434d8acc8b6e2, type: 2}
     - {fileID: 0}
@@ -10947,7 +10977,7 @@ Prefab:
     - target: {fileID: 224901328634113690, guid: 71ea0179491c64b01a192f90ee7ce01c,
         type: 2}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.72500014
       objectReference: {fileID: 0}
     - target: {fileID: 224901328634113690, guid: 71ea0179491c64b01a192f90ee7ce01c,
         type: 2}
@@ -10968,6 +10998,21 @@ Prefab:
         type: 2}
       propertyPath: movement
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 82584537335583294, guid: 71ea0179491c64b01a192f90ee7ce01c,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82584537335583294, guid: 71ea0179491c64b01a192f90ee7ce01c,
+        type: 2}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82584537335583294, guid: 71ea0179491c64b01a192f90ee7ce01c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 212594664420486272, guid: 71ea0179491c64b01a192f90ee7ce01c, type: 2}

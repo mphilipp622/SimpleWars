@@ -293,18 +293,22 @@ public class Tile : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+        double time = Time.timeSinceLevelLoad;
 		_unit = collision.GetComponent<Unit>(); // get the component from unit that just stepped onto the tile
-		_unit.SetX(this.x);
-		_unit.SetY(this.y);
+        //Debug.Log(_unit.getxPos());
+        //Debug.Log(this.x)
+        
+		//_unit.SetX(this.x);
+		//_unit.SetY(this.y);
 		_unit.increaseStats(_attackModifier, _defenseModifier);
 		if (gameObject.tag == "Building")
 		{
 			_unit.setBuilding(gameObject.GetComponent<Building>());
 			_building.SetCurrentUnit(_unit);
 		}
-        _unit.transform.GetComponent<UnitSound>().PlaySound(this.tag);
-
-	}
+        if (time >= .5) //feels like a hack lol
+            _unit.transform.GetComponent<UnitSound>().PlaySound(this.tag);
+        }
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{

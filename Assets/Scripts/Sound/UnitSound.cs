@@ -8,6 +8,8 @@ public class UnitSound : MonoBehaviour {
     public AudioClip roadSound;
     public AudioClip mountainSound;
     public AudioClip riverSound;
+    public AudioClip forestSound;
+    public AudioClip buildingSound;
 
     public AudioSource output;
 	// Use this for initialization
@@ -22,15 +24,40 @@ public class UnitSound : MonoBehaviour {
 
     public void PlaySound(string type)
     {
-        if(type == "River" && riverSound != null)
-        {
+         if (type == "River" && riverSound != null)
+         {
             output.clip = riverSound;
+                output.Play();
+         }
+            else if (type == "Grass" && grassSound != null)
+            {
+                output.clip = grassSound;
+                output.Play();
+            }
+            else if(type == "Road" && roadSound != null)
+            {
+                output.clip = roadSound;
+                output.Play();
+            }
+            else if (type == "Mountain" && mountainSound != null)
+            {
+                output.clip = mountainSound;
+                output.Play();
+            }
+        else if (type == "Forest" && forestSound != null)
+        {
+            output.clip = forestSound;
+            output.Play();
+        }
+        else if (type == "Building" && buildingSound != null)
+        {
+            output.clip = buildingSound;
             output.Play();
         }
         else
-        {
-            output.clip = defaultClip;
-            output.Play();
+            {
+                output.clip = defaultClip;
+                output.Play();
+            }
         }
-    }
 }
