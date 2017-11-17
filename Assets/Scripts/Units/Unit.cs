@@ -368,6 +368,7 @@ public class Unit : MonoBehaviour
 
 	void Attack(Unit defendingUnit) //Attack function to inflict damage on the defending unit 
 	{
+		GetComponent<Animator>().SetTrigger("Attack");
 		defendingUnit.TakeDamage(this.attack, this.hp);
 	}
 
