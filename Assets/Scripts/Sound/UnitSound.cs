@@ -12,9 +12,11 @@ public class UnitSound : MonoBehaviour {
     public AudioClip buildingSound;
 
     public AudioSource output;
+    AudioSettings settings;
+
 	// Use this for initialization
 	void Start () {
-		
+        settings = GameObject.FindGameObjectWithTag("SoundSettings").GetComponent<AudioSettings>();
 	}
 	
 	// Update is called once per frame
@@ -24,10 +26,12 @@ public class UnitSound : MonoBehaviour {
 
     public void PlaySound(string type)
     {
+        float vol = settings.Loudness("sfx");
+        output.volume = vol;
          if (type == "River" && riverSound != null)
          {
             output.clip = riverSound;
-                output.Play();
+            output.Play();
          }
             else if (type == "Grass" && grassSound != null)
             {

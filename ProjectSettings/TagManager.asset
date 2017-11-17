@@ -13,6 +13,7 @@ TagManager:
   - GridManager
   - Unit
   - Forest
+  - SoundSettings
   layers:
   - Default
   - TransparentFX
