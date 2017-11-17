@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tank : Unit
 {
+    public GameObject unitTank;
 	public Tank()
 	{
 		this.hp = 10;

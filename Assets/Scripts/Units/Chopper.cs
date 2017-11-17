@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Chopper : Unit
 {
+    public GameObject unitChopper;
 	public Chopper() 
 	{
 		this.hp = 10;

@@ -4,6 +4,7 @@ using UnityEngine;
 //update comment
 public class Infantry : Unit
 {
+    public GameObject unitInfantry;
 	public Infantry()
 	{
 		this.hp = 10;

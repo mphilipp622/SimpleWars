@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Helicopter : Unit {
-
+    public GameObject unitHelicopter;
 	// Use this for initialization
 	void Start () {
 		
