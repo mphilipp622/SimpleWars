@@ -1002,7 +1002,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 472cfb98ea7cbff41a0b1dffcd6f116b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.474
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1100,6 +1100,7 @@ MonoBehaviour:
   Loop3: {fileID: 8300000, guid: 13a74550d97acd74b82dc67eaa4e21c1, type: 3}
   Loop4: {fileID: 8300000, guid: d10d822081f7106478bd9dd4868f73ef, type: 3}
   Loop5: {fileID: 8300000, guid: b88d4fc44e4340142aa03f0002868de9, type: 3}
+  Loop6: {fileID: 8300000, guid: 472cfb98ea7cbff41a0b1dffcd6f116b, type: 3}
   das: {fileID: 0}
 --- !u!114 &108886239
 MonoBehaviour:
@@ -1123,7 +1124,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.582
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioScript : MonoBehaviour {
-    public AudioClip Loop1, Loop2, Loop3, Loop4, Loop5;
+    public AudioClip Loop1, Loop2, Loop3, Loop4, Loop5, Loop6;
     public DoubleAudioSource das;
     AudioSettings settings;
+    float volume;
+    bool f = true;
     private void Awake()
     {
         das = GetComponent<DoubleAudioSource>();
+        volume = PlayerPrefs.GetFloat("bt");
     }
     // Use this for initialization
     void Start () {
@@ -17,31 +20,34 @@ public class AudioScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (f)
+        {
+            f = false;
+            das.setVolume(volume); //shit wont work in Awake() or Start(); stupid cunt fucking shit
+        }
+    }
 
-	}
-    
     public void SwitchMusic(int turn)
     {
-        float vol = settings.Loudness("bgm");
         if (turn == 10)
         {
-            das.CrossFade(Loop1, vol, 10, 0);
+            das.CrossFade(Loop1, volume, 10, 0);
         }
         else if (turn == 20)
         {
-            das.CrossFade(Loop2, vol, 10, 0);
+            das.CrossFade(Loop2, volume, 10, 0);
         }
         else if (turn == 60)
         {
-            das.CrossFade(Loop3, vol, 10, 0);
+            das.CrossFade(Loop3, volume, 10, 0);
         }
         else if (turn == 90)
         {
-            das.CrossFade(Loop4, vol, 10, 0);
+            das.CrossFade(Loop4, volume, 10, 0);
         }
         else if (turn == 120)
         {
-            das.CrossFade(Loop5, vol, 10, 0);
+            das.CrossFade(Loop5, volume, 10, 0);
         }
     }
 }

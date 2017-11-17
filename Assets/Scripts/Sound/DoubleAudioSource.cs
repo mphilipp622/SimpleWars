@@ -222,5 +222,9 @@ public class DoubleAudioSource : MonoBehaviour
             return false;
         }//end get
     }
-
+    public void setVolume(float i)
+    {
+        _source0.volume = i;
+        _source1.volume = i;
+    }
 }

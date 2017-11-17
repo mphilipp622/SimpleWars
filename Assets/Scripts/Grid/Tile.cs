@@ -306,7 +306,7 @@ public class Tile : MonoBehaviour
 			_unit.setBuilding(gameObject.GetComponent<Building>());
 			_building.SetCurrentUnit(_unit);
 		}
-        if (time >= .5) //feels like a hack lol
+        if (time >= .2) //feels like a hack lol
             _unit.transform.GetComponent<UnitSound>().PlaySound(this.tag);
         }
 

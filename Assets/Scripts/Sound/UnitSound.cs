@@ -13,9 +13,14 @@ public class UnitSound : MonoBehaviour {
 
     public AudioSource output;
     AudioSettings settings;
+    public float volume;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        volume = PlayerPrefs.GetFloat("st");
+    }
+    // Use this for initialization
+    void Start () {
         settings = GameObject.FindGameObjectWithTag("SoundSettings").GetComponent<AudioSettings>();
 	}
 	
@@ -26,8 +31,7 @@ public class UnitSound : MonoBehaviour {
 
     public void PlaySound(string type)
     {
-        float vol = settings.Loudness("sfx");
-        output.volume = vol;
+        output.volume = volume;
          if (type == "River" && riverSound != null)
          {
             output.clip = riverSound;
