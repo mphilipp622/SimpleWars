@@ -344,6 +344,7 @@ public class Unit : MonoBehaviour
 			//return;
 
 		attackingUnit.Attack(this);
+		attackingUnit.HasAttacked();
 
 		yield return new WaitForSeconds(1);
 
@@ -353,7 +354,7 @@ public class Unit : MonoBehaviour
 
 		this.Attack(attackingUnit);
 
-		attackingUnit.HasAttacked();
+		//attackingUnit.HasAttacked();
 	}
 
 	bool CheckAttackRange(Unit defendingUnit) //This function checks the ranges of the battling units to determine if an attack can occur.
