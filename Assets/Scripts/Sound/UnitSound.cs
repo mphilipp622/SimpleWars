@@ -21,7 +21,7 @@ public class UnitSound : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        settings = GameObject.FindGameObjectWithTag("SoundSettings").GetComponent<AudioSettings>();
+        //settings = GameObject.FindGameObjectWithTag("SoundSettings").GetComponent<AudioSettings>();
 	}
 	
 	// Update is called once per frame
