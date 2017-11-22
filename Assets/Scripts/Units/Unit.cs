@@ -32,6 +32,10 @@ public class Unit : MonoBehaviour
 
 	[SerializeField]
 	GameObject damageAnimation;
+	
+	//sound variables
+    public AudioSource sfx;
+    public AudioClip[] clips;
 
 	private void Awake()
 	{

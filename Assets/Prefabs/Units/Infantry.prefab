@@ -29,6 +29,8 @@ GameObject:
   - component: {fileID: 114946664053698802}
   - component: {fileID: 111215778932067448}
   - component: {fileID: 95684902295935088}
+  - component: {fileID: 114224975827311340}
+  - component: {fileID: 82584537335583294}
   m_Layer: 0
   m_Name: Infantry
   m_TagString: Unit
@@ -81,6 +83,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 120, y: 120}
   m_EdgeRadius: 0
+--- !u!82 &82584537335583294
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636945608789556}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95684902295935088
 Animator:
   serializedVersion: 3
@@ -112,6 +194,23 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114224975827311340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636945608789556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9307fcff5d1426f489c87266895669fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultClip: {fileID: 8300000, guid: a73a815ffb97949488f1ce479e73e422, type: 3}
+  grassSound: {fileID: 8300000, guid: a73a815ffb97949488f1ce479e73e422, type: 3}
+  roadSound: {fileID: 8300000, guid: 8ebfadcec22250949ad95d963305ea77, type: 3}
+  mountainSound: {fileID: 8300000, guid: 56608a6911501ae4189ea9090c94c180, type: 3}
+  riverSound: {fileID: 8300000, guid: d62e8056b720f724d97bf4fd792e53a7, type: 3}
+  output: {fileID: 82584537335583294}
 --- !u!114 &114686972663903858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,6 +276,8 @@ MonoBehaviour:
   productionCost: 0
   xPos: 0
   yPos: 0
+  sfx: {fileID: 0}
+  clips: []
 --- !u!114 &114959755821014970
 MonoBehaviour:
   m_ObjectHideFlags: 1

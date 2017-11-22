@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 95185634650299408}
   m_Layer: 0
   m_Name: waterVert
-  m_TagString: Mountain
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

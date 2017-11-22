@@ -20,6 +20,8 @@ public class TurnManager : MonoBehaviour
 	public int maxTurn;
 	public GameObject winUI;
 	public Text winText;
+	
+	public AudioScript audioScript;
     
     public static TurnManager turnManager;
 	int nextIndex
