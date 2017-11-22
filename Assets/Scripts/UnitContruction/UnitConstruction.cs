@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class UnitConstruction : MonoBehaviour
 {
@@ -14,23 +15,34 @@ public class UnitConstruction : MonoBehaviour
     public GameObject unitTank;
     public GameObject unitInfantry;
     public GameObject unitChopper;
+    public int unitChoice;
+
+    public Transform dropdownMenu;
+    //public int value;
+
+
 
 	public void buildUnit(string newName)
 	{
-//		buildingPos = GridManager.gridMan.selectedBuilding.gridPosition;
+        //Dropdown uiDropdown = GameObject.Find("Dropdown").GetComponent<Dropdown>();
+        int menuIndex = dropdownMenu.GetComponent<Dropdown>().value;
+        List<Dropdown.OptionData> menuOptions = dropdownMenu.GetComponent<Dropdown>().options;
+        string value = menuOptions[menuIndex].text;
+        buildingPos = GridManager.gridMan.selectedBuilding.gridPosition;
 		playerMoney = PlayerManager.playerManager.GetActivePlayer().getMoney();
-		if (newName == "Infantry") {
+        
+        if (value == "Tank") {//(newName == "Infantry") {
 			canPurchase = playerMoney > productioncostUnitInfantry;
-			if (canPurchase = true) {
+			if (canPurchase == true) {
 				playerMoney = playerMoney - productioncostUnitInfantry;
-                Instantiate(unitInfantry, buildingPos, Quaternion.identity);
+                Instantiate(unitTank, buildingPos, Quaternion.identity);
 			} else {
 				// Return nothing due to insufficient funds 
 				return;
 			}
 		} else if (newName == "Tank") {
 			canPurchase = playerMoney > productioncostUnitTank;
-			if (canPurchase = true) {
+			if (canPurchase == true) {
 				playerMoney = playerMoney - productioncostUnitTank;
                 Instantiate(unitTank, buildingPos, Quaternion.identity);
 			} else {
@@ -39,7 +51,7 @@ public class UnitConstruction : MonoBehaviour
 			}
 		} else if (newName == "Chopper") {
 			canPurchase = playerMoney > productioncostUnitChopper;
-			if (canPurchase = true) {
+			if (canPurchase == true) {
 				playerMoney = playerMoney - productioncostUnitChopper;
 //				Instantiate(prefabnameInfantry, buildingPos, Quaternion.identity);
 			} else {

@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 114771162422282540}
   - component: {fileID: 95545802366896586}
   - component: {fileID: 212022520080370180}
+  - component: {fileID: 114409799224048154}
   m_Layer: 0
   m_Name: Building_BuildMenu
   m_TagString: Building
@@ -497,6 +498,25 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114409799224048154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1682149370016386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ff825a14d5445a0b96cff2a8bc4b6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingPos: {x: 0, y: 0, z: 0}
+  playerMoney: 0
+  unitTank: {fileID: 1138251443355416, guid: fd0a67323c132eb4dbc434d8acc8b6e2, type: 2}
+  unitInfantry: {fileID: 1636945608789556, guid: 71ea0179491c64b01a192f90ee7ce01c,
+    type: 2}
+  unitChopper: {fileID: 0}
+  unitChoice: 0
+  dropdownMenu: {fileID: 0}
 --- !u!114 &114572058297978746
 MonoBehaviour:
   m_ObjectHideFlags: 1

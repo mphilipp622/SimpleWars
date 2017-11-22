@@ -12,6 +12,7 @@ public class Building : MonoBehaviour {
     protected int captureFlag;
     protected Unit currentUnit;
     protected Unit previousUnit;
+    //public Vector3 buildingPos;
 
     // Constructor
     public Building()
@@ -59,6 +60,11 @@ public class Building : MonoBehaviour {
         this.captureFlag = 1;
         GetComponent<Image>().color = capturedBy.color;
     }
+
+    //public Vector3 getbuildingPos()
+    //{
+    //    return this.buildingPos;
+    //}
 
     public Player GetOwner()
     {
