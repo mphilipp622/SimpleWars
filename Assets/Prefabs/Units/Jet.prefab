@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9307fcff5d1426f489c87266895669fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultClip: {fileID: 8300000, guid: 0e03914768d49324bb2865880c724640, type: 3}
+  defaultClip: {fileID: 8300000, guid: ac6c366990a853d4ca9e1795d407e36b, type: 3}
   grassSound: {fileID: 0}
   roadSound: {fileID: 0}
   mountainSound: {fileID: 0}
