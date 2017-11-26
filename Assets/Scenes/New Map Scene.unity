@@ -8327,95 +8327,35 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 224788775262164426, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224788775262164426, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224215860578989642, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224215860578989642, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224215860578989642, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 212948063116555244, guid: fd0a67323c132eb4dbc434d8acc8b6e2, type: 2}
+    - {fileID: 212305246588149776, guid: fd0a67323c132eb4dbc434d8acc8b6e2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd0a67323c132eb4dbc434d8acc8b6e2, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1051984027 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1515494277135798, guid: fd0a67323c132eb4dbc434d8acc8b6e2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1051984026}
---- !u!82 &1051984028
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1051984027}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!224 &1070865881 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224880970356115388, guid: f5f73795a77f54a7a92633f4e98f544b,
@@ -10319,23 +10259,33 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114814768492341824, guid: 47b89f723e1b5c04fa1ef07d02c5227b,
+    - target: {fileID: 224068598119347492, guid: 47b89f723e1b5c04fa1ef07d02c5227b,
         type: 2}
-      propertyPath: defense
-      value: 2
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114814768492341824, guid: 47b89f723e1b5c04fa1ef07d02c5227b,
+    - target: {fileID: 224068598119347492, guid: 47b89f723e1b5c04fa1ef07d02c5227b,
         type: 2}
-      propertyPath: range
-      value: 4
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114814768492341824, guid: 47b89f723e1b5c04fa1ef07d02c5227b,
+    - target: {fileID: 224974905241620516, guid: 47b89f723e1b5c04fa1ef07d02c5227b,
         type: 2}
-      propertyPath: movement
-      value: 5
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224974905241620516, guid: 47b89f723e1b5c04fa1ef07d02c5227b,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224974905241620516, guid: 47b89f723e1b5c04fa1ef07d02c5227b,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 212786346285896302, guid: 47b89f723e1b5c04fa1ef07d02c5227b, type: 2}
+    - {fileID: 212403556590416664, guid: 47b89f723e1b5c04fa1ef07d02c5227b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 47b89f723e1b5c04fa1ef07d02c5227b, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &1307716912 stripped

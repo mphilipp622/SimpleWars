@@ -17,7 +17,6 @@ public class ParentTile : MonoBehaviour {
 	GridManager gridMan;
 	RectTransform thisRect;
 	float newX, newY;
-	//Unit thisUnit;
 
 	public int rows, columns;
 
@@ -34,7 +33,6 @@ public class ParentTile : MonoBehaviour {
 	{
 		if (Application.isPlaying)
 		{
-			//Destroy(GetComponent<SpriteRenderer>());
 			this.enabled = false;
 		}
 
@@ -45,14 +43,12 @@ public class ParentTile : MonoBehaviour {
 		newY = Mathf.Clamp(newY, -((grid.cellSize.x * rows) - grid.cellSize.y / 2), -(grid.cellSize.y / 2));
 
 		thisRect.anchoredPosition = new Vector3(newX, newY, thisRect.localPosition.z);
-		
-		/*if(thisUnit != null)
-		{
-			int finalX = (int)Mathf.Abs((thisRect.anchoredPosition.x / grid.cellSize.x));
-			int finalY = (int)Mathf.Abs((thisRect.anchoredPosition.y / grid.cellSize.y));
-			thisUnit.x = finalX;
-			thisUnit.y = finalY;
-		}*/
+	}
+
+
+	private void OnMouseUp()
+	{
+		Debug.Log("Hello");
 	}
 
 	void InitData()
@@ -64,8 +60,6 @@ public class ParentTile : MonoBehaviour {
 
 		// force rows and columns to adapt to the current cell size and the 16:9 aspect ratio.
 		// This calculation will allow us to calculate the needed rows and columns based on cell size.
-		//rows = Mathf.RoundToInt(Screen.currentResolution.height / grid.cellSize.y);
-		//columns = Mathf.RoundToInt(Screen.currentResolution.width / grid.cellSize.x);
 		rows = gridMan.rows;
 		columns = gridMan.columns;
 
@@ -77,8 +71,6 @@ public class ParentTile : MonoBehaviour {
 		else
 			transform.SetParent(GameObject.FindGameObjectWithTag("Grid").transform.Find("Tiles").transform);
 		transform.localScale = new Vector3(1, 1, 1);
-		//if (gameObject.tag == "Unit")
-		//	thisUnit = GetComponent<Unit>();
 	}
 
 	public void UpdateDimensions()

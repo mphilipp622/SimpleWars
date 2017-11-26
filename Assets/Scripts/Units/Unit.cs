@@ -37,12 +37,17 @@ public class Unit : MonoBehaviour
     public AudioSource sfx;
     public AudioClip[] clips;
 
+	// HP Bar
+	[SerializeField]
+	Slider hpBar;
+
 	private void Awake()
 	{
 		int finalX = (int)Mathf.Abs((GetComponent<RectTransform>().anchoredPosition.x / GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize.x));
 		int finalY = (int)Mathf.Abs((GetComponent<RectTransform>().anchoredPosition.y / GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize.y));
 		this.xPos = finalX;
 		this.yPos = finalY;
+		hpBar.value = hp;
 	}
 
 	private void Start()
@@ -400,6 +405,8 @@ public class Unit : MonoBehaviour
 			totalDamageDone = 1;
 		else //Else proceed as normal with no additional modifiers
 			this.hp = this.hp - totalDamageDone;
+
+		hpBar.value = this.hp;
 		Debug.Log(gameObject.name + " took " + totalDamageDone + " damage.");
 
 		if (hp <= 0)
