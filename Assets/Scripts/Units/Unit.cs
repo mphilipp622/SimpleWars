@@ -34,7 +34,7 @@ public class Unit : MonoBehaviour
 	GameObject damageAnimation;
 	
 	//sound variables
-    public AudioSource sfx;
+    public AudioSource attackSound;
     public AudioClip[] clips;
 
 	// HP Bar
@@ -379,6 +379,7 @@ public class Unit : MonoBehaviour
 	void Attack(Unit defendingUnit) //Attack function to inflict damage on the defending unit 
 	{
 		GetComponent<Animator>().SetTrigger("Attack");
+        attackSound.Play();
 		defendingUnit.TakeDamage(this.attack, this.hp);
 	}
 
