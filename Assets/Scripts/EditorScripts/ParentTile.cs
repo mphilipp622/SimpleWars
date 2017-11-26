@@ -45,12 +45,6 @@ public class ParentTile : MonoBehaviour {
 		thisRect.anchoredPosition = new Vector3(newX, newY, thisRect.localPosition.z);
 	}
 
-
-	private void OnMouseUp()
-	{
-		Debug.Log("Hello");
-	}
-
 	void InitData()
 	{
 		gridMan = GameObject.FindGameObjectWithTag("GridManager").GetComponent<GridManager>();
