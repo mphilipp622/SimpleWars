@@ -44,11 +44,13 @@ public class TurnManager : MonoBehaviour
         currentPlayer.Lock(); //Locks the current Player object
         index++;
 		index %= 2;
+        currentPlayer.disableUnitBuilding();
         currentPlayer = player[index]; //Assigns currentPlayer to the next Player object in player[]
         currentPlayer.startTurn(); //Calls on the Player's startTurn function
 
         turnCounter++; //Increments turn counter by 1
 		UIManager.uiManager.UpdateUI(currentPlayer, turnCounter);
+
     }
 
     void initSingleton()
