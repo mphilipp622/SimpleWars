@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 82659820429344970}
   - component: {fileID: 212305246588149776}
   m_Layer: 0
-  m_Name: Tank
+  m_Name: Infantry
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,7 +299,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 59a550bcc28d68b48be6ef22d24d11f2, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -551,7 +551,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 0
   damageAnimation: {fileID: 1981170231414822}
-  sfx: {fileID: 0}
+  attackSound: {fileID: 82659820429344970}
   clips: []
   hpBar: {fileID: 114204279488721546}
 --- !u!114 &114546265477680012
