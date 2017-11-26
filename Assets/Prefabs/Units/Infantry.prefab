@@ -201,7 +201,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2, y: 1.2}
+    oldSize: {x: 1.25, y: 1.25}
     newSize: {x: 1.2, y: 1.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -300,7 +300,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 59a550bcc28d68b48be6ef22d24d11f2, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -379,7 +379,7 @@ Animator:
   m_GameObject: {fileID: 1515494277135798}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 885f2fd2e53924ed3b9faf844cd5314b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8e36fb85a81f5458a8996fa085a8a4fa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -522,11 +522,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9307fcff5d1426f489c87266895669fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultClip: {fileID: 8300000, guid: f5baf9ddf9db22f4bb79d532be86e404, type: 3}
-  grassSound: {fileID: 8300000, guid: f5baf9ddf9db22f4bb79d532be86e404, type: 3}
-  roadSound: {fileID: 8300000, guid: 853c2357bab45ef4290c531ee49cbd0d, type: 3}
+  defaultClip: {fileID: 8300000, guid: a73a815ffb97949488f1ce479e73e422, type: 3}
+  grassSound: {fileID: 8300000, guid: 56608a6911501ae4189ea9090c94c180, type: 3}
+  roadSound: {fileID: 8300000, guid: 8ebfadcec22250949ad95d963305ea77, type: 3}
   mountainSound: {fileID: 0}
-  riverSound: {fileID: 0}
+  riverSound: {fileID: 8300000, guid: d62e8056b720f724d97bf4fd792e53a7, type: 3}
   forestSound: {fileID: 0}
   buildingSound: {fileID: 0}
   output: {fileID: 82118904590092196}
@@ -573,7 +573,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1389d3c35d6d380408643f8a7855c7df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 077389b8d56fe0c48a9d5423e68e1583, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -667,7 +667,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 55f8743814701ce46b94db1c48591fc7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 077389b8d56fe0c48a9d5423e68e1583, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
