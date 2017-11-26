@@ -299,8 +299,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 800c9a3854898d8459466c87543f7838, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -551,7 +551,7 @@ MonoBehaviour:
   xPos: 0
   yPos: 0
   damageAnimation: {fileID: 1981170231414822}
-  sfx: {fileID: 0}
+  attackSound: {fileID: 82659820429344970}
   clips: []
   hpBar: {fileID: 114204279488721546}
 --- !u!114 &114546265477680012
