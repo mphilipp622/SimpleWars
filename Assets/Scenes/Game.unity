@@ -867,7 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc4d61b77ad64a39afcd9098bb4a74c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTurn: 0
+  maxTurn: 100
   winUI: {fileID: 1335314439}
   winText: {fileID: 1523272515}
   audioScript: {fileID: 0}
