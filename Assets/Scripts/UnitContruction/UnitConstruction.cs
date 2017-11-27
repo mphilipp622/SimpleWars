@@ -30,23 +30,27 @@ public class UnitConstruction : MonoBehaviour
     {
         buildingPos = gameObject.GetComponent<Tile>().gridPosition;
         playerMoney = PlayerManager.playerManager.GetActivePlayer().getMoney();
-        Debug.Log("hello");
-        int chosenValue = GameObject.Find("UnitConstruction").GetComponent<Dropdown>().value;//selectedropDown.value;
-        Debug.Log(chosenValue);
+        //int chosenValue = GameObject.Find("UnitConstruction").GetComponent<Dropdown>().value;//selectedropDown.value;
+        Debug.Log(selectedropDown.value);
 
         if (selectedropDown.value == 0)
         {
             canPurchase = playerMoney > productioncostUnitInfantry;
+
             if (canPurchase == true)
             {
                 playerMoney = playerMoney - productioncostUnitInfantry;
                 Debug.Log(playerMoney);
-                Instantiate(unitTank, buildingPos, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
+                GameObject temp = Instantiate(unitTank, buildingPos, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
+                temp.GetComponent<RectTransform>().anchoredPosition = buildingPos;
+                temp.GetComponent<Unit>().SetOwner(gameObject.GetComponent<Building>().GetOwner());
+                selectedropDown.value = 5;
             }
             else
             {
                 // Return nothing due to insufficient funds 
                 return;
+
             }
         }
         else if (selectedropDown.value == 1)
@@ -56,11 +60,15 @@ public class UnitConstruction : MonoBehaviour
             {
                 playerMoney = playerMoney - productioncostUnitTank;
                 Debug.Log(playerMoney);
-                Instantiate(unitTank, buildingPos, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
+                //Instantiate(unitTank, buildingPos, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
+                GameObject temp = Instantiate(unitTank, buildingPos, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
+                temp.GetComponent<RectTransform>().anchoredPosition = buildingPos;
+                temp.GetComponent<Unit>().SetOwner(gameObject.GetComponent<Building>().GetOwner());
+                selectedropDown.value = 5;
             }
             else
             {
-                // Return nothing due to insufficient funds 
+                // Return nothing due to insufficient funds
                 return;
             }
         }
@@ -71,7 +79,11 @@ public class UnitConstruction : MonoBehaviour
             {
                 playerMoney = playerMoney - productioncostUnitChopper;
                 Debug.Log(playerMoney);
-                Instantiate(unitTank, buildingPos, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
+                GameObject temp = Instantiate(unitTank, buildingPos, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
+                temp.GetComponent<RectTransform>().anchoredPosition = buildingPos;
+                temp.GetComponent<Unit>().SetOwner(gameObject.GetComponent<Building>().GetOwner());
+                selectedropDown.value = 5;
+                //Instantiate(unitTank, buildingPos, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
                 //Instantiate(prefabnameInfantry, buildingPos, Quaternion.identity);
             }
             else
@@ -82,45 +94,45 @@ public class UnitConstruction : MonoBehaviour
         }
     }
 
+/*
+	public void buildUnit(string newName)
+	{
+        //Dropdown uiDropdown = GameObject.Find("Dropdown").GetComponent<Dropdown>();
+        //int menuIndex = dropdownMenu.GetComponent<Dropdown>().value;
+        //List<Dropdown.OptionData> menuOptions = dropdownMenu.GetComponent<Dropdown>().options;
+        //string value = menuOptions[menuIndex].text;
 
-//	public void buildUnit(string newName)
-//	{
-//        //Dropdown uiDropdown = GameObject.Find("Dropdown").GetComponent<Dropdown>();
-//        //int menuIndex = dropdownMenu.GetComponent<Dropdown>().value;
-//        //List<Dropdown.OptionData> menuOptions = dropdownMenu.GetComponent<Dropdown>().options;
-//        //string value = menuOptions[menuIndex].text;
-
-//        buildingPos = GridManager.gridMan.selectedBuilding.gridPosition;
-//		playerMoney = PlayerManager.playerManager.GetActivePlayer().getMoney();
+        buildingPos = GridManager.gridMan.selectedBuilding.gridPosition;
+		playerMoney = PlayerManager.playerManager.GetActivePlayer().getMoney();
         
-//        if (newName == "Infantry") {
-//			canPurchase = playerMoney > productioncostUnitInfantry;
-//			if (canPurchase == true) {
-//				playerMoney = playerMoney - productioncostUnitInfantry;
-//                Instantiate(unitTank, buildingPos, Quaternion.identity);
-//			} else {
-//				// Return nothing due to insufficient funds 
-//				return;
-//			}
-//		} else if (newName == "Tank") {
-//			canPurchase = playerMoney > productioncostUnitTank;
-//			if (canPurchase == true) {
-//				playerMoney = playerMoney - productioncostUnitTank;
-//                Instantiate(unitTank, buildingPos, Quaternion.identity);
-//			} else {
-//				// Return nothing due to insufficient funds 
-//				return;
-//			}
-//		} else if (newName == "Jet") {
-//			canPurchase = playerMoney > productioncostUnitChopper;
-//			if (canPurchase == true) {
-//				playerMoney = playerMoney - productioncostUnitChopper;
-////				Instantiate(prefabnameInfantry, buildingPos, Quaternion.identity);
-	//		} else {
-	//			// Return nothing due to insufficient funds 
-	//			return;
-	//		}
-	//	}
-	//}
-
+        if (newName == "Infantry") {
+			canPurchase = playerMoney > productioncostUnitInfantry;
+			if (canPurchase == true) {
+				playerMoney = playerMoney - productioncostUnitInfantry;
+                Instantiate(unitTank, buildingPos, Quaternion.identity);
+			} else {
+				// Return nothing due to insufficient funds 
+				return;
+			}
+		} else if (newName == "Tank") {
+			canPurchase = playerMoney > productioncostUnitTank;
+			if (canPurchase == true) {
+				playerMoney = playerMoney - productioncostUnitTank;
+                Instantiate(unitTank, buildingPos, Quaternion.identity);
+			} else {
+				// Return nothing due to insufficient funds 
+				return;
+			}
+		} else if (newName == "Jet") {
+			canPurchase = playerMoney > productioncostUnitChopper;
+			if (canPurchase == true) {
+				playerMoney = playerMoney - productioncostUnitChopper;
+//				Instantiate(prefabnameInfantry, buildingPos, Quaternion.identity);
+			} else {
+				// Return nothing due to insufficient funds 
+				return;
+			}
+		}
+	}
+*/
 }

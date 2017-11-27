@@ -63,6 +63,8 @@ public class Player : MonoBehaviour
     public void addUnit(Unit addedUnit)                 // Adds unit to list 
     {
         units.Add(addedUnit);
+        addedUnit.GetComponent<Image>().color=this.color;
+        addedUnit.SetOwner(this);
     }
 	public void captureBuilding(Building addedBuilding) // Adds building to list 
 	{
