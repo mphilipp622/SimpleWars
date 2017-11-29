@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour {
 	public static UIManager uiManager;
 
 	[SerializeField]
-	Text moneyText, moneyPerTurnText, turnText;
+	Text moneyText, moneyPerTurnText, turnText, currentPlayerText;
 
 	private void Awake()
 	{
@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour {
 	}
 	void Start ()
 	{
-		
+
 	}
 	
 	void Update ()
@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour {
 		turnText.text = "Turn: " + turnCounter;
 		moneyText.text = "Money: $" + currentPlayer.getMoney();
 		moneyPerTurnText.text = "Money Per Turn: $" + currentPlayer.GetMoneyPerTurn();
+		currentPlayerText.text = PlayerManager.playerManager.GetActivePlayer().playerName;
+		currentPlayerText.color = PlayerManager.playerManager.GetActivePlayer().color;
 	}
     public void updateMoney(int newMoney)
     {

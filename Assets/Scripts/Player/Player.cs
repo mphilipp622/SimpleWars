@@ -17,6 +17,17 @@ public class Player : MonoBehaviour
     protected Building removeBuilding = null;
     public Color color;
 
+	[SerializeField]
+	string _playerName;
+
+	public string playerName
+	{
+		get
+		{
+			return _playerName;
+		}
+	}
+
 	void Awake()
     {
 		InitData();
