@@ -30,7 +30,10 @@ public class UIManager : MonoBehaviour {
 		moneyText.text = "Money: $" + currentPlayer.getMoney();
 		moneyPerTurnText.text = "Money Per Turn: $" + currentPlayer.GetMoneyPerTurn();
 	}
-
+    public void updateMoney(int newMoney)
+    {
+        moneyText.text = "Money: $" + newMoney.ToString();
+    }
 	void initSingleton()
 	{
 		if (uiManager == null)
