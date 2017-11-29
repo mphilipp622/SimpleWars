@@ -44,6 +44,10 @@ public class Player : MonoBehaviour
 	{
 		return this.isActive;
 	}
+    public void setMoney(int newMoney)
+    {
+        currentMoney = newMoney;
+    }
 	public int getMoney()
 	{
 		return this.currentMoney;

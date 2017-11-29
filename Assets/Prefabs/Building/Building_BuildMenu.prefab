@@ -462,6 +462,8 @@ MonoBehaviour:
       m_Image: {fileID: 21300000, guid: 1f7d8306289df374ba34b29f18c9590c, type: 3}
     - m_Text: Infantry
       m_Image: {fileID: 21300000, guid: 120f654d301a26d4f85e356ee8f61d8f, type: 3}
+    - m_Text: 
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

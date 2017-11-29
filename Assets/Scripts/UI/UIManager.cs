@@ -31,6 +31,10 @@ public class UIManager : MonoBehaviour {
 		moneyPerTurnText.text = "Money Per Turn: $" + currentPlayer.GetMoneyPerTurn();
 	}
 
+    public void updateMoney(int newMoney)
+    {
+        moneyText.text = "Money: $" + newMoney.ToString();
+    }
 	void initSingleton()
 	{
 		if (uiManager == null)
