@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+
 // Controls player behavior
 public class Player : MonoBehaviour
 {
@@ -88,6 +90,21 @@ public class Player : MonoBehaviour
 
 	}
 
+	public void disableUnitBuilding()
+     {
+         foreach (Building building in buildings)
+         {
+             building.GetComponentInChildren<Dropdown>().enabled = false;
+         }
+     }
+     public void enableUnitBuilding()
+     {
+         foreach (Building building in buildings)
+         {
+             building.GetComponentInChildren<Dropdown>().enabled = true;
+        }
+     }
+
 	// public void SetActive()
 	// public void SetInactive()
 
@@ -97,6 +114,7 @@ public class Player : MonoBehaviour
 		// Updates the income from buildings 
 		this.moneyPerTurn = 10 * buildings.Count; // Assuming the income per building is 10 
 		this.currentMoney = this.currentMoney + this.moneyPerTurn; // Will update income per building 
+		enableUnitBuilding();
 		foreach (Unit thisunit in units) 
 		{
 			thisunit.reset(); // Resets Boolean variables for the units 

@@ -42,6 +42,7 @@ public class TurnManager : MonoBehaviour
 		player[1] = PlayerManager.playerManager.players[1];
 		currentPlayer = player[0]; //Assigns the current Player to the first Player in player[]
         player[1].Lock();
+		player[1].disableUnitBuilding();
 		UIManager.uiManager.UpdateUI(currentPlayer, turnCounter);
 	}
 	/*
@@ -56,8 +57,10 @@ public class TurnManager : MonoBehaviour
         currentPlayer.Lock(); //Locks the current Player object
         index++;
 		index %= 2;
+		currentPlayer.disableUnitBuilding();
         currentPlayer = player[index]; //Assigns currentPlayer to the next Player object in player[]
 		turnCounter++; //Increments turn counter by 1
+		PlayerManager.playerManager.SetActivePlayer(currentPlayer); // update player manager's active players
 		if (turnCounter >= maxTurn)
 		{
 			DetermineWinner();

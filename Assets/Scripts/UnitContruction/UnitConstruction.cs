@@ -24,7 +24,11 @@ public class UnitConstruction : MonoBehaviour
     void Start()
     {
         Debug.Log(gameObject.GetComponent<Tile>().gridPosition);
-        selectedropDown.value = 4;
+		selectedropDown.options[0].text = "Jet\n$" + productioncostUnitJet.ToString();
+		selectedropDown.options[1].text = "Tank\n$" + productioncostUnitTank.ToString();
+		selectedropDown.options[2].text = "Infantry\n$" + productioncostUnitInfantry.ToString();
+
+		selectedropDown.value = 4;
     }
 
     public void buildUnit()
@@ -36,16 +40,17 @@ public class UnitConstruction : MonoBehaviour
 
         if (selectedropDown.value == 0)
         {
-            canPurchase = playerMoney >= productioncostUnitInfantry;
+            canPurchase = playerMoney >= productioncostUnitJet;
             if (canPurchase == true)
             {
-                playerMoney = playerMoney - productioncostUnitInfantry;
+                playerMoney = playerMoney - productioncostUnitJet;
                 Debug.Log(playerMoney);
                 PlayerManager.playerManager.GetActivePlayer().setMoney(playerMoney);
                 UIManager.uiManager.updateMoney(playerMoney);
-                GameObject temp = Instantiate(unitJet, buildingPos, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
+                GameObject temp = Instantiate(unitJet, transform.position, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
                 temp.GetComponent<RectTransform>().anchoredPosition = buildingPos;
                 temp.GetComponent<Unit>().SetOwner(gameObject.GetComponent<Building>().GetOwner());
+				temp.GetComponent<Unit>().getUnitOwner().addUnit(temp.GetComponent<Unit>());
 
                 selectedropDown.value = 4;
             }
@@ -65,11 +70,13 @@ public class UnitConstruction : MonoBehaviour
                 playerMoney = playerMoney - productioncostUnitTank;
                 Debug.Log(playerMoney);
                 PlayerManager.playerManager.GetActivePlayer().setMoney(playerMoney);
-                GameObject temp = Instantiate(unitTank, buildingPos, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
+				UIManager.uiManager.updateMoney(playerMoney);
+				GameObject temp = Instantiate(unitTank, transform.position, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
                 temp.GetComponent<RectTransform>().anchoredPosition = buildingPos;
                 temp.GetComponent<Unit>().SetOwner(gameObject.GetComponent<Building>().GetOwner());
-                
-                selectedropDown.value = 4;
+				temp.GetComponent<Unit>().getUnitOwner().addUnit(temp.GetComponent<Unit>());
+
+				selectedropDown.value = 4;
             }
             else
             {
@@ -86,11 +93,12 @@ public class UnitConstruction : MonoBehaviour
                 Debug.Log(playerMoney);
                 PlayerManager.playerManager.GetActivePlayer().setMoney(playerMoney);
                 UIManager.uiManager.UpdateUI(gameObject.GetComponent<Building>().GetOwner(),0);
-                GameObject temp = Instantiate(unitInfantry, buildingPos, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
+                GameObject temp = Instantiate(unitInfantry, transform.position, Quaternion.identity, GridManager.gridMan.grid.transform.Find("Units").transform);
                 temp.GetComponent<RectTransform>().anchoredPosition = buildingPos;
                 temp.GetComponent<Unit>().SetOwner(gameObject.GetComponent<Building>().GetOwner());
-                
-                selectedropDown.value = 4;
+				temp.GetComponent<Unit>().getUnitOwner().addUnit(temp.GetComponent<Unit>());
+
+				selectedropDown.value = 4;
             }
             else
             {
