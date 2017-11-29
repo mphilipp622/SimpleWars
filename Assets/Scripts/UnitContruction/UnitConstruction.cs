@@ -23,7 +23,7 @@ public class UnitConstruction : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(gameObject.GetComponent<Tile>().gridPosition);
+		// set the text for each dropdown item so it includes the cost on a newline.
 		selectedropDown.options[0].text = "Jet\n$" + productioncostUnitJet.ToString();
 		selectedropDown.options[1].text = "Tank\n$" + productioncostUnitTank.ToString();
 		selectedropDown.options[2].text = "Infantry\n$" + productioncostUnitInfantry.ToString();
