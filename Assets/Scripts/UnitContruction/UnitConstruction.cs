@@ -64,7 +64,7 @@ public class UnitConstruction : MonoBehaviour
         else if (selectedropDown.value == 1)
         {
             //Debug.Log("Reached Section");
-            canPurchase = playerMoney > productioncostUnitTank;
+            canPurchase = playerMoney >= productioncostUnitTank;
             if (canPurchase == true)
             {
                 playerMoney = playerMoney - productioncostUnitTank;
@@ -86,7 +86,7 @@ public class UnitConstruction : MonoBehaviour
         }
         else if (selectedropDown.value == 2)
         {
-            canPurchase = playerMoney > productioncostUnitInfantry;
+            canPurchase = playerMoney >= productioncostUnitInfantry;
             if (canPurchase == true)
             {
                 playerMoney = playerMoney - productioncostUnitInfantry;
