@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
 	void Awake()
     {
-		InitData();
+		
     }
 
 	void InitData()
@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
 
 	private void Start()
 	{
+		InitData();
 		moneyPerTurn = 10 * buildings.Count;
 	}
 

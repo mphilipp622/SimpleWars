@@ -63,6 +63,7 @@ public class Building : MonoBehaviour {
 		// the slider fill will be set to the color of the other player.
 		// As the other player takes over this building, the slider will move to the right, making the other player's color start taking over
 		sliderBackground.color = capturedBy.color; // background color of the slider is set to the owner's color.
+
 		foreach(Player player in PlayerManager.playerManager.players)
 		{
 			// iterate over our players and grab the player that is NOT the owner of this building and assign the fill color for the slider to the other player's color.
