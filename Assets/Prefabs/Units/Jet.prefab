@@ -556,9 +556,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 10
-  attack: 6
+  attack: 5
   defense: 2
-  range: 4
+  range: 3
   movement: 5
   productionCost: 0
   xPos: 0

@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 10
-  attack: 6
+  attack: 4
   defense: 3
   range: 1
   movement: 4
