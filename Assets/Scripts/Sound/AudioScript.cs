@@ -29,23 +29,23 @@ public class AudioScript : MonoBehaviour {
 
     public void SwitchMusic(int turn)
     {
-        if (turn == 10)
+        if (turn == 5)
         {
             das.CrossFade(Loop1, volume, 10, 0);
         }
-        else if (turn == 20)
+        else if (turn == 10)
         {
             das.CrossFade(Loop2, volume, 10, 0);
         }
-        else if (turn == 60)
+        else if (turn == 15)
         {
             das.CrossFade(Loop3, volume, 10, 0);
         }
-        else if (turn == 90)
+        else if (turn == 20)
         {
             das.CrossFade(Loop4, volume, 10, 0);
         }
-        else if (turn == 120)
+        else if (turn == 25)
         {
             das.CrossFade(Loop5, volume, 10, 0);
         }

@@ -69,6 +69,7 @@ public class TurnManager : MonoBehaviour
 		currentPlayer.startTurn(); //Calls on the Player's startTurn function
 
 		UIManager.uiManager.UpdateUI(currentPlayer, turnCounter);
+        audioScript.SwitchMusic(turnCounter);
     }
 
     void initSingleton()
