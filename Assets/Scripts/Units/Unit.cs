@@ -129,9 +129,9 @@ public class Unit : MonoBehaviour
 	private void die() //Needs editing due to player list rather than dictionary
 	{
 		// Need to remove object from list first.
-        // Created a removeUnit(unit removedUnit) function
-        Destroy(gameObject);
+		// Created a removeUnit(unit removedUnit) function.
 		this.getUnitOwner().removeUnit(this);
+		Destroy(gameObject);
 		//get player owner from list.
 	}
 
@@ -385,35 +385,41 @@ public class Unit : MonoBehaviour
 
 	IEnumerator PlayDamageAnimation()
 	{
+
 		damageAnimation.SetActive(true);
 
 		Animator damageAnim = damageAnimation.GetComponent<Animator>();
 		while (damageAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
 			yield return null;
 
+		if (hp <= 0)
+			die(); // destroy game object if hp hits 0 or less
+
 		damageAnimation.SetActive(false);
 	}
 
 	public void TakeDamage(int attackerDamage, int attackerHP) //Damage calculation is done in this function and checks if the defending unit is destroyed.
 	{
-		StartCoroutine(PlayDamageAnimation());
 
-		int totalDamageDone = (int) ((attackerDamage)*(attackerHP/10f)) / (this.defense); //Algorithm for calculating total damage.
+		float totalDamageDone = ((attackerDamage)*(attackerHP/10f)) / (this.defense); //Algorithm for calculating total damage.
+		int finalDamage = (int) totalDamageDone; // used for decrementing hp. We need to keep totalDamageDone as a float or else our if statements below will not work properly
 		
 		if(totalDamageDone < 0.5) //If damage is under 0.5, reduced to zero.
-			totalDamageDone = 0;
+			finalDamage = 0;
 		else if(totalDamageDone >= 0.5 && totalDamageDone < 1) //If damage is over 0.5 but under 1, sets damage to 1.
-			totalDamageDone = 1;
+			finalDamage = 1;
 		else //Else proceed as normal with no additional modifiers
-			this.hp = this.hp - totalDamageDone;
+			this.hp = this.hp - finalDamage;
+
+		StartCoroutine(PlayDamageAnimation()); // die check will happen in here.
 
 		hpBar.value = this.hp;
-		Debug.Log(gameObject.name + " took " + totalDamageDone + " damage.");
+		Debug.Log(gameObject.name + " took " + finalDamage + " damage.");
 
-		if (hp <= 0)
+		/*if (hp <= 0)
 		{
 			die();
-		}
+		}*/
 	}
 
 	private void OnMouseDown() //Function is called when the mouse is clicked, and will run checks to execute the proper action.
