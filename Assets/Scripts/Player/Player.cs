@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+
 // Controls player behavior
 public class Player : MonoBehaviour
 {
@@ -15,9 +17,20 @@ public class Player : MonoBehaviour
     protected Building removeBuilding = null;
     public Color color;
 
+	[SerializeField]
+	string _playerName;
+
+	public string playerName
+	{
+		get
+		{
+			return _playerName;
+		}
+	}
+
 	void Awake()
     {
-		InitData();
+		
     }
 
 	void InitData()
@@ -28,8 +41,19 @@ public class Player : MonoBehaviour
 			building.SetOwner(this);
 	}
 
+	public int GetWinSum()
+	{
+		int total = 0;
+		total += units.Count;
+		total += buildings.Count;
+		total += currentMoney;
+		Debug.Log(name + " Total Score = " + total);
+		return total;
+	}
+
 	private void Start()
 	{
+		InitData();
 		moneyPerTurn = 10 * buildings.Count;
 	}
 
@@ -43,6 +67,10 @@ public class Player : MonoBehaviour
 	{
 		return this.isActive;
 	}
+    public void setMoney(int newMoney)
+    {
+        currentMoney = newMoney;
+    }
 	public int getMoney()
 	{
 		return this.currentMoney;
@@ -58,8 +86,9 @@ public class Player : MonoBehaviour
     public void removeUnit(Unit removedUnit)            // Removes unit from list 
     {
         units.Remove(removedUnit);
-    }
-    public void addUnit(Unit addedUnit)                 // Adds unit to list 
+
+	}
+	public void addUnit(Unit addedUnit)                 // Adds unit to list 
     {
         units.Add(addedUnit);
     }
@@ -69,8 +98,24 @@ public class Player : MonoBehaviour
 	}
     public void concedeBuilding(Building removedBuilding) // Removes building from list
 	{
-        buildings.Remove(removedBuilding); 
+        buildings.Remove(removedBuilding);
+
 	}
+
+	public void disableUnitBuilding()
+     {
+         foreach (Building building in buildings)
+         {
+             building.GetComponentInChildren<Dropdown>().enabled = false;
+         }
+     }
+     public void enableUnitBuilding()
+     {
+         foreach (Building building in buildings)
+         {
+             building.GetComponentInChildren<Dropdown>().enabled = true;
+        }
+     }
 
 	// public void SetActive()
 	// public void SetInactive()
@@ -81,11 +126,18 @@ public class Player : MonoBehaviour
 		// Updates the income from buildings 
 		this.moneyPerTurn = 10 * buildings.Count; // Assuming the income per building is 10 
 		this.currentMoney = this.currentMoney + this.moneyPerTurn; // Will update income per building 
+		enableUnitBuilding();
 		foreach (Unit thisunit in units) 
 		{
 			thisunit.reset(); // Resets Boolean variables for the units 
 		}
 		this.isLocked = false; // unlocks the current player
+	}
+
+	private void Update()
+	{
+		if (units.Count == 0 && buildings.Count == 0)
+			TurnManager.turnManager.Lose(this);
 	}
 
 }

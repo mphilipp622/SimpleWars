@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9004909ebf225014bb8f160afab27ee4
+timeCreated: 1510718488
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - Loop1: {instanceID: 0}
+  - Loop2: {instanceID: 0}
+  - Loop3: {instanceID: 0}
+  - Loop4: {instanceID: 0}
+  - Loop5: {instanceID: 0}
+  - das: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

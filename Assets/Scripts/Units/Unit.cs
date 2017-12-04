@@ -30,12 +30,24 @@ public class Unit : MonoBehaviour
 	protected List<Tile> enemyTiles;
 	protected float currentMovement;
 
+	[SerializeField]
+	GameObject damageAnimation;
+	
+	//sound variables
+    public AudioSource attackSound;
+    public AudioClip[] clips;
+
+	// HP Bar
+	[SerializeField]
+	Slider hpBar;
+
 	private void Awake()
 	{
 		int finalX = (int)Mathf.Abs((GetComponent<RectTransform>().anchoredPosition.x / GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize.x));
 		int finalY = (int)Mathf.Abs((GetComponent<RectTransform>().anchoredPosition.y / GameObject.FindGameObjectWithTag("Grid").GetComponent<GridLayoutGroup>().cellSize.y));
 		this.xPos = finalX;
 		this.yPos = finalY;
+		hpBar.value = hp;
 	}
 
 	private void Start()
@@ -119,6 +131,7 @@ public class Unit : MonoBehaviour
 		// Need to remove object from list first.
         // Created a removeUnit(unit removedUnit) function
         Destroy(gameObject);
+		this.getUnitOwner().removeUnit(this);
 		//get player owner from list.
 	}
 
@@ -333,19 +346,24 @@ public class Unit : MonoBehaviour
 		UnitManager.unitManager.selectedUnit = null;
 	}
 
-	void AttackRoutine(Unit attackingUnit) //Performs various attack actions based on the current conditions
+	IEnumerator AttackRoutine(Unit attackingUnit) //Performs various attack actions based on the current conditions
 	{
-		if(!attackingUnit.CheckAttackRange(this))
-			return;
+		if (!attackingUnit.CheckAttackRange(this))
+			yield break;
+			//return;
 
 		attackingUnit.Attack(this);
+		attackingUnit.HasAttacked();
 
-		if(!this.CheckAttackRange(attackingUnit))
-			return;
+		yield return new WaitForSeconds(1);
+
+		if (!this.CheckAttackRange(attackingUnit))
+			yield break;
+			//return;
 
 		this.Attack(attackingUnit);
 
-		attackingUnit.HasAttacked();
+		//attackingUnit.HasAttacked();
 	}
 
 	bool CheckAttackRange(Unit defendingUnit) //This function checks the ranges of the battling units to determine if an attack can occur.
@@ -360,11 +378,26 @@ public class Unit : MonoBehaviour
 
 	void Attack(Unit defendingUnit) //Attack function to inflict damage on the defending unit 
 	{
+		GetComponent<Animator>().SetTrigger("Attack");
+        attackSound.Play();
 		defendingUnit.TakeDamage(this.attack, this.hp);
+	}
+
+	IEnumerator PlayDamageAnimation()
+	{
+		damageAnimation.SetActive(true);
+
+		Animator damageAnim = damageAnimation.GetComponent<Animator>();
+		while (damageAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+			yield return null;
+
+		damageAnimation.SetActive(false);
 	}
 
 	public void TakeDamage(int attackerDamage, int attackerHP) //Damage calculation is done in this function and checks if the defending unit is destroyed.
 	{
+		StartCoroutine(PlayDamageAnimation());
+
 		int totalDamageDone = (int) ((attackerDamage)*(attackerHP/10f)) / (this.defense); //Algorithm for calculating total damage.
 		
 		if(totalDamageDone < 0.5) //If damage is under 0.5, reduced to zero.
@@ -373,6 +406,8 @@ public class Unit : MonoBehaviour
 			totalDamageDone = 1;
 		else //Else proceed as normal with no additional modifiers
 			this.hp = this.hp - totalDamageDone;
+
+		hpBar.value = this.hp;
 		Debug.Log(gameObject.name + " took " + totalDamageDone + " damage.");
 
 		if (hp <= 0)
@@ -393,7 +428,7 @@ public class Unit : MonoBehaviour
 		else if(!isSelected && UnitManager.unitManager.selectedUnit != this && UnitManager.unitManager.selectedUnit != null && UnitManager.unitManager.selectedUnit.getUnitOwner() != this.unitOwner)
 		{
 			// This means a different unit is selected and they are attempting to attack this unit
-			AttackRoutine(UnitManager.unitManager.selectedUnit);
+			StartCoroutine(AttackRoutine(UnitManager.unitManager.selectedUnit));
 		}
 		else if (isSelected)
 		{

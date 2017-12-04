@@ -115,8 +115,10 @@ MonoBehaviour:
   - {fileID: 0}
   buildings:
   - {fileID: 0}
+  currentMoney: 50
   isLocked: 1
-  color: {r: 1, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 0.44117647, b: 0.44117647, a: 1}
+  _playerName: Player 2
 --- !u!114 &114663025158761080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,7 +146,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   units:
   - {fileID: 0}
+  - {fileID: 0}
   buildings:
   - {fileID: 0}
+  currentMoney: 50
   isLocked: 0
-  color: {r: 0, g: 0.0068967342, b: 1, a: 0}
+  color: {r: 0.58823526, g: 0.6592292, b: 1, a: 1}
+  _playerName: Player 1
