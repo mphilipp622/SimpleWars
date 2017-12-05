@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+#if (UNITY_EDITOR)
 using UnityEditor;
+
 
 [ExecuteInEditMode]
 public class ParentTile : MonoBehaviour {
@@ -75,3 +77,5 @@ public class ParentTile : MonoBehaviour {
 		GetComponent<BoxCollider2D>().size = thisRect.sizeDelta;
 	}
 }
+
+#endif

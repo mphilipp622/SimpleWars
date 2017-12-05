@@ -35,6 +35,6 @@ public class AudioSettings : MonoBehaviour {
     {
         PlayerPrefs.SetFloat("st", st);
         PlayerPrefs.SetFloat("bt", bt);
-        Application.LoadLevel(2);
+        Application.LoadLevel(0);
     }
 }

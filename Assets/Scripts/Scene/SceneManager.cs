@@ -10,6 +10,11 @@ public class SceneManager : MonoBehaviour {
         //SceneManager.LoadScene;
     }
 
+	public void ExitGame()
+	{
+		Application.Quit();
+	}
+
 
 	// Use this for initialization
 	void Start () {

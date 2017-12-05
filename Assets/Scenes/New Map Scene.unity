@@ -10295,6 +10295,11 @@ Prefab:
       propertyPath: m_FontData.m_MaxSize
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 114302323114811548, guid: f88ce26615541ce45a146dcf69136c2f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f88ce26615541ce45a146dcf69136c2f, type: 2}
   m_IsPrefabParent: 0

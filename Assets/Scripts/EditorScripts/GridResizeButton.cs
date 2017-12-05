@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿#if (UNITY_EDITOR)
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEditor;
+
 
 [CustomEditor(typeof(ResizeGrid))]
 public class GridResizeButton : Editor
@@ -27,3 +30,4 @@ public class GridResizeButton : Editor
 		}
 	}
 }
+#endif
