@@ -10,6 +10,7 @@ public class UnitSound : MonoBehaviour {
     public AudioClip riverSound;
     public AudioClip forestSound;
     public AudioClip buildingSound;
+	public AudioClip attackSound;
 
     public AudioSource output;
     AudioSettings settings;

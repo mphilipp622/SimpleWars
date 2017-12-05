@@ -36,6 +36,7 @@ public class Unit : MonoBehaviour
 	//sound variables
     public AudioSource attackSound;
     public AudioClip[] clips;
+	float volume;
 
 	// HP Bar
 	[SerializeField]
@@ -48,6 +49,8 @@ public class Unit : MonoBehaviour
 		this.xPos = finalX;
 		this.yPos = finalY;
 		hpBar.value = hp;
+		volume = PlayerPrefs.GetFloat("st");
+		attackSound.volume = volume;
 	}
 
 	private void Start()
